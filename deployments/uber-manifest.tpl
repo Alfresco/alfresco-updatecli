@@ -7,16 +7,6 @@ title: Images updates for all versions of Helm charts and Docker compose
 {{- end }}
 
 scms:
-  sourceRepo:
-    kind: github
-    spec:
-      user: {{ requiredEnv "GIT_AUTHOR_USERNAME" }}
-      email: {{ requiredEnv "GIT_AUTHOR_EMAIL" }}
-      owner: Alfresco
-      repository: acs-deployment
-      branch: {{ requiredEnv "GIT_BRANCH" }}
-      username: alfresco-build
-      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
   searchEnterprise:
     name: Alfresco Elasticsearch connector
     kind: github
