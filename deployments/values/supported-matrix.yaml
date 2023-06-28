@@ -25,13 +25,13 @@ matrix:
       version: "3.3"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: "3.9"
+      version: "3.10"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "4"
+      version: "4.1"
       pattern: *ga_hotfixes_pattern
     adminApp:
-      version: "8"
+      version: "8.1"
       pattern: *ga_hotfixes_pattern
     onedrive:
       version: "2"
@@ -40,21 +40,21 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: "~1.5.0"
+      version: "~2.0.0"
     trouter:
-      version: "~2.1.0"
+      version: "~3.0.0"
     sfs:
-      version: "~2.1.0"
+      version: "~3.0.0"
     tengine-misc:
-      version: "~3.1.0"
+      version: "~4.0.0"
     tengine-im:
-      version: "~3.1.0"
+      version: "~4.0.0"
     tengine-lo:
-      version: "~3.1.0"
+      version: "~4.0.0"
     tengine-pdf:
-      version: "~3.1.0"
+      version: "~4.0.0"
     tengine-tika:
-      version: "~3.1.0"
+      version: "~4.0.0"
 
   7.3.N:
     id: 73n
