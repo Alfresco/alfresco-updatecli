@@ -97,6 +97,8 @@ matrix:
       version: "~3.0.0"
     sfs:
       version: "~3.0.0"
+    tengine-aio:
+      version: "~4.0.0"
     tengine-misc:
       version: "~4.0.0"
     tengine-im:
@@ -146,6 +148,8 @@ matrix:
       version: "~2.0.0"
     sfs:
       version: "~2.0.0"
+    tengine-aio:
+      version: "~3.0.0"
     tengine-misc:
       version: "~3.0.0"
     tengine-im:
@@ -195,6 +199,8 @@ matrix:
       version: "~2.0.0"
     sfs:
       version: "~2.0.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:
@@ -241,6 +247,8 @@ matrix:
       version: "~1.5.0"
     sfs:
       version: "~1.5.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:
@@ -281,6 +289,8 @@ matrix:
       version: "~1.4.0"
     sfs:
       version: "~0.16.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:
