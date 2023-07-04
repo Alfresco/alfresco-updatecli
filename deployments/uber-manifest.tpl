@@ -331,7 +331,8 @@ targets:
   {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" }}
-  {{- if index . "search-enterprise" "compose_target" }}
+  {{- $target_searchEntCompose := index . "search-enterprise" "compose_target" }}
+  {{- if $target_searchEntCompose }}
   {{- range $index, $key := index . "search-enterprise" "compose_keys" }}
   searchEnterprise{{ $index }}Compose_{{ $id }}:
     name: Search Enterprise image tag
@@ -340,7 +341,7 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-elasticsearch-{{ $index }}:"
     spec:
-      file: {{ index . "search-enterprise" "compose_target" }}
+      file: {{ $target_searchEntCompose }}
       key: {{ $key }}
   {{- end }}
   {{- end }}
