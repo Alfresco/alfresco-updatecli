@@ -6,17 +6,69 @@ patterns:
   ga: &ga_pattern (\.[0-9]+){1,2}
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
   development: &development_pattern (\.[0-9]+){0,3}(-[AM]\.?[0-9]+)?
+  development_almost_semver_pattern: &development_almost_semver_pattern (\.[0-9]+){0,3}(-[0-9]+)?
 matrix:
-  latest:
+  next:
+    id: 231n
+    acs:
+      version: "23.1"
+      pattern: *development_pattern
+      image: &repository_image quay.io/alfresco/alfresco-content-repository
+    share:
+      version: "23.1"
+      pattern: *development_pattern
+      image: &share_image quay.io/alfresco/alfresco-share
+    search:
+      version: "2"
+      image: quay.io/alfresco/search-services
+      pattern: *development_pattern
+    search-enterprise:
+      version: "3"
+      pattern: *development_pattern
+    sync:
+      version: "4"
+      pattern: *development_pattern
+    adw:
+      version: "4.1"
+      pattern: *development_almost_semver_pattern
+    adminApp:
+      version: "8.1"
+      pattern: *development_almost_semver_pattern
+    onedrive:
+      version: "2"
+      pattern: *development_pattern
+    msteams:
+      version: "2"
+      pattern: *development_pattern
+    intelligence:
+      version: ">=1.5.0-0"
+    trouter:
+      version: ">=2.1.0-0"
+    sfs:
+      version: ">=2.1.0-0"
+    tengine-aio:
+      version: ">=3.1.0-0"
+    tengine-misc:
+      version: ">=3.1.0-0"
+    tengine-im:
+      version: ">=3.1.0-0"
+    tengine-lo:
+      version: ">=3.1.0-0"
+    tengine-pdf:
+      version: ">=3.1.0-0"
+    tengine-tika:
+      version: ">=3.1.0-0"
+
+  7.4.N:
     id: 74n
     acs:
       version: "7.4"
       pattern: *ga_hotfixes_pattern
-      image: &repository_image quay.io/alfresco/alfresco-content-repository
+      image: *repository_image
     share:
       version: "7.4"
       pattern: *ga_hotfixes_pattern
-      image: &share_image quay.io/alfresco/alfresco-share
+      image: *share_image
     search:
       version: "2.0.7"
       image: quay.io/alfresco/search-services
@@ -45,6 +97,8 @@ matrix:
       version: "~3.0.0"
     sfs:
       version: "~3.0.0"
+    tengine-aio:
+      version: "~4.0.0"
     tengine-misc:
       version: "~4.0.0"
     tengine-im:
@@ -94,6 +148,8 @@ matrix:
       version: "~2.0.0"
     sfs:
       version: "~2.0.0"
+    tengine-aio:
+      version: "~3.0.0"
     tengine-misc:
       version: "~3.0.0"
     tengine-im:
@@ -143,6 +199,8 @@ matrix:
       version: "~2.0.0"
     sfs:
       version: "~2.0.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:
@@ -189,6 +247,8 @@ matrix:
       version: "~1.5.0"
     sfs:
       version: "~1.5.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:
@@ -229,6 +289,8 @@ matrix:
       version: "~1.4.0"
     sfs:
       version: "~0.16.0"
+    tengine-aio:
+      version: "~2.5.0"
     tengine-misc:
       version: "~2.5.0"
     tengine-im:

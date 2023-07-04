@@ -331,17 +331,19 @@ targets:
   {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" }}
-  {{- if index . "search-enterprise" "compose_target" }}
-  searchEnterpriseCompose_{{ $id }}:
+  {{- $target_searchEntCompose := index . "search-enterprise" "compose_target" }}
+  {{- if $target_searchEntCompose }}
+  {{- range $index, $key := index . "search-enterprise" "compose_keys" }}
+  searchEnterprise{{ $index }}Compose_{{ $id }}:
     name: Search Enterprise image tag
     kind: yaml
     sourceid: searchEnterpriseTag_{{ $id }}
     transformers:
-      - addprefix: "quay.io/alfresco/alfresco-elasticsearch-live-indexing:"
+      - addprefix: "quay.io/alfresco/alfresco-elasticsearch-{{ $index }}:"
     spec:
-      file: {{ index . "search-enterprise" "compose_target" }}
-      key: >-
-        {{ index . "search-enterprise" "compose_key" }}
+      file: {{ $target_searchEntCompose }}
+      key: {{ $key }}
+  {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" "helm_target" }}
   {{- $target_searchEnt := index . "search-enterprise" "helm_target" }}
