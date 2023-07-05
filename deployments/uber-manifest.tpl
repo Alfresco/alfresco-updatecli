@@ -416,6 +416,8 @@ targets:
         {{ .intelligence.helm_key }}
   {{- end }}
   {{- if index . "trouter" }}
+  {{- with .trouter }}
+  {{- if and .compose_key .compose_target }}
   trouterCompose_{{ $id }}:
     name: Alfresco Transform Router image tag
     kind: yaml
@@ -423,9 +425,11 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-transform-router:"
     spec:
-      file: {{ index . "trouter" "compose_target" }}
+      file: {{ .compose_target }}
       key: >-
-        {{ index . "trouter" "compose_key" }}
+        {{ .compose_key }}
+  {{- end }}
+  {{- end }}
   trouterValues_{{ $id }}:
     name: Alfresco Transform Router image tag
     kind: yaml
@@ -436,6 +440,8 @@ targets:
         {{ .trouter.helm_key }}
   {{- end }}
   {{- if index . "sfs" }}
+  {{- with .sfs }}
+  {{- if and .compose_key .compose_target }}
   sfsCompose_{{ $id }}:
     name: Alfresco Shared Filestore image tag
     kind: yaml
@@ -443,9 +449,11 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-shared-file-store:"
     spec:
-      file: {{ index . "sfs" "compose_target" }}
+      file: {{ .compose_target }}
       key: >-
-        {{ index . "sfs" "compose_key" }}
+        {{ .compose_key }}
+  {{- end }}
+  {{- end }}
   sfsValues_{{ $id }}:
     name: Alfresco Shared Filestore image tag
     kind: yaml
