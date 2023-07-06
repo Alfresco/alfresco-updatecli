@@ -46,6 +46,17 @@ sources:
         pattern: >-
           ^{{ index . "adw" "version" }}{{ index . "adw" "pattern" }}$
   {{- end }}
+  {{- if index . "aca" }}
+  acaTag_{{ $id }}:
+    name: Alfresco Content App tag
+    kind: dockerimage
+    spec:
+      image: alfresco/alfresco-content-app
+      versionFilter:
+        kind: regex
+        pattern: >-
+          ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
+  {{- end }}
   {{- if index . "acs" }}
   {{ $repo_image := index . "acs" "image" }}
   repositoryTag_{{ $id }}:
@@ -285,6 +296,18 @@ targets:
       file: {{ .adw.helm_target }}
       key: >-
         {{ .adw.helm_key }}
+  {{- end }}
+  {{- if index . "acc" }}
+  accCompose_{{ $id }}:
+    name: ACC image tag
+    kind: yaml
+    sourceid: accTag_{{ $id }}
+    transformers:
+      - addprefix: "alfresco/alfresco-content-app:"
+    spec:
+      file: {{ .acc.compose_target }}
+      key: >-
+        {{ .acc.compose_key }}
   {{- end }}
   {{- if index . "acs" }}
   repositoryCompose_{{ $id }}:

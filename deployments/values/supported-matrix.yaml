@@ -316,5 +316,11 @@ matrix:
       version: "2.0.7"
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-search-services
+    adminApp:
+      version: "8.1"
+      pattern: *ga_hotfixes_pattern
     tengine-aio:
-      version: "~3.1.0"
+      version: "~4.0.0"
+    aca:
+      version: "4.1"
+      pattern: *ga_hotfixes_pattern
