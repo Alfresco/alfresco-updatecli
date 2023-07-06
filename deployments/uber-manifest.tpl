@@ -258,6 +258,7 @@ targets:
   {{- range .matrix }}
   {{- $id := .id -}}
   {{- if index . "adminApp" }}
+  {{- if and .adminApp.compose_key .search.compose_target }}
   adminAppCompose_{{ $id }}:
     name: Alfresco Control Center
     kind: yaml
@@ -268,6 +269,8 @@ targets:
       file: {{ .adminApp.compose_target }}
       key: >-
         {{ .adminApp.compose_key }}
+  {{- end }}
+  {{- if and .adminApp.helm_key .search.helm_target }}
   adminAppValues_{{ $id }}:
     name: Helm chart default values file
     kind: yaml
@@ -276,6 +279,7 @@ targets:
       file: {{ .adminApp.helm_target }}
       key: >-
         {{ .adminApp.helm_key }}
+  {{- end }}
   {{- end }}
   {{- if index . "adw" }}
   adwCompose_{{ $id }}:
