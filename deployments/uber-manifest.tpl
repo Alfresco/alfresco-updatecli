@@ -301,17 +301,17 @@ targets:
       key: >-
         {{ .adw.helm_key }}
   {{- end }}
-  {{- if index . "acc" }}
-  accCompose_{{ $id }}:
-    name: ACC image tag
+  {{- if index . "aca" }}
+  acaCompose_{{ $id }}:
+    name: ACA image tag
     kind: yaml
-    sourceid: accTag_{{ $id }}
+    sourceid: acaTag_{{ $id }}
     transformers:
       - addprefix: "alfresco/alfresco-content-app:"
     spec:
-      file: {{ .acc.compose_target }}
+      file: {{ .aca.compose_target }}
       key: >-
-        {{ .acc.compose_key }}
+        {{ .aca.compose_key }}
   {{- end }}
   {{- if index . "acs" }}
   repositoryCompose_{{ $id }}:
