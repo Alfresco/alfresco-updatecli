@@ -46,6 +46,17 @@ sources:
         pattern: >-
           ^{{ index . "adw" "version" }}{{ index . "adw" "pattern" }}$
   {{- end }}
+  {{- if index . "aca" }}
+  acaTag_{{ $id }}:
+    name: Alfresco Content App tag
+    kind: dockerimage
+    spec:
+      image: alfresco/alfresco-content-app
+      versionFilter:
+        kind: regex
+        pattern: >-
+          ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
+  {{- end }}
   {{- if index . "acs" }}
   {{ $repo_image := index . "acs" "image" }}
   repositoryTag_{{ $id }}:
@@ -247,6 +258,7 @@ targets:
   {{- range .matrix }}
   {{- $id := .id -}}
   {{- if index . "adminApp" }}
+  {{- if and .adminApp.compose_key .adminApp.compose_target }}
   adminAppCompose_{{ $id }}:
     name: Alfresco Control Center
     kind: yaml
@@ -257,6 +269,8 @@ targets:
       file: {{ .adminApp.compose_target }}
       key: >-
         {{ .adminApp.compose_key }}
+  {{- end }}
+  {{- if and .adminApp.helm_key .adminApp.helm_target }}
   adminAppValues_{{ $id }}:
     name: Helm chart default values file
     kind: yaml
@@ -265,6 +279,7 @@ targets:
       file: {{ .adminApp.helm_target }}
       key: >-
         {{ .adminApp.helm_key }}
+  {{- end }}
   {{- end }}
   {{- if index . "adw" }}
   adwCompose_{{ $id }}:
@@ -285,6 +300,18 @@ targets:
       file: {{ .adw.helm_target }}
       key: >-
         {{ .adw.helm_key }}
+  {{- end }}
+  {{- if index . "aca" }}
+  acaCompose_{{ $id }}:
+    name: ACA image tag
+    kind: yaml
+    sourceid: acaTag_{{ $id }}
+    transformers:
+      - addprefix: "alfresco/alfresco-content-app:"
+    spec:
+      file: {{ .aca.compose_target }}
+      key: >-
+        {{ .aca.compose_key }}
   {{- end }}
   {{- if index . "acs" }}
   repositoryCompose_{{ $id }}:
