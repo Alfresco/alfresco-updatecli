@@ -70,7 +70,7 @@ matrix:
       pattern: *ga_hotfixes_pattern
       image: *share_image
     search:
-      version: "2.0.7"
+      version: "2.0.8"
       image: quay.io/alfresco/search-services
       pattern: *ga_hotfixes_pattern
     search-enterprise:
