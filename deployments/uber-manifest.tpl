@@ -393,6 +393,7 @@ targets:
   {{- end }}
   {{- end }}
   {{- if index . "share" }}
+  {{- if and .share.compose_key .share.compose_target }}
   shareCompose_{{ $id }}:
     name: Share image tag
     kind: yaml
@@ -403,6 +404,7 @@ targets:
       file: {{ .share.compose_target }}
       key: >-
         {{ .share.compose_key }}
+  {{- end }}
   shareValues_{{ $id }}:
     name: Share image tag
     kind: yaml
