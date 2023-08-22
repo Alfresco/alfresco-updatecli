@@ -62,15 +62,15 @@ matrix:
   7.4.N:
     id: 74n
     acs:
-      version: "7.4"
+      version: &acs_ga_version "7.4"
       pattern: *ga_hotfixes_pattern
       image: *repository_image
     share:
-      version: "7.4"
+      version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
       image: *share_image
     search:
-      version: "2.0.8"
+      version: &search_ga_version "2.0.8"
       image: quay.io/alfresco/search-services
       pattern: *ga_hotfixes_pattern
     search-enterprise:
@@ -305,15 +305,15 @@ matrix:
   community:
     id: com
     acs:
-      version: "7.4"
+      version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-content-repository-community
     share:
-      version: "7.4"
+      version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-share
     search:
-      version: "2.0.7"
+      version: *search_ga_version
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-search-services
     adminApp:
