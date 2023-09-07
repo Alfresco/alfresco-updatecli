@@ -332,6 +332,15 @@ targets:
       file: {{ .acs.helm_target }}
       key: >-
         {{ .acs.helm_key }}
+  {{- if index . "acs" "helm_update_appVersion" }}
+  repositoryAppVersion_{{ $id }}:
+    name: Repo appVersion in Chart.yaml
+    kind: yaml
+    sourceid: repositoryTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .acs.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "search" }}
   {{- if and .search.compose_key .search.compose_target }}
@@ -355,6 +364,15 @@ targets:
       file: {{ .search.helm_target }}
       key: >-
         {{ .search.helm_key }}
+  {{- if index . "search" "helm_update_appVersion" }}
+  searchAppVersion_{{ $id }}:
+    name: Search appVersion in Chart.yaml
+    kind: yaml
+    sourceid: searchTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .search.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" }}
@@ -390,6 +408,15 @@ targets:
       file: {{ $target_searchEnt }}
       key: {{ $value }}
   {{- end }}
+  {{- if index . "search-enterprise" "helm_update_appVersion" }}
+  searchEnterpriseAppVersion_{{ $id }}:
+    name: Search Enterprise appVersion in Chart.yaml
+    kind: yaml
+    sourceid: searchEnterpriseTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .search.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- if index . "share" }}
@@ -413,6 +440,15 @@ targets:
       file: {{ .share.helm_target }}
       key: >-
         {{ .share.helm_key }}
+  {{- if index . "share" "helm_update_appVersion" }}
+  shareAppVersion_{{ $id }}:
+    name: Share appVersion in Chart.yaml
+    kind: yaml
+    sourceid: shareTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .share.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "onedrive" }}
   onedriveValues_{{ $id }}:
@@ -423,6 +459,15 @@ targets:
       file: {{ .onedrive.helm_target }}
       key: >-
         {{ .onedrive.helm_key }}
+  {{- if index . "onedrive" "helm_update_appVersion" }}
+  onedriveAppVersion_{{ $id }}:
+    name: Onedrive appVersion in Chart.yaml
+    kind: yaml
+    sourceid: onedriveTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .onedrive.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "msteams" }}
   msteamsValues_{{ $id }}:
@@ -433,6 +478,15 @@ targets:
       file: {{ .msteams.helm_target }}
       key: >-
         {{ .msteams.helm_key }}
+  {{- if index . "msteams" "helm_update_appVersion" }}
+  msteamsAppVersion_{{ $id }}:
+    name: MS Teams appVersion in Chart.yaml
+    kind: yaml
+    sourceid: msteamsTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .msteams.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "intelligence" }}
   intelligenceValues_{{ $id }}:
@@ -443,6 +497,15 @@ targets:
       file: {{ .intelligence.helm_target }}
       key: >-
         {{ .intelligence.helm_key }}
+  {{- if index . "intelligence" "helm_update_appVersion" }}
+  intelligenceAppVersion_{{ $id }}:
+    name: Alfresco Intelligence appVersion in Chart.yaml
+    kind: yaml
+    sourceid: intelligenceTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .intelligence.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "trouter" }}
   {{- with .trouter }}
@@ -467,6 +530,15 @@ targets:
       file: {{ .trouter.helm_target }}
       key: >-
         {{ .trouter.helm_key }}
+  {{- if index "trouter" "helm_update_appVersion" }}
+  trouterAppVersion_{{ $id }}:
+    name: Alfresco Transform Router appVersion in Chart.yaml
+    kind: yaml
+    sourceid: trouterTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .trouter.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- if index . "sfs" }}
   {{- with .sfs }}
