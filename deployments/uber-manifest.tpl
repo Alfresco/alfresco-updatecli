@@ -530,7 +530,7 @@ targets:
       file: {{ .trouter.helm_target }}
       key: >-
         {{ .trouter.helm_key }}
-  {{- if index "trouter" "helm_update_appVersion" }}
+  {{- if index . "trouter" "helm_update_appVersion" }}
   trouterAppVersion_{{ $id }}:
     name: Alfresco Transform Router appVersion in Chart.yaml
     kind: yaml
@@ -647,7 +647,7 @@ targets:
       file: {{ .sync.helm_target }}
       key: >-
         {{ .sync.helm_key }}
-  {{- if index .sync "helm_update_appVersion" }}
+  {{- if index . "sync" "helm_update_appVersion" }}
   syncAppVersion_{{ $id }}:
     name: Sync appVersion in Chart.yaml
     kind: yaml
