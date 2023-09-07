@@ -414,7 +414,7 @@ targets:
     kind: yaml
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .search.helm_target }}/Chart.yaml
+      file: {{ trimSuffix "/values.yaml" $target_searchEnt }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
