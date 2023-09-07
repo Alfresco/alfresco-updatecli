@@ -647,5 +647,14 @@ targets:
       file: {{ .sync.helm_target }}
       key: >-
         {{ .sync.helm_key }}
+  {{- if index .sync "helm_update_appVersion" }}
+  syncAppVersion_{{ $id }}:
+    name: Sync appVersion in Chart.yaml
+    kind: yaml
+    sourceid: syncTag_{{ $id }}
+    spec:
+      file: {{ trimSuffix "/values.yaml" .sync.helm_target }}/Chart.yaml
+      key: .appVersion
+  {{- end }}
   {{- end }}
   {{- end }}
