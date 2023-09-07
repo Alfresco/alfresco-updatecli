@@ -338,7 +338,7 @@ targets:
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .acs.helm_target }}/Chart.yaml
+      file: {{ osDir .acs.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -370,7 +370,7 @@ targets:
     kind: yaml
     sourceid: searchTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .search.helm_target }}/Chart.yaml
+      file: {{ osDir .search.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -414,7 +414,7 @@ targets:
     kind: yaml
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" $target_searchEnt }}/Chart.yaml
+      file: {{ osDir $target_searchEnt }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -446,7 +446,7 @@ targets:
     kind: yaml
     sourceid: shareTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .share.helm_target }}/Chart.yaml
+      file: {{ osDir .share.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -465,7 +465,7 @@ targets:
     kind: yaml
     sourceid: onedriveTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .onedrive.helm_target }}/Chart.yaml
+      file: {{ osDir .onedrive.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -484,7 +484,7 @@ targets:
     kind: yaml
     sourceid: msteamsTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .msteams.helm_target }}/Chart.yaml
+      file: {{ osDir .msteams.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -503,7 +503,7 @@ targets:
     kind: yaml
     sourceid: intelligenceTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .intelligence.helm_target }}/Chart.yaml
+      file: {{ osDir .intelligence.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -536,7 +536,7 @@ targets:
     kind: yaml
     sourceid: trouterTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .trouter.helm_target }}/Chart.yaml
+      file: {{ osDir .trouter.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
@@ -653,7 +653,7 @@ targets:
     kind: yaml
     sourceid: syncTag_{{ $id }}
     spec:
-      file: {{ trimSuffix "/values.yaml" .sync.helm_target }}/Chart.yaml
+      file: {{ osDir .sync.helm_target }}/Chart.yaml
       key: .appVersion
   {{- end }}
   {{- end }}
