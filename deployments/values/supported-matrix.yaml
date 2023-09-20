@@ -23,16 +23,16 @@ matrix:
       image: quay.io/alfresco/search-services
       pattern: *development_pattern
     search-enterprise:
-      version: "3"
+      version: "4"
       pattern: *development_pattern
     sync:
       version: "4"
       pattern: *development_pattern
     adw:
-      version: "4.1"
+      version: "4.2"
       pattern: *development_almost_semver_pattern
     adminApp:
-      version: "8.1"
+      version: "8.2"
       pattern: *development_almost_semver_pattern
     onedrive:
       version: "2"
@@ -80,10 +80,10 @@ matrix:
       version: "3.10"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "4.1"
+      version: &adw_ga_version "4.2"
       pattern: *ga_hotfixes_pattern
     adminApp:
-      version: "8.1"
+      version: &acc_ga_version "8.2"
       pattern: *ga_hotfixes_pattern
     onedrive:
       version: "2"
@@ -98,7 +98,7 @@ matrix:
     sfs:
       version: "~3.0.0"
     tengine-aio:
-      version: "~4.0.0"
+      version: &tengine_ga_version "~4.0.0"
     tengine-misc:
       version: "~4.0.0"
     tengine-im:
@@ -317,10 +317,10 @@ matrix:
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-search-services
     adminApp:
-      version: "8.1"
+      version: *acc_ga_version
       pattern: *ga_hotfixes_pattern
     tengine-aio:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     aca:
-      version: "4.1"
+      version: *adw_ga_version
       pattern: *ga_hotfixes_pattern
