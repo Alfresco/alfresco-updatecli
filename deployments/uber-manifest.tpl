@@ -1,5 +1,5 @@
 ---
-title: Images updates for all versions of Helm charts and Docker compose
+name: Images updates for all Alfresco supported versions of Helm charts and Docker compose
 
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
