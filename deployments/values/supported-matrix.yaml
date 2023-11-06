@@ -1,7 +1,6 @@
 ---
 # Reflection of https://docs.alfresco.com/content-services/latest/support/
 # TO BE ENRICHED AS RELEASES ARE OUT
-# yaml-language-server: $schema=./supported-matrix.yaml
 patterns:
   ga: &ga_pattern (\.[0-9]+){1,2}
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
