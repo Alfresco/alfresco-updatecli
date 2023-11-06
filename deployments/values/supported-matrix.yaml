@@ -64,11 +64,11 @@ matrix:
     acs:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
-      image: &repository_image quay.io/alfresco/alfresco-content-repository
+      image: quay.io/alfresco/alfresco-content-repository
     share:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
-      image: &share_image quay.io/alfresco/alfresco-share
+      image: quay.io/alfresco/alfresco-share
     search:
       version: &search_ga_version "2.0.8"
       image: quay.io/alfresco/search-services
