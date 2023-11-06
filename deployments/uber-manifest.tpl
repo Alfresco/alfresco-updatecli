@@ -58,7 +58,7 @@ sources:
           ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
   {{- end }}
   {{- if index . "acs" }}
-  {{ $repo_image := index . "acs" "image" }}
+  {{ $repo_image := index . "acs" "image" | default "quay.io/alfresco/alfresco-content-repository" }}
   repositoryTag_{{ $id }}:
     name: ACS repository tag
     kind: dockerimage
@@ -84,7 +84,7 @@ sources:
           ^{{ index . "search-enterprise" "version" }}{{ index . "search-enterprise" "pattern" }}$
   {{ end }}
   {{- if index . "search" }}
-  {{ $search_image := index . "search" "image" }}
+  {{ $search_image := index . "search" "image" | default "quay.io/alfresco/search-services" }}
   searchTag_{{ $id }}:
     name: Alfresco Search Services
     kind: dockerimage
@@ -99,7 +99,7 @@ sources:
           ^{{ index . "search" "version" }}{{ index . "search" "pattern" }}$
   {{- end }}
   {{- if index . "share" }}
-  {{ $share_image := index . "share" "image" }}
+  {{ $share_image := index . "share" "image" | default "quay.io/alfresco/alfresco-share" }}
   shareTag_{{ $id }}:
     name: Share repository tag
     kind: dockerimage

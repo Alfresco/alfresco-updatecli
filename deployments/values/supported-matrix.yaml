@@ -12,14 +12,11 @@ matrix:
     acs:
       version: "23.2"
       pattern: *development_pattern
-      image: &repository_image quay.io/alfresco/alfresco-content-repository
     share:
       version: "23.2"
       pattern: *development_pattern
-      image: &share_image quay.io/alfresco/alfresco-share
     search:
       version: "2"
-      image: quay.io/alfresco/search-services
       pattern: *development_pattern
     search-enterprise:
       version: "4"
@@ -63,14 +60,11 @@ matrix:
     acs:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/alfresco-content-repository
     share:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/alfresco-share
     search:
       version: &search_ga_version "2.0.8"
-      image: quay.io/alfresco/search-services
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "4.0"
@@ -114,14 +108,11 @@ matrix:
     acs:
       version: &acs_ga_version "7.4"
       pattern: *ga_hotfixes_pattern
-      image: *repository_image
     share:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
-      image: *share_image
     search:
       version: "2.0.8"
-      image: quay.io/alfresco/search-services
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "3.3"
@@ -165,15 +156,12 @@ matrix:
     acs:
       version: "7.3.1"
       pattern: *ga_hotfixes_pattern
-      image: *repository_image
     share:
       version: "7.3.1"
       pattern: *ga_hotfixes_pattern
-      image: *share_image
     search:
       version: "2.0.5"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/search-services
     search-enterprise:
       version: "3.2"
       pattern: *ga_hotfixes_pattern
@@ -216,15 +204,12 @@ matrix:
     acs:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
-      image: *repository_image
     share:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
-      image: *share_image
     search:
       version: "2.0.3"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/search-services
     search-enterprise:
       version: "3.1"
       pattern: *ga_hotfixes_pattern
@@ -267,15 +252,12 @@ matrix:
     acs:
       version: "7.1"
       pattern: *ga_hotfixes_pattern
-      image: *repository_image
     share:
       version: "7.1"
       pattern: *ga_hotfixes_pattern
-      image: *share_image
     search:
       version: "2.0.2"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/search-services
     search-enterprise:
       version: "3.1"
       pattern: *ga_hotfixes_pattern
@@ -315,15 +297,12 @@ matrix:
     acs:
       version: "7.0"
       pattern: *ga_hotfixes_pattern
-      image: *repository_image
     share:
       version: "7.0"
       pattern: *ga_hotfixes_pattern
-      image: *share_image
     search:
       version: "2.0.2"
       pattern: *ga_hotfixes_pattern
-      image: quay.io/alfresco/search-services
     sync:
       version: "3.7"
       pattern: *ga_hotfixes_pattern
