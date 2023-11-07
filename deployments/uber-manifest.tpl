@@ -314,6 +314,7 @@ targets:
         {{ .aca.compose_key }}
   {{- end }}
   {{- if index . "acs" }}
+  {{- if and .acs.compose_key .acs.compose_target }}
   repositoryCompose_{{ $id }}:
     name: Repo image tag
     kind: yaml
@@ -324,6 +325,7 @@ targets:
       file: {{ .acs.compose_target }}
       key: >-
         {{ .acs.compose_key }}
+  {{- end }}
   repositoryValues_{{ $id }}:
     name: Repo image tag
     kind: yaml
