@@ -355,25 +355,16 @@ targets:
       key: >-
         {{ .search.compose_key }}
   {{- end }}
-  {{- $target_search := .search.helm_target}}
-  {{- if and $target_search .search.helm_key }}
+  {{- $target_search_helm := .search.helm_target}}
+  {{- if and $target_search_helm .search.helm_key }}
   searchValues_{{ $id }}:
     name: search image tag
     kind: yaml
     sourceid: searchTag_{{ $id }}
     spec:
-      file: {{ $target_search }}
+      file: {{ $target_search_helm }}
       key: >-
         {{ .search.helm_key }}
-  {{- end }}
-  {{- if index . "search" "helm_update_appVersion" }}
-  searchAppVersion_{{ $id }}:
-    name: Search appVersion in Chart.yaml
-    kind: yaml
-    sourceid: searchTag_{{ $id }}
-    spec:
-      file: {{ osDir $target_search }}/Chart.yaml
-      key: .appVersion
   {{- end }}
   {{- range $key, $path := .search.helm_keys }}
   searchValues{{ $key }}_{{ $id }}:
@@ -381,9 +372,18 @@ targets:
     kind: yaml
     sourceid: searchTag_{{ $id }}
     spec:
-      file: {{ $target_search }}
+      file: {{ $target_search_helm }}
       key: >-
         {{ $path }}
+  {{- end }}
+  {{- if index . "search" "helm_update_appVersion" }}
+  searchAppVersion_{{ $id }}:
+    name: Search appVersion in Chart.yaml
+    kind: yaml
+    sourceid: searchTag_{{ $id }}
+    spec:
+      file: {{ osDir $target_search_helm }}/Chart.yaml
+      key: .appVersion
   {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" }}
