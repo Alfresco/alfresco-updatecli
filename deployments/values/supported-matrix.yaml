@@ -55,8 +55,8 @@ matrix:
     tengine-tika:
       version: ">=4.0.0-0"
 
-  23.1.N:
-    id: 231n
+  23.N:
+    id: 23n
     acs:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
