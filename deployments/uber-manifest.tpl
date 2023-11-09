@@ -320,7 +320,7 @@ targets:
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "acs" "image" }}:"
+      - addprefix: "{{ $repo_image }}:"
     spec:
       file: {{ .acs.compose_target }}
       key: >-
@@ -351,7 +351,7 @@ targets:
     kind: yaml
     sourceid: searchTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "search" "image" }}:"
+      - addprefix: "{{ $search_image }}:"
     spec:
       file: {{ .search.compose_target }}
       key: >-
@@ -439,7 +439,7 @@ targets:
     kind: yaml
     sourceid: shareTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "share" "image" }}:"
+      - addprefix: "{{ $share_image }}:"
     spec:
       file: {{ .share.compose_target }}
       key: >-
