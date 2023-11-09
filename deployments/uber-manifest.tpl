@@ -18,6 +18,10 @@ scms:
       token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
       directory: /tmp/updatecli/searchEnterprise
 
+{{ $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
+{{ $default_search_image := "quay.io/alfresco/search-services" }}
+{{ $default_share_image := "quay.io/alfresco/alfresco-share" }}
+
 sources:
   {{- range .matrix }}
   {{- $id := .id -}}
@@ -58,7 +62,7 @@ sources:
           ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
   {{- end }}
   {{- if index . "acs" }}
-  {{ $repo_image := index . "acs" "image" | default "quay.io/alfresco/alfresco-content-repository" }}
+  {{ $repo_image := index . "acs" "image" | default $default_repo_image }}
   repositoryTag_{{ $id }}:
     name: ACS repository tag
     kind: dockerimage
@@ -84,7 +88,7 @@ sources:
           ^{{ index . "search-enterprise" "version" }}{{ index . "search-enterprise" "pattern" }}$
   {{ end }}
   {{- if index . "search" }}
-  {{ $search_image := index . "search" "image" | default "quay.io/alfresco/search-services" }}
+  {{ $search_image := index . "search" "image" | default $default_search_image }}
   searchTag_{{ $id }}:
     name: Alfresco Search Services
     kind: dockerimage
@@ -99,7 +103,7 @@ sources:
           ^{{ index . "search" "version" }}{{ index . "search" "pattern" }}$
   {{- end }}
   {{- if index . "share" }}
-  {{ $share_image := index . "share" "image" | default "quay.io/alfresco/alfresco-share" }}
+  {{ $share_image := index . "share" "image" | default $default_share_image }}
   shareTag_{{ $id }}:
     name: Share repository tag
     kind: dockerimage
@@ -320,7 +324,7 @@ targets:
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "acs" "image" }}:"
+      - addprefix: "{{ index . "acs" "image" | default $default_repo_image }}:"
     spec:
       file: {{ .acs.compose_target }}
       key: >-
@@ -351,7 +355,7 @@ targets:
     kind: yaml
     sourceid: searchTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "search" "image" }}:"
+      - addprefix: "{{ index . "search" "image" | default $default_search_image }}:"
     spec:
       file: {{ .search.compose_target }}
       key: >-
@@ -439,7 +443,7 @@ targets:
     kind: yaml
     sourceid: shareTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "share" "image" }}:"
+      - addprefix: "{{ index . "share" "image" | default $default_share_image }}:"
     spec:
       file: {{ .share.compose_target }}
       key: >-
