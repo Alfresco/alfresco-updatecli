@@ -250,10 +250,10 @@ matrix:
   7.1.N:
     id: 71n
     acs:
-      version: "7.1"
+      version: "7.1.1"
       pattern: *ga_hotfixes_pattern
     share:
-      version: "7.1"
+      version: "7.1.1"
       pattern: *ga_hotfixes_pattern
     search:
       version: "2.0.2"
