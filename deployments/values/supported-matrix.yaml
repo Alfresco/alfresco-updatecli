@@ -85,7 +85,7 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: "~2.0.0"
+      version: "~3.0.0"
     trouter:
       version: "~4.0.0"
     sfs:
