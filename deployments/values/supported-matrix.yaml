@@ -183,21 +183,21 @@ matrix:
     intelligence:
       version: "~1.5.0"
     trouter:
-      version: "~2.0.0"
+      version: "~2.1.1"
     sfs:
-      version: "~2.0.0"
+      version: "~2.1.1"
     tengine-aio:
-      version: "~3.0.0"
+      version: "~3.1.1"
     tengine-misc:
-      version: "~3.0.0"
+      version: "~3.1.1"
     tengine-im:
-      version: "~3.0.0"
+      version: "~3.1.1"
     tengine-lo:
-      version: "~3.0.0"
+      version: "~3.1.1"
     tengine-pdf:
-      version: "~3.0.0"
+      version: "~3.1.1"
     tengine-tika:
-      version: "~3.0.0"
+      version: "~3.1.1"
 
   7.2.N:
     id: 72n
@@ -231,21 +231,21 @@ matrix:
     intelligence:
       version: "~1.5.0"
     trouter:
-      version: "~2.0.0"
+      version: "~2.1.1"
     sfs:
-      version: "~2.0.0"
+      version: "~2.1.1"
     tengine-aio:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-misc:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-im:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-lo:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-pdf:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-tika:
-      version: "~2.5.0"
+      version: "~3.1.1"
 
   7.1.N:
     id: 71n
