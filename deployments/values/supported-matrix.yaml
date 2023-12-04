@@ -276,21 +276,21 @@ matrix:
     intelligence:
       version: "~1.4.0"
     trouter:
-      version: "~1.5.0"
+      version: "~2.1.1"
     sfs:
-      version: "~1.5.0"
+      version: "~2.1.1"
     tengine-aio:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-misc:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-im:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-lo:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-pdf:
-      version: "~2.5.0"
+      version: "~3.1.1"
     tengine-tika:
-      version: "~2.5.0"
+      version: "~3.1.1"
 
   7.0.N:
     id: 70n
