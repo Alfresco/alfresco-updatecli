@@ -345,7 +345,7 @@ targets:
     sourceid: repositoryTag_{{ $id }}
     spec:
       file: {{ osDir .acs.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "search" }}
@@ -389,7 +389,7 @@ targets:
     sourceid: searchTag_{{ $id }}
     spec:
       file: {{ osDir $target_search_helm }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "search-enterprise" }}
@@ -432,7 +432,7 @@ targets:
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
       file: {{ osDir $target_searchEnt }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- end }}
@@ -464,7 +464,7 @@ targets:
     sourceid: shareTag_{{ $id }}
     spec:
       file: {{ osDir .share.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "onedrive" }}
@@ -483,7 +483,7 @@ targets:
     sourceid: onedriveTag_{{ $id }}
     spec:
       file: {{ osDir .onedrive.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "msteams" }}
@@ -502,7 +502,7 @@ targets:
     sourceid: msteamsTag_{{ $id }}
     spec:
       file: {{ osDir .msteams.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "intelligence" }}
@@ -521,7 +521,7 @@ targets:
     sourceid: intelligenceTag_{{ $id }}
     spec:
       file: {{ osDir .intelligence.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "trouter" }}
@@ -554,7 +554,7 @@ targets:
     sourceid: trouterTag_{{ $id }}
     spec:
       file: {{ osDir .trouter.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "sfs" }}
@@ -671,7 +671,7 @@ targets:
     sourceid: syncTag_{{ $id }}
     spec:
       file: {{ osDir .sync.helm_target }}/Chart.yaml
-      key: .appVersion
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- end }}
