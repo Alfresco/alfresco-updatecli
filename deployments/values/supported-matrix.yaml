@@ -64,7 +64,7 @@ matrix:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
     search:
-      version: &search_ga_version "2.0.8"
+      version: &search_ga_version "2.0.9"
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "4.0"
@@ -112,7 +112,7 @@ matrix:
       version: "7.4"
       pattern: *ga_hotfixes_pattern
     search:
-      version: "2.0.8"
+      version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "3.3.1"
