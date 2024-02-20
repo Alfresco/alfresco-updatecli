@@ -50,6 +50,18 @@ sources:
         pattern: >-
           ^{{ index . "adw" "version" }}{{ index . "adw" "pattern" }}$
   {{- end }}
+  {{- if index . "activemq" }}
+  activemqTag_{{ $id }}:
+    name: Alfresco ActiveMQ tag
+    kind: dockerimage
+    spec:
+      image: quay.io/alfresco/alfresco-activemq
+      {{ template "quay_auth" }}
+      versionFilter:
+        kind: regex
+        pattern: >-
+          ^{{ index . "activemq" "version" }}{{ index . "activemq" "pattern" }}$
+  {{- end }}
   {{- if index . "aca" }}
   acaTag_{{ $id }}:
     name: Alfresco Content App tag
@@ -389,6 +401,40 @@ targets:
     sourceid: searchTag_{{ $id }}
     spec:
       file: {{ osDir $target_search_helm }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- if index . "activemq" }}
+  {{- if and .activemq.compose_key .activemq.compose_target }}
+  activemqCompose_{{ $id }}:
+    name: activemq image tag
+    kind: yaml
+    sourceid: activemqTag_{{ $id }}
+    transformers:
+      - addprefix: "quay.io/alfresco/alfresco-activemq:"
+    spec:
+      file: {{ .activemq.compose_target }}
+      key: >-
+        {{ .activemq.compose_key }}
+  {{- end }}
+  {{- $target_activemq_helm := .activemq.helm_target}}
+  {{- if and $target_activemq_helm .activemq.helm_key }}
+  activemqValues_{{ $id }}:
+    name: activemq image tag
+    kind: yaml
+    sourceid: activemqTag_{{ $id }}
+    spec:
+      file: {{ $target_activemq_helm }}
+      key: >-
+        {{ .activemq.helm_key }}
+  {{- end }}
+  {{- if index . "activemq" "helm_update_appVersion" }}
+  activemqAppVersion_{{ $id }}:
+    name: Search appVersion in Chart.yaml
+    kind: yaml
+    sourceid: activemqTag_{{ $id }}
+    spec:
+      file: {{ osDir $target_activemq_helm }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}

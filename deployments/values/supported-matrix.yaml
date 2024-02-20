@@ -6,12 +6,16 @@ patterns:
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
   development: &development_pattern (\.[0-9]+){0,3}(-[AM]\.?[0-9]+)?
   development_almost_semver_pattern: &development_almost_semver_pattern (\.[0-9]+){0,3}(-[0-9]+)?
+  ga_activemq: &ga_activemq_pattern (\.[0-9]+){0,1}-[a-zA-Z0-9]+[0-9]+-[a-zA-Z0-9]+[0-9]+
 matrix:
   next:
     id: next
     acs:
       version: "23.2"
       pattern: *development_pattern
+    activemq:
+      version: "5.19"
+      pattern: *ga_activemq_pattern
     share:
       version: "23.2"
       pattern: *development_pattern
@@ -60,6 +64,9 @@ matrix:
     acs:
       version: &acs_ga_version "23.1"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.18"
+      pattern: *ga_activemq_pattern
     share:
       version: "23.1"
       pattern: *ga_hotfixes_pattern
@@ -108,6 +115,9 @@ matrix:
     acs:
       version: "7.4"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.17"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.4"
       pattern: *ga_hotfixes_pattern
@@ -156,6 +166,9 @@ matrix:
     acs:
       version: "7.3.1"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.17"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.3.1"
       pattern: *ga_hotfixes_pattern
@@ -204,6 +217,9 @@ matrix:
     acs:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.16.1"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
@@ -252,6 +268,9 @@ matrix:
     acs:
       version: "7.1.1"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.16"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.1.1"
       pattern: *ga_hotfixes_pattern
@@ -297,6 +316,9 @@ matrix:
     acs:
       version: "7.0"
       pattern: *ga_hotfixes_pattern
+    activemq:
+      version: "5.16"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.0"
       pattern: *ga_hotfixes_pattern
@@ -337,6 +359,9 @@ matrix:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
       image: docker.io/alfresco/alfresco-content-repository-community
+    activemq:
+      version: "5.18"
+      pattern: *ga_activemq_pattern
     share:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
