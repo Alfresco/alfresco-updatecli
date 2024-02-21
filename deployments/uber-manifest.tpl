@@ -433,7 +433,7 @@ targets:
     name: Search appVersion in Chart.yaml
     kind: yaml
     sourceid: activemqTag_{{ $id }}
-    transformers
+    transformers:
       - trimsuffix:
     spec:
       file: {{ osDir $target_activemq_helm }}/Chart.yaml
