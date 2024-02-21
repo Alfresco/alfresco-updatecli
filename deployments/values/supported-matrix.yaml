@@ -218,8 +218,8 @@ matrix:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
     activemq:
-      version: "~5.16.1"
-      pattern: -jre17-rockylinux8
+      version: "5.16"
+      pattern: *ga_activemq_pattern
     share:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
