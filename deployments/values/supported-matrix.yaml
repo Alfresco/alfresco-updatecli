@@ -6,7 +6,7 @@ patterns:
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
   development: &development_pattern (\.[0-9]+){0,3}(-[AM]\.?[0-9]+)?
   development_almost_semver_pattern: &development_almost_semver_pattern (\.[0-9]+){0,3}(-[0-9]+)?
-  ga_activemq: &ga_activemq_pattern (\.[0-9]+){0,1}-[a-zA-Z0-9]+[0-9]+-[a-zA-Z0-9]+[0-9]+
+  ga_activemq: &ga_activemq_pattern (\.[0-9]+)
 matrix:
   next:
     id: next
@@ -219,7 +219,6 @@ matrix:
       pattern: *ga_hotfixes_pattern
     activemq:
       version: "5.16.1"
-      pattern: *ga_activemq_pattern
     share:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
