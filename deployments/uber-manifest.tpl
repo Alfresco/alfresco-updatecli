@@ -434,7 +434,7 @@ targets:
     kind: yaml
     sourceid: activemqTag_{{ $id }}
     transformers:
-      - trimsuffix:
+      - trimsuffix: "-jre17-rockylinux8"
     spec:
       file: {{ osDir $target_activemq_helm }}/Chart.yaml
       key: "$.appVersion"
