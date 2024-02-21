@@ -14,8 +14,8 @@ matrix:
       version: "23.2"
       pattern: *development_pattern
     activemq:
-      version: "5.19"
-      pattern: *ga_activemq_pattern
+      version: "6"
+      pattern: *ga_pattern
     share:
       version: "23.2"
       pattern: *development_pattern
