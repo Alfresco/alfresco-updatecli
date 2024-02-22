@@ -21,6 +21,7 @@ scms:
 {{ $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
 {{ $default_search_image := "quay.io/alfresco/search-services" }}
 {{ $default_share_image := "quay.io/alfresco/alfresco-share" }}
+{{ $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
 
 sources:
   {{- range .matrix }}
@@ -51,12 +52,15 @@ sources:
           ^{{ index . "adw" "version" }}{{ index . "adw" "pattern" }}$
   {{- end }}
   {{- if index . "activemq" }}
+  {{ $activemq_image := index . "activemq" "image" | default $default_activemq_image }}
   activemqTag_{{ $id }}:
     name: Alfresco ActiveMQ tag
     kind: dockerimage
     spec:
-      image: quay.io/alfresco/alfresco-activemq
+      image: {{ $activemq_image }}
+      {{ if eq (printf "%.8s" $activemq_image) "quay.io/" }}
       {{ template "quay_auth" }}
+      {{ end }}
       versionFilter:
         kind: regex
         pattern: >-
@@ -411,7 +415,7 @@ targets:
     kind: yaml
     sourceid: activemqTag_{{ $id }}
     transformers:
-      - addprefix: "quay.io/alfresco/alfresco-activemq:"
+      - addprefix: "{{ index . "activemq" "image" | default $default_activemq_image }}:"
     spec:
       file: {{ .activemq.compose_target }}
       key: >-
