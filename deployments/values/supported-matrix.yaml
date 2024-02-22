@@ -362,11 +362,11 @@ matrix:
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
-      image: docker.io/alfresco/alfresco-content-repository-community
+      image: docker.io/alfresco/alfresco-activemq
     share:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
-      image: docker.io/alfresco/alfresco-activemq
+      image: docker.io/alfresco/alfresco-share
     search:
       version: *search_ga_version
       pattern: *ga_hotfixes_pattern
