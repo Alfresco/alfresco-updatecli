@@ -41,11 +41,11 @@ matrix:
       version: "2"
       pattern: *development_pattern
     intelligence:
-      version: ">=3.0.0-0"
+      version: ">=3.1.0-0"
     trouter:
-      version: ">=4.0.0-0"
+      version: ">=4.1.0-0"
     sfs:
-      version: ">=4.0.0-0"
+      version: ">=4.1.0-0"
     tengine-aio:
       version: &tengine_next_version  ">=5.0.0-0"
     tengine-misc:
@@ -62,13 +62,13 @@ matrix:
   23.N:
     id: 23n
     acs:
-      version: &acs_ga_version "23.1"
+      version: &acs_ga_version "23.2"
       pattern: *ga_hotfixes_pattern
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share:
-      version: "23.1"
+      version: "23.2"
       pattern: *ga_hotfixes_pattern
     search:
       version: &search_ga_version "2.0.9"
@@ -77,13 +77,13 @@ matrix:
       version: "4.0"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: "4.0"
+      version: "5.0"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: &adw_ga_version "4.3"
+      version: &adw_ga_version "4.4"
       pattern: *ga_hotfixes_pattern
     adminApp:
-      version: &acc_ga_version "8.3"
+      version: &acc_ga_version "8.4"
       pattern: *ga_hotfixes_pattern
     onedrive:
       version: "2"
@@ -92,11 +92,11 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: "~3.0.0"
+      version: "~3.1.0"
     trouter:
-      version: "~4.0.0"
+      version: "~4.1.0"
     sfs:
-      version: "~4.0.0"
+      version: "~4.1.0"
     tengine-aio:
       version: &tengine_ga_version "~5.0.0"
     tengine-misc:
