@@ -59,25 +59,25 @@ matrix:
     tengine-tika:
       version: *tengine_next_version
 
-  23.N:
-    id: 23n
+  current:
+    id: current
     acs:
       version: &acs_ga_version "23.1"
       pattern: *ga_hotfixes_pattern
     activemq:
-      version: &activemq_ga_version "5.18"
+      version: "5.18"
       pattern: *ga_activemq_pattern
     share:
-      version: &share_ga_version "23.1"
+      version: "23.1"
       pattern: *ga_hotfixes_pattern
     search:
       version: &search_ga_version "2.0.9"
       pattern: *ga_hotfixes_pattern
     search-enterprise:
-      version: &search_enterprise_ga_version "4.0"
+      version: "4.0"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: &sync_ga_version "4.0"
+      version: "4.0"
       pattern: *ga_hotfixes_pattern
     adw:
       version: &adw_ga_version "4.3"
@@ -86,70 +86,19 @@ matrix:
       version: &acc_ga_version "8.3"
       pattern: *ga_hotfixes_pattern
     onedrive:
-      version: &onedrive_ga_version "2"
+      version: "2"
       pattern: *ga_hotfixes_pattern
     msteams:
-      version: &msteams_ga_version "2"
+      version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: &intelligence_ga_version "~3.0.0"
+      version: "~3.0.0"
     trouter:
-      version: &trouter_ga_version "~4.0.0"
+      version: "~4.0.0"
     sfs:
-      version: &sfs_ga_version "~4.0.0"
+      version: "~4.0.0"
     tengine-aio:
       version: &tengine_ga_version "~5.0.0"
-    tengine-misc:
-      version: *tengine_ga_version
-    tengine-im:
-      version: *tengine_ga_version
-    tengine-lo:
-      version: *tengine_ga_version
-    tengine-pdf:
-      version: *tengine_ga_version
-    tengine-tika:
-      version: *tengine_ga_version
-
-  current:
-    id: current
-    acs:
-      version: *acs_ga_version 
-      pattern: *ga_hotfixes_pattern
-    activemq:
-      version: *activemq_ga_version
-      pattern: *ga_activemq_pattern
-    share:
-      version: *share_ga_version
-      pattern: *ga_hotfixes_pattern
-    search:
-      version: *search_ga_version
-      pattern: *ga_hotfixes_pattern
-    search-enterprise:
-      version: *search_enterprise_ga_version
-      pattern: *ga_hotfixes_pattern
-    sync:
-      version: *sync_ga_version
-      pattern: *ga_hotfixes_pattern
-    adw:
-      version: *adw_ga_version
-      pattern: *ga_hotfixes_pattern
-    adminApp:
-      version: *acc_ga_version
-      pattern: *ga_hotfixes_pattern
-    onedrive:
-      version: *onedrive_ga_version
-      pattern: *ga_hotfixes_pattern
-    msteams:
-      version: *msteams_ga_version
-      pattern: *ga_hotfixes_pattern
-    intelligence:
-      version: *intelligence_ga_version
-    trouter:
-      version: *trouter_ga_version
-    sfs:
-      version: *sfs_ga_version
-    tengine-aio:
-      version: *tengine_ga_version
     tengine-misc:
       version: *tengine_ga_version
     tengine-im:
