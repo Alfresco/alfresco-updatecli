@@ -59,8 +59,8 @@ matrix:
     tengine-tika:
       version: *tengine_next_version
 
-  23.N:
-    id: 23n
+  current:
+    id: current
     acs:
       version: &acs_ga_version "23.1"
       pattern: *ga_hotfixes_pattern
