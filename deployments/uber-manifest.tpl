@@ -302,6 +302,7 @@ targets:
   {{- end }}
   {{- end }}
   {{- if index . "adw" }}
+  {{- if and .adw.compose_key .adw.compose_target }}
   adwCompose_{{ $id }}:
     name: ADW image tag
     kind: yaml
@@ -312,6 +313,7 @@ targets:
       file: {{ .adw.compose_target }}
       key: >-
         {{ .adw.compose_key }}
+  {{- end }}
   adwValues_{{ $id }}:
     name: ADW image tag
     kind: yaml
@@ -322,6 +324,7 @@ targets:
         {{ .adw.helm_key }}
   {{- end }}
   {{- if index . "aca" }}
+  {{- if and .aca.compose_key .aca.compose_target }}
   acaCompose_{{ $id }}:
     name: ACA image tag
     kind: yaml
@@ -332,6 +335,7 @@ targets:
       file: {{ .aca.compose_target }}
       key: >-
         {{ .aca.compose_key }}
+  {{- end }}
   {{- end }}
   {{- if index . "acs" }}
   {{- if and .acs.compose_key .acs.compose_target }}
