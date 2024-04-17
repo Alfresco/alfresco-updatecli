@@ -11,13 +11,13 @@ matrix:
   next:
     id: next
     acs:
-      version: "23.2"
+      version: &acs_next_version "23.3"
       pattern: *development_pattern
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share:
-      version: "23.2"
+      version: *acs_next_version
       pattern: *development_pattern
     search:
       version: "2"
@@ -29,10 +29,10 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "4.4"
+      version: "4.5"
       pattern: *development_almost_semver_pattern
     adminApp:
-      version: "8.4"
+      version: "8.5"
       pattern: *development_almost_semver_pattern
     onedrive:
       version: "2"
@@ -71,13 +71,13 @@ matrix:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
     search:
-      version: &search_ga_version "2.0.9"
+      version: &search_ga_version "2.0.10"
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "4.0"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: "4.0"
+      version: "5.0"
       pattern: *ga_hotfixes_pattern
     adw:
       version: &adw_ga_version "4.4"
