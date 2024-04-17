@@ -70,8 +70,11 @@ matrix:
     share:
       version: *acs_ga_version
       pattern: *ga_hotfixes_pattern
-    search:
+    insight-zeppelin:
       version: &search_ga_version "2.0.10"
+      pattern: *ga_hotfixes_pattern
+    search:
+      version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "4.0"
@@ -120,6 +123,9 @@ matrix:
       pattern: *ga_activemq_pattern
     share:
       version: "7.4"
+      pattern: *ga_hotfixes_pattern
+    insight-zeppelin:
+      version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search:
       version: *search_ga_version
@@ -172,6 +178,9 @@ matrix:
     share:
       version: "7.3.1"
       pattern: *ga_hotfixes_pattern
+    insight-zeppelin:
+      version: "2.0.5"
+      pattern: *ga_hotfixes_pattern
     search:
       version: "2.0.5"
       pattern: *ga_hotfixes_pattern
@@ -223,6 +232,9 @@ matrix:
     share:
       version: "7.2"
       pattern: *ga_hotfixes_pattern
+    insight-zeppelin:
+      version: "2.0.3"
+      pattern: *ga_hotfixes_pattern
     search:
       version: "2.0.3"
       pattern: *ga_hotfixes_pattern
@@ -273,6 +285,9 @@ matrix:
       pattern: *ga_activemq_pattern
     share:
       version: "7.1.1"
+      pattern: *ga_hotfixes_pattern
+    insight-zeppelin:
+      version: "2.0.2"
       pattern: *ga_hotfixes_pattern
     search:
       version: "2.0.2"
