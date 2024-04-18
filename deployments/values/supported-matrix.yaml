@@ -95,11 +95,11 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: "~3.1.0"
+      version: &ais_ga_version "~3.1.0"
     trouter:
-      version: "~4.1.0"
+      version: &trouter_ga_version "~4.1.0"
     sfs:
-      version: "~4.1.0"
+      version: *trouter_ga_version
     tengine-aio:
       version: &tengine_ga_version "~5.1.0"
     tengine-misc:
@@ -149,23 +149,23 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence:
-      version: "~2.0.0"
+      version: *ais_ga_version
     trouter:
-      version: "~3.0.0"
+      version: *trouter_ga_version
     sfs:
-      version: "~3.0.0"
+      version: *trouter_ga_version
     tengine-aio:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     tengine-misc:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     tengine-im:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     tengine-lo:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     tengine-pdf:
-      version: "~4.0.0"
+      version: *tengine_ga_version
     tengine-tika:
-      version: "~4.0.0"
+      version: *tengine_ga_version
 
   7.3.N:
     id: 73n
