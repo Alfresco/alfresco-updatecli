@@ -92,6 +92,21 @@ sources:
         pattern: >-
           ^{{ index . "acs" "version" }}{{ index . "acs" "pattern" }}$
   {{- end }}
+  {{- if index . "insight-zeppelin" }}
+  {{ $image := "quay.io/alfresco/insight-zeppelin" }}
+  insightZeppelinTag_{{ $id }}:
+    name: Alfresco Insight Zeppelin
+    kind: dockerimage
+    spec:
+      image: {{ $image }}
+      {{ if eq (printf "%.8s" $image) "quay.io/" }}
+      {{ template "quay_auth" }}
+      {{ end }}
+      versionFilter:
+        kind: regex
+        pattern: >-
+          ^{{ index . "insight-zeppelin" "version" }}{{ index . "insight-zeppelin" "pattern" }}$
+  {{- end }}
   {{- if index . "search-enterprise" }}
   searchEnterpriseTag_{{ $id }}:
     name: Search Enterprise tag
@@ -366,6 +381,18 @@ targets:
     spec:
       file: {{ osDir .acs.helm_target }}/Chart.yaml
       key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- if index . "insight-zeppelin" }}
+  {{- if index . "insight-zeppelin" "helm_target" }}
+  insightZeppelinValues_{{ $id }}:
+    name: Alfresco Insight Zeppelin image tag
+    kind: yaml
+    sourceid: insightZeppelinTag_{{ $id }}
+    spec:
+      file: {{ index . "insight-zeppelin" "helm_target" }}
+      key: >-
+        {{ index . "insight-zeppelin" "helm_key" }}
   {{- end }}
   {{- end }}
   {{- if index . "search" }}
