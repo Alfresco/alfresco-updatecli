@@ -92,7 +92,7 @@ sources:
         pattern: >-
           ^{{ index . "acs" "version" }}{{ index . "acs" "pattern" }}$
   {{- end }}
-  {{- if index . "insight-zeppelin" }}
+  {{ with index . "insight-zeppelin" }}
   {{ $image := "quay.io/alfresco/insight-zeppelin" }}
   insightZeppelinTag_{{ $id }}:
     name: Alfresco Insight Zeppelin
@@ -105,7 +105,7 @@ sources:
       versionFilter:
         kind: regex
         pattern: >-
-          ^{{ index . "insight-zeppelin" "version" }}{{ index . "insight-zeppelin" "pattern" }}$
+          ^{{ .version }}{{ .pattern }}$
   {{- end }}
   {{- if index . "search-enterprise" }}
   searchEnterpriseTag_{{ $id }}:
@@ -383,16 +383,26 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "insight-zeppelin" }}
-  {{- if index . "insight-zeppelin" "helm_target" }}
+  {{- with index . "insight-zeppelin" }}
+  {{ $target_insight_zeppelin_helm := .helm_target }}
+  {{- if $target_insight_zeppelin_helm }}
   insightZeppelinValues_{{ $id }}:
     name: Alfresco Insight Zeppelin image tag
     kind: yaml
     sourceid: insightZeppelinTag_{{ $id }}
     spec:
-      file: {{ index . "insight-zeppelin" "helm_target" }}
+      file: {{ $target_insight_zeppelin_helm }}
       key: >-
-        {{ index . "insight-zeppelin" "helm_key" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
+  insightZeppelinAppVersion_{{ $id }}:
+    name: Alfresco Insight Zeppelin appVersion in Chart.yaml
+    kind: yaml
+    sourceid: insightZeppelinTag_{{ $id }}
+    spec:
+      file: {{ osDir $target_insight_zeppelin_helm }}/Chart.yaml
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- if index . "search" }}
