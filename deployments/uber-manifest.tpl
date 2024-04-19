@@ -736,8 +736,8 @@ targets:
       key: >-
         {{ index . "tengine-tika" "helm_key" }}
   {{- end }}
-  {{- if index . "sync" }}
-  {{- if and .sync.compose_target .search.compose_key }}
+  {{- with .sync }}
+  {{- if and .compose_key .compose_target }}
   syncCompose_{{ $id }}:
     name: Sync image tag
     kind: yaml
@@ -745,25 +745,24 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/service-sync:"
     spec:
-      file: {{ .sync.compose_target }}
-      key: >-
-        {{ .sync.compose_key }}
+      file: {{ .compose_target }}
+      key: {{ .compose_key }}
   {{- end }}
   syncValues_{{ $id }}:
     name: Sync image tag
     kind: yaml
     sourceid: syncTag_{{ $id }}
     spec:
-      file: {{ .sync.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .sync.helm_key }}
-  {{- if index . "sync" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- if .helm_update_appVersion }}
   syncAppVersion_{{ $id }}:
     name: Sync appVersion in Chart.yaml
     kind: yaml
     sourceid: syncTag_{{ $id }}
     spec:
-      file: {{ osDir .sync.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
