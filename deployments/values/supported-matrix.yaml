@@ -131,16 +131,16 @@ matrix:
       version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search-enterprise:
-      version: "3.3.1"
+      version: "3.3"
       pattern: *ga_hotfixes_pattern
     sync:
       version: "3.11"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "4.2"
+      version: "4.4"
       pattern: *ga_hotfixes_pattern
     adminApp:
-      version: "8.2"
+      version: "8.3"
       pattern: *ga_hotfixes_pattern
     onedrive:
       version: "2"
@@ -191,7 +191,7 @@ matrix:
       version: "3.11"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "3.1"
+      version: "4.4"
       pattern: *ga_pattern
     adminApp:
       version: "7"
@@ -245,7 +245,7 @@ matrix:
       version: "3.11"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "3.0"
+      version: "4.4"
       pattern: *ga_pattern
     adminApp:
       version: "7"
@@ -299,8 +299,8 @@ matrix:
       version: "3.11"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "2.6.2"
-      pattern: ""
+      version: "4.4"
+      pattern: *ga_pattern
     onedrive:
       version: "1.1.1"
       pattern: *ga_hotfixes_pattern
