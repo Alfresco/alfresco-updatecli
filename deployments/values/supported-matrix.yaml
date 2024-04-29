@@ -26,7 +26,7 @@ matrix:
       version: "4"
       pattern: *development_pattern
     sync:
-      version: "5"
+      version: "4" # see OPSEXP-2651 before bumping to 5.0
       pattern: *development_pattern
     adw:
       version: "4.5"
@@ -80,7 +80,7 @@ matrix:
       version: "4.0"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: "5.0"
+      version: "4.0" # see OPSEXP-2651 before bumping to 5.0
       pattern: *ga_hotfixes_pattern
     adw:
       version: &adw_ga_version "4.4"
