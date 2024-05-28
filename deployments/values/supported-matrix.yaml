@@ -170,13 +170,13 @@ matrix:
   7.3.N:
     id: 73n
     acs:
-      version: "7.3.1"
+      version: "7.3"
       pattern: *ga_hotfixes_pattern
     activemq:
       version: "5.17"
       pattern: *ga_activemq_pattern
     share:
-      version: "7.3.1"
+      version: "7.3"
       pattern: *ga_hotfixes_pattern
     insight-zeppelin:
       version: "2.0.5"
