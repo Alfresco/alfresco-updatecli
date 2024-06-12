@@ -286,6 +286,28 @@ sources:
         pattern: >-
           {{ index . "tengine-tika" "version" }}
   {{- end }}
+  {{- if index . "activiti"}}
+  activitiTag_{{ $id }}:
+    name: Alfresco Activiti image tag
+    kind: dockerimage
+    spec:
+      image: alfresco/alfresco-process-services
+      varsionFilter:
+        kind: semver
+        pattern: >-
+          {{ index . "activiti" "version" }}
+  {{- end }}
+  {{- if index . "activiti-admin"}}
+  activitiAdminTag_{{ $id }}:
+    name: Alfresco Activiti Admin image tag
+    kind: dockerimage
+    spec:
+      image: alfresco/alfresco-process-services-admin
+      varsionFilter:
+        kind: semver
+        pattern: >-
+          {{ index . "activiti-admin" "version" }}
+  {{- end }}
   {{- end }}
 
 
@@ -763,6 +785,45 @@ targets:
     sourceid: syncTag_{{ $id }}
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- if index . "activiti" }}
+  activitiValues_{{ $id }}:
+    name: Activiti image tag
+    kind: yaml
+    sourceid: activitiTag_{{ $id }}
+    spec:
+      file: {{ .activiti.helm_target }}
+      key: >-
+        {{ .activiti.helm_key }}
+  {{- if index . "activiti" "helm_update_appVersion" }}
+  activitiAppVersion_{{ $id }}:
+    name: Activiti appVersion in Chart.yaml
+    kind: yaml
+    sourceid: activitiTag_{{ $id }}
+    spec:
+      file: {{ osDir .activiti.helm_target }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- if index . "activiti-admin" }}
+  activitiAdminValues_{{ $id }}:
+    name: Activiti Admin image tag
+    kind: yaml
+    sourceid: activitiAdminTag_{{ $id }}
+    spec:
+      file: {{ index . "activiti-admin" "helm_target" }}
+      key: >-
+        {{ index . "activiti-admin" "helm_key" }}
+  {{- if index . "activiti-admin" "helm_update_appVersion" }}
+  {{- $target_activitiAdmin := index . "activiti-admin" "helm_target" }}
+  activitiAdminAppVersion_{{ $id }}:
+    name: Activiti Admin appVersion in Chart.yaml
+    kind: yaml
+    sourceid: activitiAdminTag_{{ $id }}
+    spec:
+      file: {{ osDir $target_activitiAdmin }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}

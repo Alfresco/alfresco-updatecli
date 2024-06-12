@@ -112,6 +112,10 @@ matrix:
       version: *tengine_ga_version
     tengine-tika:
       version: *tengine_ga_version
+    activiti:
+      version: &activiti_ga_version "~24.2.0"
+    activiti-admin:
+      version: *activiti_ga_version
 
   7.4.N:
     id: 74n
@@ -166,6 +170,10 @@ matrix:
       version: *tengine_ga_version
     tengine-tika:
       version: *tengine_ga_version
+    activiti:
+      version: "~2.4.0"
+    activiti-admin:
+      version: "~2.4.0"
 
   7.3.N:
     id: 73n
@@ -220,6 +228,10 @@ matrix:
       version: "~3.1.1"
     tengine-tika:
       version: "~3.1.1"
+    activiti:
+      version: "~2.3.0"
+    activiti-admin:
+      version: "~2.3.0"
 
   7.2.N:
     id: 72n
