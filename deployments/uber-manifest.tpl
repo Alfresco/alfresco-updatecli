@@ -293,7 +293,7 @@ sources:
     spec:
       image: quay.io/alfresco/alfresco-process-services
       {{ template "quay_auth" }}
-      varsionFilter:
+      versionFilter:
         kind: regex
         pattern: >-
           ^{{ index . "activiti" "version" }}{{ index . "activiti" "pattern" }}$
@@ -305,7 +305,7 @@ sources:
     spec:
       image: quay.io/alfresco/alfresco-process-services-admin
       {{ template "quay_auth" }}
-      varsionFilter:
+      versionFilter:
         kind: regex
         pattern: >-
           ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
