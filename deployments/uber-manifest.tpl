@@ -291,7 +291,8 @@ sources:
     name: Alfresco Activiti image tag
     kind: dockerimage
     spec:
-      image: alfresco/alfresco-process-services
+      image: quay.io/alfresco/alfresco-process-services
+      {{ template "quay_auth" }}
       varsionFilter:
         kind: semver
         pattern: >-
@@ -302,7 +303,8 @@ sources:
     name: Alfresco Activiti Admin image tag
     kind: dockerimage
     spec:
-      image: alfresco/alfresco-process-services-admin
+      image: quay.io/alfresco/alfresco-process-services-admin
+      {{ template "quay_auth" }}
       varsionFilter:
         kind: semver
         pattern: >-
