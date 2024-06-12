@@ -294,9 +294,9 @@ sources:
       image: quay.io/alfresco/alfresco-process-services
       {{ template "quay_auth" }}
       varsionFilter:
-        kind: semver
+        kind: regex
         pattern: >-
-          {{ index . "activiti" "version" }}
+          ^{{ index . "activiti" "version" }}{{ index . "activiti" "pattern" }}$
   {{- end }}
   {{- if index . "activiti-admin"}}
   activitiAdminTag_{{ $id }}:
@@ -306,9 +306,9 @@ sources:
       image: quay.io/alfresco/alfresco-process-services-admin
       {{ template "quay_auth" }}
       varsionFilter:
-        kind: semver
+        kind: regex
         pattern: >-
-          {{ index . "activiti-admin" "version" }}
+          ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
   {{- end }}
   {{- end }}
 
