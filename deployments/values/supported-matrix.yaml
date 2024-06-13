@@ -112,6 +112,12 @@ matrix:
       version: *tengine_ga_version
     tengine-tika:
       version: *tengine_ga_version
+    activiti:
+      version: &activiti_ga_version "24.2"
+      pattern: *ga_hotfixes_pattern
+    activiti-admin:
+      version: *activiti_ga_version
+      pattern: *ga_hotfixes_pattern
 
   7.4.N:
     id: 74n
@@ -166,6 +172,12 @@ matrix:
       version: *tengine_ga_version
     tengine-tika:
       version: *tengine_ga_version
+    activiti:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
+    activiti-admin:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
 
   7.3.N:
     id: 73n
@@ -220,6 +232,12 @@ matrix:
       version: "~3.1.1"
     tengine-tika:
       version: "~3.1.1"
+    activiti:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
+    activiti-admin:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
 
   7.2.N:
     id: 72n
@@ -274,6 +292,12 @@ matrix:
       version: "~3.1.1"
     tengine-tika:
       version: "~3.1.1"
+    activiti:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
+    activiti-admin:
+      version: "2.4"
+      pattern: *ga_hotfixes_pattern
 
   7.1.N:
     id: 71n
