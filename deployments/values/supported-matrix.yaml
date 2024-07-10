@@ -11,7 +11,7 @@ matrix:
   next:
     id: next
     acs:
-      version: &acs_next_version "23.3"
+      version: &acs_next_version "23"
       pattern: *development_pattern
     activemq:
       version: "5.18"
@@ -26,13 +26,13 @@ matrix:
       version: "4"
       pattern: *development_pattern
     sync:
-      version: "4" # see OPSEXP-2651 before bumping to 5.0
+      version: "5"
       pattern: *development_pattern
     adw:
-      version: "4.5"
+      version: "4"
       pattern: *development_almost_semver_pattern
     adminApp:
-      version: "8.5"
+      version: "8"
       pattern: *development_almost_semver_pattern
     onedrive:
       version: "2"
@@ -62,32 +62,32 @@ matrix:
   current:
     id: current
     acs:
-      version: &acs_ga_version "23.2"
-      pattern: *ga_hotfixes_pattern
+      version: &acs_ga_version "23"
+      pattern: *ga_pattern
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share:
       version: *acs_ga_version
+      pattern: *ga_pattern
+    search:
+      version: &search_ga_version "2.0.11"
       pattern: *ga_hotfixes_pattern
     insight-zeppelin:
-      version: &search_ga_version "2.0.10"
-      pattern: *ga_hotfixes_pattern
-    search:
       version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search-enterprise:
       version: "4.0"
       pattern: *ga_hotfixes_pattern
     sync:
-      version: "4.0" # see OPSEXP-2651 before bumping to 5.0
+      version: "4.0"  # 5.x AMPs are available only for 23.3 images (not GA at time of writing)
       pattern: *ga_hotfixes_pattern
     adw:
       version: &adw_ga_version "4.4"
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
     adminApp:
       version: &acc_ga_version "8.4"
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
     onedrive:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -113,11 +113,11 @@ matrix:
     tengine-tika:
       version: *tengine_ga_version
     activiti:
-      version: &activiti_ga_version "24.2"
-      pattern: *ga_hotfixes_pattern
+      version: &activiti_ga_version "24"
+      pattern: *ga_pattern
     activiti-admin:
       version: *activiti_ga_version
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
 
   7.4.N:
     id: 74n
@@ -144,10 +144,10 @@ matrix:
       pattern: *ga_hotfixes_pattern
     adw:
       version: "4.4"
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
     adminApp:
       version: "8.3"
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
     onedrive:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -354,7 +354,7 @@ matrix:
     id: com
     acs:
       version: *acs_ga_version
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
       image: docker.io/alfresco/alfresco-content-repository-community
     activemq:
       version: "5.18"
@@ -362,7 +362,7 @@ matrix:
       image: docker.io/alfresco/alfresco-activemq
     share:
       version: *acs_ga_version
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
       image: docker.io/alfresco/alfresco-share
     search:
       version: *search_ga_version
@@ -370,9 +370,9 @@ matrix:
       image: docker.io/alfresco/alfresco-search-services
     adminApp:
       version: *acc_ga_version
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
     tengine-aio:
       version: *tengine_ga_version
     aca:
       version: *adw_ga_version
-      pattern: *ga_hotfixes_pattern
+      pattern: *ga_pattern
