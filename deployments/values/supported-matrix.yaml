@@ -77,7 +77,7 @@ matrix:
       version: *search_ga_version
       pattern: *ga_hotfixes_pattern
     search-enterprise:
-      version: "4.0"
+      version: "4.1"
       pattern: *ga_hotfixes_pattern
     sync:
       version: "4.0"  # 5.x AMPs are available only for 23.3 images (not GA at time of writing)
