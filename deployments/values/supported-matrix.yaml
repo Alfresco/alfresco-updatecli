@@ -29,10 +29,10 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "4"
+      version: "5"
       pattern: *development_almost_semver_pattern
     adminApp:
-      version: "8"
+      version: "9"
       pattern: *development_almost_semver_pattern
     onedrive:
       version: "2"
@@ -83,10 +83,10 @@ matrix:
       version: "4.0"  # 5.x AMPs are available only for 23.3 images (not GA at time of writing)
       pattern: *ga_hotfixes_pattern
     adw:
-      version: &adw_ga_version "4.4"
+      version: &adw_ga_version "5.0"
       pattern: *ga_pattern
     adminApp:
-      version: &acc_ga_version "8.4"
+      version: &acc_ga_version "9.0"
       pattern: *ga_pattern
     onedrive:
       version: "2"
