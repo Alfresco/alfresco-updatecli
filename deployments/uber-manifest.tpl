@@ -708,7 +708,7 @@ targets:
         {{ .sfs.helm_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-aio }}
+  {{- with index . "tengine-aio" }}
   {{- if and .compose_key .compose_target }}
   tengine-aioCompose_{{ $id }}:
     name: Alfresco All-In-One Transform Engine image tag
@@ -722,7 +722,7 @@ targets:
         {{ .compose_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-misc }}
+  {{- with index . "tengine-misc" }}
   {{- if and .helm_key .helm_target }}
   tengine-miscValues_{{ $id }}:
     name: Alfresco misc Transform Engine image tag
@@ -734,7 +734,7 @@ targets:
         {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-im }}
+  {{- with index . "tengine-im" }}
   {{- if and .helm_key .helm_target }}
   tengine-imValues_{{ $id }}:
     name: Alfresco ImageMagick Transform Engine image tag
@@ -746,7 +746,7 @@ targets:
         {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-lo }}
+  {{- with index . "tengine-lo" }}
   {{- if and .helm_key .helm_target }}
   tengine-loValues_{{ $id }}:
     name: Alfresco LibreOffice Transform Engine image tag
@@ -758,7 +758,7 @@ targets:
         {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-pdf }}
+  {{- with index . "tengine-pdf" }}
   {{- if and .helm_key .helm_target }}
   tengine-pdfValues_{{ $id }}:
     name: Alfresco PDF Transform Engine image tag
@@ -770,7 +770,7 @@ targets:
         {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- with .tengine-tika }}
+  {{- with index . "tengine-tika" }}
   {{- if and .helm_key .helm_target }}
   tengine-tikaValues_{{ $id }}:
     name: Alfresco tika Transform Engine image tag
@@ -835,7 +835,7 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- with .activiti-admin }}
+  {{- with index . "activiti-admin" }}
   {{- if and .helm_key .helm_target }}
   activitiAdminValues_{{ $id }}:
     name: Activiti Admin image tag
