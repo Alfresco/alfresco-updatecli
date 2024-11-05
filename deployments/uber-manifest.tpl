@@ -598,9 +598,9 @@ targets:
     kind: yaml
     sourceid: onedriveTag_{{ $id }}
     spec:
-      file: {{ .onedrive.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .onedrive.helm_key }}
+        {{ .helm_key }}
   {{- end }}
   {{- if .helm_update_appVersion }}
   onedriveAppVersion_{{ $id }}:
@@ -706,9 +706,9 @@ targets:
     kind: yaml
     sourceid: sfsTag_{{ $id }}
     spec:
-      file: {{ .sfs.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .sfs.helm_key }}
+        {{ .helm_key }}
   {{- end }}
   {{- end }}
   {{- with index . "tengine-aio" }}
