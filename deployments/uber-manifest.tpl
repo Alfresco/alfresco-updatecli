@@ -349,7 +349,7 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-digital-workspace:"
     spec:
-      file: {{ .adw.compose_target }}
+      file: {{ .compose_target }}
       key: >-
         {{ .compose_key }}
   {{- end }}
