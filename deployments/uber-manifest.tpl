@@ -316,8 +316,8 @@ sources:
 targets:
   {{- range .matrix }}
   {{- $id := .id -}}
-  {{- if index . "adminApp" }}
-  {{- if and .adminApp.compose_key .adminApp.compose_target }}
+  {{- with .adminApp }}
+  {{- if and .compose_key .compose_target }}
   adminAppCompose_{{ $id }}:
     name: Alfresco Control Center
     kind: yaml
@@ -325,19 +325,19 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-control-center:"
     spec:
-      file: {{ .adminApp.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .adminApp.compose_key }}
+        {{ .compose_key }}
   {{- end }}
-  {{- if and .adminApp.helm_key .adminApp.helm_target }}
+  {{- if and .helm_key .helm_target }}
   adminAppValues_{{ $id }}:
     name: Helm chart default values file
     kind: yaml
     sourceid: adminAppTag_{{ $id }}
     spec:
-      file: {{ .adminApp.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .adminApp.helm_key }}
+        {{ .helm_key }}
   {{- end }}
   {{- end }}
   {{- with .adw }}
@@ -478,6 +478,7 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
+  {{- end }}
   {{- with .activemq }}
   {{- if and .compose_key .compose_target }}
   activemqCompose_{{ $id }}:
@@ -513,9 +514,9 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- with index "search-enterprise" }}
-  {{- $target_searchEntCompose := index .compose_target }}
-  {{- if $target_searchEntCompose }}
+  {{- with index . "search-enterprise" }}
+  {{- if and .compose_keys .compose_target }}
+  {{- $target_searchEntCompose := .compose_target }}
   {{- range $index, $key := .compose_keys }}
   searchEnterprise{{ $index }}Compose_{{ $id }}:
     name: Search Enterprise image tag
@@ -528,7 +529,7 @@ targets:
       key: {{ $key }}
   {{- end }}
   {{- end }}
-  {{- if .helm_target }}
+  {{- if and .helm_keys .helm_target }}
   {{- $target_searchEnt := .helm_target }}
   searchEnterpriseReindexingValues_{{ $id }}:
     name: Search Enterprise image tag
@@ -536,8 +537,8 @@ targets:
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
       file: {{ $target_searchEnt }}
-      key: {{ index .helm_keys.Reindexing }}
-  {{- range $key, $value := index .helm_keys.Liveindexing }}
+      key: {{ .helm_keys.Reindexing }}
+  {{- range $key, $value := .helm_keys.Liveindexing }}
   searchEnterprise{{ $key }}Values_{{ $id }}:
     name: Search Enterprise image tag
     kind: yaml
@@ -546,7 +547,7 @@ targets:
       file: {{ $target_searchEnt }}
       key: {{ $value }}
   {{- end }}
-  {{- if index .helm_update_appVersion }}
+  {{- if .helm_update_appVersion }}
   searchEnterpriseAppVersion_{{ $id }}:
     name: Search Enterprise appVersion in Chart.yaml
     kind: yaml
@@ -578,7 +579,7 @@ targets:
       file: {{ .helm_target }}
       key: >-
         {{ .helm_key }}
-  {{- if index .helm_update_appVersion }}
+  {{- if .helm_update_appVersion }}
   shareAppVersion_{{ $id }}:
     name: Share appVersion in Chart.yaml
     kind: yaml
@@ -846,14 +847,14 @@ targets:
       key: >-
         {{ .helm_key }}
   {{- if .helm_update_appVersion }}
-  {{- $target_activitiAdmin := .helm_target }}
   activitiAdminAppVersion_{{ $id }}:
     name: Activiti Admin appVersion in Chart.yaml
     kind: yaml
     sourceid: activitiAdminTag_{{ $id }}
     spec:
-      file: {{ osDir $target_activitiAdmin }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- end }}
