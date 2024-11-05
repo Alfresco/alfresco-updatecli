@@ -571,6 +571,7 @@ targets:
       key: >-
         {{ .compose_key }}
   {{- end }}
+  {{- if and .helm_key .helm_target }}
   shareValues_{{ $id }}:
     name: Share image tag
     kind: yaml
@@ -579,6 +580,7 @@ targets:
       file: {{ .helm_target }}
       key: >-
         {{ .helm_key }}
+  {{- end }}
   {{- if .helm_update_appVersion }}
   shareAppVersion_{{ $id }}:
     name: Share appVersion in Chart.yaml
