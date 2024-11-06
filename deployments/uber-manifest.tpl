@@ -316,8 +316,8 @@ sources:
 targets:
   {{- range .matrix }}
   {{- $id := .id -}}
-  {{- if index . "adminApp" }}
-  {{- if and .adminApp.compose_key .adminApp.compose_target }}
+  {{- with .adminApp }}
+  {{- if and .compose_key .compose_target }}
   adminAppCompose_{{ $id }}:
     name: Alfresco Control Center
     kind: yaml
@@ -325,23 +325,23 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-control-center:"
     spec:
-      file: {{ .adminApp.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .adminApp.compose_key }}
+        {{ .compose_key }}
   {{- end }}
-  {{- if and .adminApp.helm_key .adminApp.helm_target }}
+  {{- if and .helm_key .helm_target }}
   adminAppValues_{{ $id }}:
     name: Helm chart default values file
     kind: yaml
     sourceid: adminAppTag_{{ $id }}
     spec:
-      file: {{ .adminApp.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .adminApp.helm_key }}
+        {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- if index . "adw" }}
-  {{- if and .adw.compose_key .adw.compose_target }}
+  {{- with .adw }}
+  {{- if and .compose_key .compose_target }}
   adwCompose_{{ $id }}:
     name: ADW image tag
     kind: yaml
@@ -349,21 +349,23 @@ targets:
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-digital-workspace:"
     spec:
-      file: {{ .adw.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .adw.compose_key }}
+        {{ .compose_key }}
   {{- end }}
+  {{- if and .helm_key .helm_target }}
   adwValues_{{ $id }}:
     name: ADW image tag
     kind: yaml
     sourceid: adwTag_{{ $id }}
     spec:
-      file: {{ .adw.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .adw.helm_key }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "aca" }}
-  {{- if and .aca.compose_key .aca.compose_target }}
+  {{- end }}
+  {{- with .aca }}
+  {{- if and .compose_key .compose_target }}
   acaCompose_{{ $id }}:
     name: ACA image tag
     kind: yaml
@@ -371,39 +373,51 @@ targets:
     transformers:
       - addprefix: "alfresco/alfresco-content-app:"
     spec:
-      file: {{ .aca.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .aca.compose_key }}
+        {{ .compose_key }}
+  {{- end }}
+  {{- if and .helm_key .helm_target }}
+  acaValues_{{ $id }}:
+    name: ACA image tag
+    kind: yaml
+    sourceid: acaTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: >-
+        {{ .helm_key }}
   {{- end }}
   {{- end }}
-  {{- if index . "acs" }}
-  {{- if and .acs.compose_key .acs.compose_target }}
+  {{- with .acs }}
+  {{- if and .compose_key .compose_target }}
   repositoryCompose_{{ $id }}:
     name: Repo image tag
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "acs" "image" | default $default_repo_image }}:"
+      - addprefix: "{{ .image | default $default_repo_image }}:"
     spec:
-      file: {{ .acs.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .acs.compose_key }}
+        {{ .compose_key }}
   {{- end }}
+  {{- if and .helm_key .helm_target }}
   repositoryValues_{{ $id }}:
     name: Repo image tag
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     spec:
-      file: {{ .acs.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .acs.helm_key }}
-  {{- if index . "acs" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   repositoryAppVersion_{{ $id }}:
     name: Repo appVersion in Chart.yaml
     kind: yaml
     sourceid: repositoryTag_{{ $id }}
     spec:
-      file: {{ osDir .acs.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
@@ -429,31 +443,22 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "search" }}
-  {{- if and .search.compose_key .search.compose_target }}
+  {{- with .search }}
+  {{- if and .compose_key .compose_target }}
   searchCompose_{{ $id }}:
     name: search image tag
     kind: yaml
     sourceid: searchTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "search" "image" | default $default_search_image }}:"
+      - addprefix: "{{ .image | default $default_search_image }}:"
     spec:
-      file: {{ .search.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .search.compose_key }}
+        {{ .compose_key }}
   {{- end }}
-  {{- $target_search_helm := .search.helm_target}}
-  {{- if and $target_search_helm .search.helm_key }}
-  searchValues_{{ $id }}:
-    name: search image tag
-    kind: yaml
-    sourceid: searchTag_{{ $id }}
-    spec:
-      file: {{ $target_search_helm }}
-      key: >-
-        {{ .search.helm_key }}
-  {{- end }}
-  {{- range $key, $path := .search.helm_keys }}
+  {{- $target_search_helm := .helm_target}}
+  {{- if and .helm_keys $target_search_helm }}
+  {{- range $key, $path := .helm_keys }}
   searchValues{{ $key }}_{{ $id }}:
     name: search image tag
     kind: yaml
@@ -463,7 +468,7 @@ targets:
       key: >-
         {{ $path }}
   {{- end }}
-  {{- if index . "search" "helm_update_appVersion" }}
+  {{- if .helm_update_appVersion }}
   searchAppVersion_{{ $id }}:
     name: Search appVersion in Chart.yaml
     kind: yaml
@@ -473,31 +478,31 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "activemq" }}
-  {{- if and .activemq.compose_key .activemq.compose_target }}
+  {{- end }}
+  {{- with .activemq }}
+  {{- if and .compose_key .compose_target }}
   activemqCompose_{{ $id }}:
     name: activemq image tag
     kind: yaml
     sourceid: activemqTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "activemq" "image" | default $default_activemq_image }}:"
+      - addprefix: "{{ .image | default $default_activemq_image }}:"
     spec:
-      file: {{ .activemq.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .activemq.compose_key }}
+        {{ .compose_key }}
   {{- end }}
-  {{- $target_activemq_helm := .activemq.helm_target}}
-  {{- if and $target_activemq_helm .activemq.helm_key }}
+  {{- if and .helm_target .helm_key }}
   activemqValues_{{ $id }}:
     name: activemq image tag
     kind: yaml
     sourceid: activemqTag_{{ $id }}
     spec:
-      file: {{ $target_activemq_helm }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .activemq.helm_key }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "activemq" "helm_update_appVersion" }}
+  {{- if .helm_update_appVersion }}
   activemqAppVersion_{{ $id }}:
     name: Search appVersion in Chart.yaml
     kind: yaml
@@ -505,14 +510,14 @@ targets:
     transformers:
       - trimsuffix: "-jre17-rockylinux8"
     spec:
-      file: {{ osDir $target_activemq_helm }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "search-enterprise" }}
-  {{- $target_searchEntCompose := index . "search-enterprise" "compose_target" }}
-  {{- if $target_searchEntCompose }}
-  {{- range $index, $key := index . "search-enterprise" "compose_keys" }}
+  {{- with index . "search-enterprise" }}
+  {{- if and .compose_keys .compose_target }}
+  {{- $target_searchEntCompose := .compose_target }}
+  {{- range $index, $key := .compose_keys }}
   searchEnterprise{{ $index }}Compose_{{ $id }}:
     name: Search Enterprise image tag
     kind: yaml
@@ -524,16 +529,16 @@ targets:
       key: {{ $key }}
   {{- end }}
   {{- end }}
-  {{- if index . "search-enterprise" "helm_target" }}
-  {{- $target_searchEnt := index . "search-enterprise" "helm_target" }}
+  {{- if and .helm_keys .helm_target }}
+  {{- $target_searchEnt := .helm_target }}
   searchEnterpriseReindexingValues_{{ $id }}:
     name: Search Enterprise image tag
     kind: yaml
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
       file: {{ $target_searchEnt }}
-      key: {{ index . "search-enterprise" "helm_keys" "Reindexing" }}
-  {{- range $key, $value := index . "search-enterprise" "helm_keys" "Liveindexing" }}
+      key: {{ .helm_keys.Reindexing }}
+  {{- range $key, $value := .helm_keys.Liveindexing }}
   searchEnterprise{{ $key }}Values_{{ $id }}:
     name: Search Enterprise image tag
     kind: yaml
@@ -542,7 +547,7 @@ targets:
       file: {{ $target_searchEnt }}
       key: {{ $value }}
   {{- end }}
-  {{- if index . "search-enterprise" "helm_update_appVersion" }}
+  {{- if .helm_update_appVersion }}
   searchEnterpriseAppVersion_{{ $id }}:
     name: Search Enterprise appVersion in Chart.yaml
     kind: yaml
@@ -553,95 +558,102 @@ targets:
   {{- end }}
   {{- end }}
   {{- end }}
-  {{- if index . "share" }}
-  {{- if and .share.compose_key .share.compose_target }}
+  {{- with .share }}
+  {{- if and .compose_key .compose_target }}
   shareCompose_{{ $id }}:
     name: Share image tag
     kind: yaml
     sourceid: shareTag_{{ $id }}
     transformers:
-      - addprefix: "{{ index . "share" "image" | default $default_share_image }}:"
+      - addprefix: "{{ .image | default $default_share_image }}:"
     spec:
-      file: {{ .share.compose_target }}
+      file: {{ .compose_target }}
       key: >-
-        {{ .share.compose_key }}
+        {{ .compose_key }}
   {{- end }}
+  {{- if and .helm_key .helm_target }}
   shareValues_{{ $id }}:
     name: Share image tag
     kind: yaml
     sourceid: shareTag_{{ $id }}
     spec:
-      file: {{ .share.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .share.helm_key }}
-  {{- if index . "share" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   shareAppVersion_{{ $id }}:
     name: Share appVersion in Chart.yaml
     kind: yaml
     sourceid: shareTag_{{ $id }}
     spec:
-      file: {{ osDir .share.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "onedrive" }}
+  {{- with .onedrive }}
+  {{- if and .helm_key .helm_target }}
   onedriveValues_{{ $id }}:
     name: Onedrive image tag
     kind: yaml
     sourceid: onedriveTag_{{ $id }}
     spec:
-      file: {{ .onedrive.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .onedrive.helm_key }}
-  {{- if index . "onedrive" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   onedriveAppVersion_{{ $id }}:
     name: Onedrive appVersion in Chart.yaml
     kind: yaml
     sourceid: onedriveTag_{{ $id }}
     spec:
-      file: {{ osDir .onedrive.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "msteams" }}
+  {{- with .msteams }}
+  {{- if and .helm_key .helm_target }}
   msteamsValues_{{ $id }}:
     name: MS Teams image tag
     kind: yaml
     sourceid: msteamsTag_{{ $id }}
     spec:
-      file: {{ .msteams.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .msteams.helm_key }}
-  {{- if index . "msteams" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   msteamsAppVersion_{{ $id }}:
     name: MS Teams appVersion in Chart.yaml
     kind: yaml
     sourceid: msteamsTag_{{ $id }}
     spec:
-      file: {{ osDir .msteams.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "intelligence" }}
+  {{- with .intelligence }}
+  {{- if and .helm_key .helm_target }}
   intelligenceValues_{{ $id }}:
     name: Alfresco Intelligence image tag
     kind: yaml
     sourceid: intelligenceTag_{{ $id }}
     spec:
-      file: {{ .intelligence.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .intelligence.helm_key }}
-  {{- if index . "intelligence" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   intelligenceAppVersion_{{ $id }}:
     name: Alfresco Intelligence appVersion in Chart.yaml
     kind: yaml
     sourceid: intelligenceTag_{{ $id }}
     spec:
-      file: {{ osDir .intelligence.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "trouter" }}
   {{- with .trouter }}
   {{- if and .compose_key .compose_target }}
   trouterCompose_{{ $id }}:
@@ -655,26 +667,26 @@ targets:
       key: >-
         {{ .compose_key }}
   {{- end }}
-  {{- end }}
+  {{- if and .helm_key .helm_target }}
   trouterValues_{{ $id }}:
     name: Alfresco Transform Router image tag
     kind: yaml
     sourceid: trouterTag_{{ $id }}
     spec:
-      file: {{ .trouter.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .trouter.helm_key }}
-  {{- if index . "trouter" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   trouterAppVersion_{{ $id }}:
     name: Alfresco Transform Router appVersion in Chart.yaml
     kind: yaml
     sourceid: trouterTag_{{ $id }}
     spec:
-      file: {{ osDir .trouter.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "sfs" }}
   {{- with .sfs }}
   {{- if and .compose_key .compose_target }}
   sfsCompose_{{ $id }}:
@@ -688,17 +700,19 @@ targets:
       key: >-
         {{ .compose_key }}
   {{- end }}
-  {{- end }}
+  {{- if and .helm_key .helm_target }}
   sfsValues_{{ $id }}:
     name: Alfresco Shared Filestore image tag
     kind: yaml
     sourceid: sfsTag_{{ $id }}
     spec:
-      file: {{ .sfs.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .sfs.helm_key }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "tengine-aio" }}
+  {{- end }}
+  {{- with index . "tengine-aio" }}
+  {{- if and .compose_key .compose_target }}
   tengine-aioCompose_{{ $id }}:
     name: Alfresco All-In-One Transform Engine image tag
     kind: yaml
@@ -706,59 +720,70 @@ targets:
     transformers:
       - addprefix: "alfresco/alfresco-transform-core-aio:"
     spec:
-      file: {{ index . "tengine-aio" "compose_target" }}
+      file: {{ .compose_target }}
       key: >-
-        {{ index . "tengine-aio" "compose_key" }}
+        {{ .compose_key }}
   {{- end }}
-  {{- if index . "tengine-misc" }}
+  {{- end }}
+  {{- with index . "tengine-misc" }}
+  {{- if and .helm_key .helm_target }}
   tengine-miscValues_{{ $id }}:
     name: Alfresco misc Transform Engine image tag
     kind: yaml
     sourceid: tengine-miscTag_{{ $id }}
     spec:
-      file: {{ index . "tengine-misc" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "tengine-misc" "helm_key" }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "tengine-im" }}
+  {{- end }}
+  {{- with index . "tengine-im" }}
+  {{- if and .helm_key .helm_target }}
   tengine-imValues_{{ $id }}:
     name: Alfresco ImageMagick Transform Engine image tag
     kind: yaml
     sourceid: tengine-imTag_{{ $id }}
     spec:
-      file: {{ index . "tengine-im" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "tengine-im" "helm_key" }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "tengine-lo" }}
+  {{- end }}
+  {{- with index . "tengine-lo" }}
+  {{- if and .helm_key .helm_target }}
   tengine-loValues_{{ $id }}:
     name: Alfresco LibreOffice Transform Engine image tag
     kind: yaml
     sourceid: tengine-loTag_{{ $id }}
     spec:
-      file: {{ index . "tengine-lo" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "tengine-lo" "helm_key" }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "tengine-pdf" }}
+  {{- end }}
+  {{- with index . "tengine-pdf" }}
+  {{- if and .helm_key .helm_target }}
   tengine-pdfValues_{{ $id }}:
     name: Alfresco PDF Transform Engine image tag
     kind: yaml
     sourceid: tengine-pdfTag_{{ $id }}
     spec:
-      file: {{ index . "tengine-pdf" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "tengine-pdf" "helm_key" }}
+        {{ .helm_key }}
   {{- end }}
-  {{- if index . "tengine-tika" }}
+  {{- end }}
+  {{- with index . "tengine-tika" }}
+  {{- if and .helm_key .helm_target }}
   tengine-tikaValues_{{ $id }}:
     name: Alfresco tika Transform Engine image tag
     kind: yaml
     sourceid: tengine-tikaTag_{{ $id }}
     spec:
-      file: {{ index . "tengine-tika" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "tengine-tika" "helm_key" }}
+        {{ .helm_key }}
+  {{- end }}
   {{- end }}
   {{- with .sync }}
   {{- if and .compose_key .compose_target }}
@@ -772,6 +797,7 @@ targets:
       file: {{ .compose_target }}
       key: {{ .compose_key }}
   {{- end }}
+  {{- if and .helm_key .helm_target }}
   syncValues_{{ $id }}:
     name: Sync image tag
     kind: yaml
@@ -780,6 +806,7 @@ targets:
       file: {{ .helm_target }}
       key: >-
         {{ .helm_key }}
+  {{- end }}
   {{- if .helm_update_appVersion }}
   syncAppVersion_{{ $id }}:
     name: Sync appVersion in Chart.yaml
@@ -790,43 +817,46 @@ targets:
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "activiti" }}
+  {{- with .activiti }}
+  {{- if and .helm_key .helm_target }}
   activitiValues_{{ $id }}:
     name: Activiti image tag
     kind: yaml
     sourceid: activitiTag_{{ $id }}
     spec:
-      file: {{ .activiti.helm_target }}
+      file: {{ .helm_target }}
       key: >-
-        {{ .activiti.helm_key }}
-  {{- if index . "activiti" "helm_update_appVersion" }}
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
   activitiAppVersion_{{ $id }}:
     name: Activiti appVersion in Chart.yaml
     kind: yaml
     sourceid: activitiTag_{{ $id }}
     spec:
-      file: {{ osDir .activiti.helm_target }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
-  {{- if index . "activiti-admin" }}
+  {{- with index . "activiti-admin" }}
+  {{- if and .helm_key .helm_target }}
   activitiAdminValues_{{ $id }}:
     name: Activiti Admin image tag
     kind: yaml
     sourceid: activitiAdminTag_{{ $id }}
     spec:
-      file: {{ index . "activiti-admin" "helm_target" }}
+      file: {{ .helm_target }}
       key: >-
-        {{ index . "activiti-admin" "helm_key" }}
-  {{- if index . "activiti-admin" "helm_update_appVersion" }}
-  {{- $target_activitiAdmin := index . "activiti-admin" "helm_target" }}
+        {{ .helm_key }}
+  {{- if .helm_update_appVersion }}
   activitiAdminAppVersion_{{ $id }}:
     name: Activiti Admin appVersion in Chart.yaml
     kind: yaml
     sourceid: activitiAdminTag_{{ $id }}
     spec:
-      file: {{ osDir $target_activitiAdmin }}/Chart.yaml
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- end }}
