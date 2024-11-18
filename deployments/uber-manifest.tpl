@@ -310,6 +310,18 @@ sources:
         pattern: >-
           ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
   {{- end }}
+  {{- with index . "acs-audit"}}
+  acsAuditTag_{{ $id }}:
+    name: Alfresco Repository Audit component image tag
+    kind: dockerimage
+    spec:
+      image: quay.io/alfresco/alfresco-audit-storage
+      {{ template "quay_auth" }}
+      versionFilter:
+        kind: semver
+        pattern: >-
+          ^{{ index . "acs-audit" "version" }}
+  {{- end }}
   {{- end }}
 
 
@@ -853,6 +865,26 @@ targets:
     name: Activiti Admin appVersion in Chart.yaml
     kind: yaml
     sourceid: activitiAdminTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- with index . "acs-audit" }}
+  {{- if and .helm_key .helm_target }}
+  acsAuditValues_{{ $id }}:
+    name: Alfresco Repository Audit component image tag
+    kind: yaml
+    sourceid: acsAuditTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: {{ .helm_key }}
+  {{- if .helm_update_appVersion }}
+  acsAuditAppVersion_{{ $id }}:
+    name: Alfresco Repository Audit component appVersion in Chart.yaml
+    kind: yaml
+    sourceid: acsAuditTag_{{ $id }}
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
