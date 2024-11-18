@@ -322,8 +322,7 @@ sources:
       {{ template "quay_auth" }}
       versionFilter:
         kind: semver
-        pattern: >-
-          ^{{ index . "acs-audit" "version" }}
+        pattern: {{ .version }}
   {{- end }}
   {{- end }}
 
