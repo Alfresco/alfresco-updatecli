@@ -1,13 +1,12 @@
----
 {{- define "manifest_name" }}
 {{- default "Alfresco components' Updatecli manifest" .name }}
 {{- end }}
-name: {{ template "manifest_name" . }}
-
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
       password: {{ requiredEnv "QUAY_PASSWORD" }}
-{{- end }}
+{{- end -}}
+---
+name: {{ template "manifest_name" . }}
 
 scms:
   searchEnterprise:
@@ -21,10 +20,10 @@ scms:
       token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
       directory: /tmp/updatecli/searchEnterprise
 
-{{ $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
-{{ $default_search_image := "quay.io/alfresco/search-services" }}
-{{ $default_share_image := "quay.io/alfresco/alfresco-share" }}
-{{ $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
+{{- $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
+{{- $default_search_image := "quay.io/alfresco/search-services" }}
+{{- $default_share_image := "quay.io/alfresco/alfresco-share" }}
+{{- $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
 
 sources:
   {{- range .matrix }}
@@ -881,7 +880,8 @@ targets:
     sourceid: acsAuditTag_{{ $id }}
     spec:
       file: {{ .helm_target }}
-      key: {{ .helm_key }}
+      key: >-
+        {{ .helm_key }}
   {{- if .helm_update_appVersion }}
   acsAuditAppVersion_{{ $id }}:
     name: Alfresco Repository Audit component appVersion in Chart.yaml
