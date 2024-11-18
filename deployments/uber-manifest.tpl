@@ -1,5 +1,8 @@
 ---
-name: Images updates for all Alfresco supported versions of Helm charts and Docker compose
+{{- define "manifest_name" }}
+{{- default "Alfresco components' Updatecli manifest" .name }}
+{{- end }}
+name: {{ template "manifest_name" . }}
 
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
