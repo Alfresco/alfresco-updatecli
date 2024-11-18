@@ -321,7 +321,8 @@ sources:
       {{ template "quay_auth" }}
       versionFilter:
         kind: semver
-        pattern: {{ .version }}
+        pattern: >-
+          {{ .version }}
   {{- end }}
   {{- end }}
 
