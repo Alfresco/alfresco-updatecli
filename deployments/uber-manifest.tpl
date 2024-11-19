@@ -874,18 +874,28 @@ targets:
   {{- end }}
   {{- end }}
   {{- with index . "acs-audit" }}
+  {{- if and .compose_key .compose_target }}
+  acsAuditCompose_{{ $id }}:
+    name: Alfresco Repository Audit Compose target
+    kind: yaml
+    sourceid: acsAuditTag_{{ $id }}
+    transformers:
+      - addprefix: "quay.io/alfresco/alfresco-audit-storage:"
+    spec:
+      file: {{ .compose_target }}
+      key: {{ .compose_key }}
+  {{- end }}
   {{- if and .helm_key .helm_target }}
   acsAuditValues_{{ $id }}:
-    name: Alfresco Repository Audit component image tag
+    name: Alfresco Repository Audit Helm values target
     kind: yaml
     sourceid: acsAuditTag_{{ $id }}
     spec:
       file: {{ .helm_target }}
-      key: >-
-        {{ .helm_key }}
+      key: {{ .helm_key }}
   {{- if .helm_update_appVersion }}
   acsAuditAppVersion_{{ $id }}:
-    name: Alfresco Repository Audit component appVersion in Chart.yaml
+    name: Alfresco Repository Audit Helm Chart target
     kind: yaml
     sourceid: acsAuditTag_{{ $id }}
     spec:
