@@ -312,8 +312,8 @@ sources:
         pattern: >-
           ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
   {{- end }}
-  {{- with index . "acs-audit"}}
-  acsAuditTag_{{ $id }}:
+  {{- with index . "audit-storage"}}
+  auditStorageTag_{{ $id }}:
     name: Alfresco Repository Audit component image tag
     kind: dockerimage
     spec:
@@ -873,12 +873,12 @@ targets:
   {{- end }}
   {{- end }}
   {{- end }}
-  {{- with index . "acs-audit" }}
+  {{- with index . "audit-storage" }}
   {{- if and .compose_key .compose_target }}
-  acsAuditCompose_{{ $id }}:
+  auditStorageCompose_{{ $id }}:
     name: Alfresco Repository Audit Compose target
     kind: yaml
-    sourceid: acsAuditTag_{{ $id }}
+    sourceid: auditStorageTag_{{ $id }}
     transformers:
       - addprefix: "quay.io/alfresco/alfresco-audit-storage:"
     spec:
@@ -886,18 +886,18 @@ targets:
       key: {{ .compose_key }}
   {{- end }}
   {{- if and .helm_key .helm_target }}
-  acsAuditValues_{{ $id }}:
+  auditStorageValues_{{ $id }}:
     name: Alfresco Repository Audit Helm values target
     kind: yaml
-    sourceid: acsAuditTag_{{ $id }}
+    sourceid: auditStorageTag_{{ $id }}
     spec:
       file: {{ .helm_target }}
       key: {{ .helm_key }}
   {{- if .helm_update_appVersion }}
-  acsAuditAppVersion_{{ $id }}:
+  auditStorageAppVersion_{{ $id }}:
     name: Alfresco Repository Audit Helm Chart target
     kind: yaml
-    sourceid: acsAuditTag_{{ $id }}
+    sourceid: auditStorageTag_{{ $id }}
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
