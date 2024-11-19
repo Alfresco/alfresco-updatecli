@@ -58,6 +58,8 @@ matrix:
       version: *tengine_next_version
     tengine-tika:
       version: *tengine_next_version
+    audit-storage:
+      version: ">=1.0.0-0"
 
   current:
     id: current
@@ -118,6 +120,8 @@ matrix:
     activiti-admin:
       version: *activiti_ga_version
       pattern: *ga_pattern
+    audit-storage:
+      version: "~1.0.0"
 
   7.4.N:
     id: 74n

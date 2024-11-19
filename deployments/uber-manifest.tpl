@@ -1,10 +1,12 @@
----
-name: Images updates for all Alfresco supported versions of Helm charts and Docker compose
-
+{{- define "manifest_name" }}
+{{- default "Alfresco components' Updatecli manifest" .name }}
+{{- end }}
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
       password: {{ requiredEnv "QUAY_PASSWORD" }}
-{{- end }}
+{{- end -}}
+---
+name: {{ template "manifest_name" . }}
 
 scms:
   searchEnterprise:
@@ -18,10 +20,10 @@ scms:
       token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
       directory: /tmp/updatecli/searchEnterprise
 
-{{ $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
-{{ $default_search_image := "quay.io/alfresco/search-services" }}
-{{ $default_share_image := "quay.io/alfresco/alfresco-share" }}
-{{ $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
+{{- $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
+{{- $default_search_image := "quay.io/alfresco/search-services" }}
+{{- $default_share_image := "quay.io/alfresco/alfresco-share" }}
+{{- $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
 
 sources:
   {{- range .matrix }}
@@ -309,6 +311,18 @@ sources:
         kind: regex
         pattern: >-
           ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
+  {{- end }}
+  {{- with index . "audit-storage"}}
+  auditStorageTag_{{ $id }}:
+    name: Alfresco Repository Audit component image tag
+    kind: dockerimage
+    spec:
+      image: quay.io/alfresco/alfresco-audit-storage
+      {{ template "quay_auth" }}
+      versionFilter:
+        kind: semver
+        pattern: >-
+          {{ .version }}
   {{- end }}
   {{- end }}
 
@@ -853,6 +867,37 @@ targets:
     name: Activiti Admin appVersion in Chart.yaml
     kind: yaml
     sourceid: activitiAdminTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- with index . "audit-storage" }}
+  {{- if and .compose_key .compose_target }}
+  auditStorageCompose_{{ $id }}:
+    name: Alfresco Repository Audit Compose target
+    kind: yaml
+    sourceid: auditStorageTag_{{ $id }}
+    transformers:
+      - addprefix: "quay.io/alfresco/alfresco-audit-storage:"
+    spec:
+      file: {{ .compose_target }}
+      key: {{ .compose_key }}
+  {{- end }}
+  {{- if and .helm_key .helm_target }}
+  auditStorageValues_{{ $id }}:
+    name: Alfresco Repository Audit Helm values target
+    kind: yaml
+    sourceid: auditStorageTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: {{ .helm_key }}
+  {{- if .helm_update_appVersion }}
+  auditStorageAppVersion_{{ $id }}:
+    name: Alfresco Repository Audit Helm Chart target
+    kind: yaml
+    sourceid: auditStorageTag_{{ $id }}
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
