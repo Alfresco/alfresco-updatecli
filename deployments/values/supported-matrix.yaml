@@ -99,11 +99,11 @@ matrix:
     intelligence:
       version: &ais_ga_version "~3.1.0"
     trouter:
-      version: &ats_ga_version "~4.1.0"
+      version: &ats_ga_version "~4"
     sfs:
       version: *ats_ga_version
     tengine-aio:
-      version: &tengine_ga_version "~5.1.0"
+      version: &tengine_ga_version "~5"
     tengine-misc:
       version: *tengine_ga_version
     tengine-im:
