@@ -99,9 +99,9 @@ matrix:
     intelligence:
       version: &ais_ga_version "~3.1.0"
     trouter:
-      version: &trouter_ga_version "~4.1.0"
+      version: &ats_ga_version "~4.1.0"
     sfs:
-      version: *trouter_ga_version
+      version: *ats_ga_version
     tengine-aio:
       version: &tengine_ga_version "~5.1.0"
     tengine-misc:
@@ -161,9 +161,9 @@ matrix:
     intelligence:
       version: *ais_ga_version
     trouter:
-      version: *trouter_ga_version
+      version: *ats_ga_version
     sfs:
-      version: *trouter_ga_version
+      version: *ats_ga_version
     tengine-aio:
       version: *tengine_ga_version
     tengine-misc:
@@ -221,21 +221,21 @@ matrix:
     intelligence:
       version: "~1.5.0"
     trouter:
-      version: "~2.1.1"
+      version: "~4.1.1"
     sfs:
-      version: "~2.1.1"
+      version: "~4.1.1"
     tengine-aio:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-misc:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-im:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-lo:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-pdf:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-tika:
-      version: "~3.1.1"
+      version: "~5.1.1"
     activiti:
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -281,21 +281,21 @@ matrix:
     intelligence:
       version: "~1.5.0"
     trouter:
-      version: "~2.1.1"
+      version: "~4.1.1"
     sfs:
-      version: "~2.1.1"
+      version: "~4.1.1"
     tengine-aio:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-misc:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-im:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-lo:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-pdf:
-      version: "~3.1.1"
+      version: "~5.1.1"
     tengine-tika:
-      version: "~3.1.1"
+      version: "~5.1.1"
     activiti:
       version: "2.4"
       pattern: *ga_hotfixes_pattern
