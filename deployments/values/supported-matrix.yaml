@@ -10,13 +10,13 @@ patterns:
 matrix:
   next:
     id: next
-    acs:
-      version: &acs_next_version ">=25.0.0-0"
+    acs: &acs_next_version_spec
+      versionFilterKind: semver
+      version: ">=25.0.0-0"
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
-    share:
-      version: *acs_next_version
+    share: *acs_next_version_spec
     search:
       version: "2"
       pattern: *development_pattern
