@@ -90,9 +90,13 @@ sources:
       {{ template "quay_auth" }}
       {{ end }}
       versionFilter:
-        kind: regex
+        kind: {{ (eq $id "next") | ternary "semver" "regex" }}
         pattern: >-
+          {{- if eq $id "next" }}
+          {{ index . "acs" "version" }}
+          {{- else }}
           ^{{ index . "acs" "version" }}{{ index . "acs" "pattern" }}$
+          {{- end }}
   {{- end }}
   {{ with index . "insight-zeppelin" }}
   {{ $image := "quay.io/alfresco/insight-zeppelin" }}
@@ -146,9 +150,13 @@ sources:
       {{ template "quay_auth" }}
       {{ end }}
       versionFilter:
-        kind: regex
+        kind: {{ (eq $id "next") | ternary "semver" "regex" }}
         pattern: >-
+          {{- if eq $id "next" }}
+          {{ index . "share" "version" }}
+          {{- else }}
           ^{{ index . "share" "version" }}{{ index . "share" "pattern" }}$
+          {{- end }}
   {{- end }}
   {{- if index . "sync" }}
   syncTag_{{ $id }}:

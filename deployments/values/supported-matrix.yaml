@@ -11,14 +11,12 @@ matrix:
   next:
     id: next
     acs:
-      version: &acs_next_version "23"
-      pattern: *development_pattern
+      version: &acs_next_version ">=25.0.0-0"
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share:
       version: *acs_next_version
-      pattern: *development_pattern
     search:
       version: "2"
       pattern: *development_pattern
