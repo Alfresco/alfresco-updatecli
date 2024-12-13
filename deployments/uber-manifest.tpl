@@ -79,8 +79,9 @@ sources:
         pattern: >-
           ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
   {{- end }}
-  {{- if index . "acs" }}
-  {{ $repo_image := index . "acs" "image" | default $default_repo_image }}
+  {{- with .acs }}
+  {{- $vfk := .versionFilterKind | default "regex" }}
+  {{- $repo_image := .image | default $default_repo_image }}
   repositoryTag_{{ $id }}:
     name: ACS repository tag
     kind: dockerimage
@@ -90,9 +91,13 @@ sources:
       {{ template "quay_auth" }}
       {{ end }}
       versionFilter:
-        kind: regex
+        kind: {{ $vfk }}
         pattern: >-
-          ^{{ index . "acs" "version" }}{{ index . "acs" "pattern" }}$
+          {{- if eq $vfk "semver" }}
+          {{ .version }}
+          {{- else }}
+          ^{{ .version }}{{ .pattern }}$
+          {{- end }}
   {{- end }}
   {{ with index . "insight-zeppelin" }}
   {{ $image := "quay.io/alfresco/insight-zeppelin" }}
@@ -135,8 +140,9 @@ sources:
         pattern: >-
           ^{{ index . "search" "version" }}{{ index . "search" "pattern" }}$
   {{- end }}
-  {{- if index . "share" }}
-  {{ $share_image := index . "share" "image" | default $default_share_image }}
+  {{- with .share }}
+  {{- $vfk := .versionFilterKind | default "regex" }}
+  {{ $share_image := .image | default $default_share_image }}
   shareTag_{{ $id }}:
     name: Share repository tag
     kind: dockerimage
@@ -146,9 +152,13 @@ sources:
       {{ template "quay_auth" }}
       {{ end }}
       versionFilter:
-        kind: regex
+        kind: {{ $vfk }}
         pattern: >-
-          ^{{ index . "share" "version" }}{{ index . "share" "pattern" }}$
+          {{- if eq $vfk "semver" }}
+          {{ .version }}
+          {{- else }}
+          ^{{ .version }}{{ .pattern }}$
+          {{- end }}
   {{- end }}
   {{- if index . "sync" }}
   syncTag_{{ $id }}:
