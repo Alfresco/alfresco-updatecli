@@ -145,7 +145,7 @@ matrix:
       version: "3.11"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: "4.4"
+      version: "5.0"
       pattern: *ga_pattern
     adminApp:
       version: "8.3"
