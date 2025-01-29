@@ -71,7 +71,7 @@ matrix:
       version: *acs_ga_version
       pattern: *ga_pattern
     search:
-      version: &search_ga_version "2.0.13"
+      version: &search_ga_version "2.0.14"
       pattern: *ga_hotfixes_pattern
     insight-zeppelin:
       version: *search_ga_version
@@ -83,10 +83,10 @@ matrix:
       version: "5.1"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: &adw_ga_version "5.2"
+      version: &adw_ga_version "5.3"
       pattern: *ga_pattern
     adminApp:
-      version: &acc_ga_version "9.2"
+      version: &acc_ga_version "9.3"
       pattern: *ga_pattern
     onedrive:
       version: "2"
