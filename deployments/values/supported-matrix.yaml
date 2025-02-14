@@ -11,8 +11,8 @@ matrix:
   next:
     id: next
     acs: &acs_next_version_spec
-      versionFilterKind: semver
       version: ">=25.0.0-0"
+      versionFilterKind: semver
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
@@ -62,14 +62,14 @@ matrix:
   current:
     id: current
     acs:
-      version: &acs_ga_version "23"
-      pattern: *ga_pattern
+      version: &acs_ga_version "~23"
+      versionFilterKind: semver
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share:
       version: *acs_ga_version
-      pattern: *ga_pattern
+      versionFilterKind: semver
     search:
       version: &search_ga_version "2.0.14"
       pattern: *ga_hotfixes_pattern
@@ -305,7 +305,7 @@ matrix:
     id: com
     acs:
       version: *acs_ga_version
-      pattern: *ga_pattern
+      versionFilterKind: semver
       image: docker.io/alfresco/alfresco-content-repository-community
     activemq:
       version: "5.18"
@@ -313,7 +313,7 @@ matrix:
       image: docker.io/alfresco/alfresco-activemq
     share:
       version: *acs_ga_version
-      pattern: *ga_pattern
+      versionFilterKind: semver
       image: docker.io/alfresco/alfresco-share
     search:
       version: *search_ga_version
