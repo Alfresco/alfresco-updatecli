@@ -41,24 +41,23 @@ matrix:
       pattern: *development_pattern
     intelligence:
       version: ">=3.0.0-0"
-    trouter:
+      versionFilterKind: semver
+    trouter: &ats_next_version
       version: ">=4.0.0-0"
-    sfs:
-      version: ">=4.0.0-0"
-    tengine-aio:
-      version: &tengine_next_version  ">=5.0.0-0"
-    tengine-misc:
-      version: *tengine_next_version
-    tengine-im:
-      version: *tengine_next_version
-    tengine-lo:
-      version: *tengine_next_version
-    tengine-pdf:
-      version: *tengine_next_version
-    tengine-tika:
-      version: *tengine_next_version
+      versionFilterKind: semver
+    sfs: *ats_next_version
+
+    tengine-aio: &tengines_next_version
+      version:  ">=5.0.0-0"
+      versionFilterKind: semver
+    tengine-misc: *tengines_next_version
+    tengine-im: *tengines_next_version
+    tengine-lo: *tengines_next_version
+    tengine-pdf: *tengines_next_version
+    tengine-tika: *tengines_next_version
     audit-storage:
       version: ">=1.0.0-0"
+      versionFilterKind: semver
 
   current:
     id: current
@@ -95,24 +94,21 @@ matrix:
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
-    intelligence:
-      version: &ais_ga_version "~3.1.0"
-    trouter:
-      version: &ats_ga_version "~4"
-    sfs:
-      version: *ats_ga_version
-    tengine-aio:
-      version: &tengine_ga_version "~5"
-    tengine-misc:
-      version: *tengine_ga_version
-    tengine-im:
-      version: *tengine_ga_version
-    tengine-lo:
-      version: *tengine_ga_version
-    tengine-pdf:
-      version: *tengine_ga_version
-    tengine-tika:
-      version: *tengine_ga_version
+    intelligence: &ais_ga_version
+      version: "~3.1.0"
+      versionFilterKind: semver
+    trouter: &ats_ga_version
+      version: "~4"
+      versionFilterKind: semver
+    sfs: *ats_ga_version
+    tengine-aio: &tengines_ga_version
+      version: "~5"
+      versionFilterKind: semver
+    tengine-misc: *tengines_ga_version
+    tengine-im: *tengines_ga_version
+    tengine-lo: *tengines_ga_version
+    tengine-pdf: *tengines_ga_version
+    tengine-tika: *tengines_ga_version
     activiti:
       version: &activiti_ga_version "24"
       pattern: *ga_pattern
@@ -121,6 +117,7 @@ matrix:
       pattern: *ga_pattern
     audit-storage:
       version: "~1.0.0"
+      versionFilterKind: semver
 
   7.4.N:
     id: 74n
@@ -157,24 +154,15 @@ matrix:
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
-    intelligence:
-      version: *ais_ga_version
-    trouter:
-      version: *ats_ga_version
-    sfs:
-      version: *ats_ga_version
-    tengine-aio:
-      version: *tengine_ga_version
-    tengine-misc:
-      version: *tengine_ga_version
-    tengine-im:
-      version: *tengine_ga_version
-    tengine-lo:
-      version: *tengine_ga_version
-    tengine-pdf:
-      version: *tengine_ga_version
-    tengine-tika:
-      version: *tengine_ga_version
+    intelligence: *ais_ga_version
+    trouter: *ats_ga_version
+    sfs: *ats_ga_version
+    tengine-aio: *tengines_ga_version
+    tengine-misc: *tengines_ga_version
+    tengine-im: *tengines_ga_version
+    tengine-lo: *tengines_ga_version
+    tengine-pdf: *tengines_ga_version
+    tengine-tika: *tengines_ga_version
     activiti:
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -219,22 +207,19 @@ matrix:
       pattern: *ga_hotfixes_pattern
     intelligence:
       version: "~1.5.0"
-    trouter:
-      version: &ats_4_1 "~4.1.1"
-    sfs:
-      version: *ats_4_1
-    tengine-aio:
-      version: &tengine_5_1 "~5.1.1"
-    tengine-misc:
-      version: *tengine_5_1
-    tengine-im:
-      version: *tengine_5_1
-    tengine-lo:
-      version: *tengine_5_1
-    tengine-pdf:
-      version: *tengine_5_1
-    tengine-tika:
-      version: *tengine_5_1
+      versionFilterKind: semver
+    trouter: &ats_4_1
+      version: "~4.1.1"
+      versionFilterKind: semver
+    sfs: *ats_4_1
+    tengine-aio: &tengines_5_1
+      version:  "~5.1.1"
+      versionFilterKind: semver
+    tengine-misc: *tengines_5_1
+    tengine-im: *tengines_5_1
+    tengine-lo: *tengines_5_1
+    tengine-pdf: *tengines_5_1
+    tengine-tika: *tengines_5_1
     activiti:
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -279,22 +264,15 @@ matrix:
       pattern: *ga_hotfixes_pattern
     intelligence:
       version: "~1.5.0"
-    trouter:
-      version: *ats_4_1
-    sfs:
-      version: *ats_4_1
-    tengine-aio:
-      version: *tengine_5_1
-    tengine-misc:
-      version: *tengine_5_1
-    tengine-im:
-      version: *tengine_5_1
-    tengine-lo:
-      version: *tengine_5_1
-    tengine-pdf:
-      version: *tengine_5_1
-    tengine-tika:
-      version: *tengine_5_1
+      versionFilterKind: semver
+    trouter: *ats_4_1
+    sfs: *ats_4_1
+    tengine-aio: *tengines_5_1
+    tengine-misc: *tengines_5_1
+    tengine-im: *tengines_5_1
+    tengine-lo: *tengines_5_1
+    tengine-pdf: *tengines_5_1
+    tengine-tika: *tengines_5_1
     activiti:
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -323,8 +301,7 @@ matrix:
     adminApp:
       version: *acc_ga_version
       pattern: *ga_pattern
-    tengine-aio:
-      version: *tengine_ga_version
+    tengine-aio: *tengines_ga_version
     aca:
       version: *adw_ga_version
       pattern: *ga_pattern
