@@ -4,7 +4,21 @@
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
       password: {{ requiredEnv "QUAY_PASSWORD" }}
-{{- end -}}
+{{- end }}
+{{- define "common_version_filter" }}
+      {{- $vfk := .versionFilterKind | default "regex" }}
+      versionFilter:
+        kind: {{ $vfk }}
+        pattern: >-
+          {{- if eq $vfk "regex" }}
+          ^{{ .version }}{{ .pattern }}$
+          {{- else }}
+          {{ .version }}
+          {{- end }}
+        {{- if and (eq $vfk "regex/semver") .regex }}
+        regex: {{ .regex }}
+        {{- end }}
+{{- end }}
 ---
 name: {{ template "manifest_name" . }}
 
@@ -28,7 +42,7 @@ scms:
 sources:
   {{- range .matrix }}
   {{- $id := .id -}}
-  {{- if index . "adminApp" }}
+  {{- with .adminApp }}
   adminAppTag_{{ $id }}:
     name: >-
       Alfresco admin application tag
@@ -36,25 +50,19 @@ sources:
     spec:
       image: quay.io/alfresco/alfresco-control-center
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "adminApp" "version" }}{{ index . "adminApp" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "adw" }}
+  {{- with .adw }}
   adwTag_{{ $id }}:
     name: Alfresco Digital Workspace tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-digital-workspace
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "adw" "version" }}{{ index . "adw" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "activemq" }}
-  {{ $activemq_image := index . "activemq" "image" | default $default_activemq_image }}
+  {{- with .activemq }}
+  {{ $activemq_image := .image | default $default_activemq_image }}
   activemqTag_{{ $id }}:
     name: Alfresco ActiveMQ tag
     kind: dockerimage
@@ -63,24 +71,17 @@ sources:
       {{ if eq (printf "%.8s" $activemq_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "activemq" "version" }}{{ index . "activemq" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "aca" }}
+  {{- with .aca }}
   acaTag_{{ $id }}:
     name: Alfresco Content App tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-content-app
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{- with .acs }}
-  {{- $vfk := .versionFilterKind | default "regex" }}
   {{- $repo_image := .image | default $default_repo_image }}
   repositoryTag_{{ $id }}:
     name: ACS repository tag
@@ -90,43 +91,27 @@ sources:
       {{ if eq (printf "%.8s" $repo_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: {{ $vfk }}
-        pattern: >-
-          {{- if eq $vfk "semver" }}
-          {{ .version }}
-          {{- else }}
-          ^{{ .version }}{{ .pattern }}$
-          {{- end }}
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{ with index . "insight-zeppelin" }}
-  {{ $image := "quay.io/alfresco/insight-zeppelin" }}
   insightZeppelinTag_{{ $id }}:
     name: Alfresco Insight Zeppelin
     kind: dockerimage
     spec:
-      image: {{ $image }}
-      {{ if eq (printf "%.8s" $image) "quay.io/" }}
+      image: quay.io/alfresco/insight-zeppelin
       {{ template "quay_auth" }}
-      {{ end }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ .version }}{{ .pattern }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "search-enterprise" }}
+  {{- with index . "search-enterprise" }}
   searchEnterpriseTag_{{ $id }}:
     name: Search Enterprise tag
     kind: gittag
     scmid: searchEnterprise
     spec:
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "search-enterprise" "version" }}{{ index . "search-enterprise" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{ end }}
-  {{- if index . "search" }}
-  {{ $search_image := index . "search" "image" | default $default_search_image }}
+  {{- with .search }}
+  {{ $search_image := .image | default $default_search_image }}
   searchTag_{{ $id }}:
     name: Alfresco Search Services
     kind: dockerimage
@@ -135,13 +120,9 @@ sources:
       {{ if eq (printf "%.8s" $search_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "search" "version" }}{{ index . "search" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{- with .share }}
-  {{- $vfk := .versionFilterKind | default "regex" }}
   {{ $share_image := .image | default $default_share_image }}
   shareTag_{{ $id }}:
     name: Share repository tag
@@ -151,176 +132,127 @@ sources:
       {{ if eq (printf "%.8s" $share_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: {{ $vfk }}
-        pattern: >-
-          {{- if eq $vfk "semver" }}
-          {{ .version }}
-          {{- else }}
-          ^{{ .version }}{{ .pattern }}$
-          {{- end }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "sync" }}
+  {{- with .sync }}
   syncTag_{{ $id }}:
     name: Sync Service image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/service-sync
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "sync" "version" }}{{ index . "sync" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "onedrive" }}
+  {{- with .onedrive }}
   onedriveTag_{{ $id }}:
     name: Onedrive (OOI) Service image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-ooi-service
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "onedrive" "version" }}{{ index . "onedrive" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "msteams" }}
+  {{- with .msteams }}
   msteamsTag_{{ $id }}:
     name: MS Teams Service image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-ms-teams-service
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "msteams" "version" }}{{ index . "msteams" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "intelligence" }}
+  {{- with .intelligence }}
   intelligenceTag_{{ $id }}:
     name: Intelligence Service image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-ai-docker-engine
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "intelligence" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "trouter" }}
+  {{- with .trouter }}
   trouterTag_{{ $id }}:
     name: Alfresco Transform Router image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-transform-router
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "trouter" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "sfs" }}
+  {{- with .sfs }}
   sfsTag_{{ $id }}:
     name: Alfresco Shared Filestore image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-shared-file-store
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "sfs" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-aio" }}
+  {{- with index . "tengine-aio" }}
   tengine-aioTag_{{ $id }}:
     name: Alfresco All-In-One Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-transform-core-aio
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-aio" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-misc" }}
+  {{- with index . "tengine-misc" }}
   tengine-miscTag_{{ $id }}:
     name: Alfresco misc Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-transform-misc
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-misc" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-im" }}
+  {{- with index . "tengine-im" }}
   tengine-imTag_{{ $id }}:
     name: Alfresco ImageMagick Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-imagemagick
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-im" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-lo" }}
+  {{- with index . "tengine-lo" }}
   tengine-loTag_{{ $id }}:
     name: Alfresco LibreOffice Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-libreoffice
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-lo" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-pdf" }}
+  {{- with index . "tengine-pdf" }}
   tengine-pdfTag_{{ $id }}:
     name: Alfresco PDF Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-pdf-renderer
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-pdf" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "tengine-tika" }}
+  {{- with index . "tengine-tika" }}
   tengine-tikaTag_{{ $id }}:
     name: Alfresco tika Transform Engine image tag
     kind: dockerimage
     spec:
       image: alfresco/alfresco-tika
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ index . "tengine-tika" "version" }}
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "activiti"}}
+  {{- with .activiti}}
   activitiTag_{{ $id }}:
     name: Alfresco Activiti image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-process-services
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "activiti" "version" }}{{ index . "activiti" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
-  {{- if index . "activiti-admin"}}
+  {{- with index . "activiti-admin"}}
   activitiAdminTag_{{ $id }}:
     name: Alfresco Activiti Admin image tag
     kind: dockerimage
     spec:
       image: quay.io/alfresco/alfresco-process-services-admin
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: regex
-        pattern: >-
-          ^{{ index . "activiti-admin" "version" }}{{ index . "activiti-admin" "pattern" }}$
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{- with index . "audit-storage"}}
   auditStorageTag_{{ $id }}:
@@ -329,10 +261,7 @@ sources:
     spec:
       image: quay.io/alfresco/alfresco-audit-storage
       {{ template "quay_auth" }}
-      versionFilter:
-        kind: semver
-        pattern: >-
-          {{ .version }}
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{- end }}
 
