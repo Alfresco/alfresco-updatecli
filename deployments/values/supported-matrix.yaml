@@ -12,7 +12,8 @@ matrix:
     id: next
     acs: &acs_next_version_spec
       version: ">=25.0.0-0"
-      versionFilterKind: semver
+      versionFilterKind: regex/semver
+      regex: '^(\d+\.\d+\.\d+(-A\.\d+)?)$'
     activemq:
       version: "5.18"
       pattern: *ga_activemq_pattern

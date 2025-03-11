@@ -93,11 +93,14 @@ sources:
       versionFilter:
         kind: {{ $vfk }}
         pattern: >-
-          {{- if eq $vfk "semver" }}
-          {{ .version }}
-          {{- else }}
+          {{- if eq $vfk "regex" }}
           ^{{ .version }}{{ .pattern }}$
+          {{- else }}
+          {{ .version }}
           {{- end }}
+        {{- if and (eq $vfk "regex/semver") .regex }}
+        regex: {{ .regex }}
+        {{- end }}
   {{- end }}
   {{ with index . "insight-zeppelin" }}
   {{ $image := "quay.io/alfresco/insight-zeppelin" }}
@@ -154,11 +157,14 @@ sources:
       versionFilter:
         kind: {{ $vfk }}
         pattern: >-
-          {{- if eq $vfk "semver" }}
-          {{ .version }}
-          {{- else }}
+          {{- if eq $vfk "regex" }}
           ^{{ .version }}{{ .pattern }}$
+          {{- else }}
+          {{ .version }}
           {{- end }}
+        {{- if and (eq $vfk "regex/semver") .regex }}
+        regex: {{ .regex }}
+        {{- end }}
   {{- end }}
   {{- if index . "sync" }}
   syncTag_{{ $id }}:
