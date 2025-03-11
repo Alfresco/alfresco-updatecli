@@ -4,7 +4,21 @@
 {{- define "quay_auth" }}
       username: {{ requiredEnv "QUAY_USERNAME" }}
       password: {{ requiredEnv "QUAY_PASSWORD" }}
-{{- end -}}
+{{- end }}
+{{- define "common_version_filter" }}
+      {{- $vfk := .versionFilterKind | default "regex" }}
+      versionFilter:
+        kind: {{ $vfk }}
+        pattern: >-
+          {{- if eq $vfk "regex" }}
+          ^{{ .version }}{{ .pattern }}$
+          {{- else }}
+          {{ .version }}
+          {{- end }}
+        {{- if and (eq $vfk "regex/semver") .regex }}
+        regex: {{ .regex }}
+        {{- end }}
+{{- end }}
 ---
 name: {{ template "manifest_name" . }}
 
@@ -80,7 +94,6 @@ sources:
           ^{{ index . "aca" "version" }}{{ index . "aca" "pattern" }}$
   {{- end }}
   {{- with .acs }}
-  {{- $vfk := .versionFilterKind | default "regex" }}
   {{- $repo_image := .image | default $default_repo_image }}
   repositoryTag_{{ $id }}:
     name: ACS repository tag
@@ -90,17 +103,7 @@ sources:
       {{ if eq (printf "%.8s" $repo_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: {{ $vfk }}
-        pattern: >-
-          {{- if eq $vfk "regex" }}
-          ^{{ .version }}{{ .pattern }}$
-          {{- else }}
-          {{ .version }}
-          {{- end }}
-        {{- if and (eq $vfk "regex/semver") .regex }}
-        regex: {{ .regex }}
-        {{- end }}
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{ with index . "insight-zeppelin" }}
   {{ $image := "quay.io/alfresco/insight-zeppelin" }}
@@ -144,7 +147,6 @@ sources:
           ^{{ index . "search" "version" }}{{ index . "search" "pattern" }}$
   {{- end }}
   {{- with .share }}
-  {{- $vfk := .versionFilterKind | default "regex" }}
   {{ $share_image := .image | default $default_share_image }}
   shareTag_{{ $id }}:
     name: Share repository tag
@@ -154,17 +156,7 @@ sources:
       {{ if eq (printf "%.8s" $share_image) "quay.io/" }}
       {{ template "quay_auth" }}
       {{ end }}
-      versionFilter:
-        kind: {{ $vfk }}
-        pattern: >-
-          {{- if eq $vfk "regex" }}
-          ^{{ .version }}{{ .pattern }}$
-          {{- else }}
-          {{ .version }}
-          {{- end }}
-        {{- if and (eq $vfk "regex/semver") .regex }}
-        regex: {{ .regex }}
-        {{- end }}
+      {{ template "common_version_filter" . }}
   {{- end }}
   {{- if index . "sync" }}
   syncTag_{{ $id }}:
