@@ -28,7 +28,7 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "5"
+      version: "6"
       pattern: *development_almost_semver_pattern
     adminApp:
       version: "9"
