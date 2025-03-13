@@ -56,7 +56,7 @@ matrix:
     tengine-pdf: *tengines_next_version
     tengine-tika: *tengines_next_version
     audit-storage:
-      version: ">=1.0.0-0"
+      version: ">=1.1.0-0"
       versionFilterKind: semver
 
   current:
@@ -110,7 +110,7 @@ matrix:
       version: *activiti_ga_version
       pattern: *ga_pattern
     audit-storage: &audit_storage_ga_version_spec
-      version: "~1.0"
+      version: "~1"
       versionFilterKind: semver
 
   23.N:
