@@ -41,6 +41,7 @@ scms:
 
 sources:
   {{- range .matrix }}
+  {{- if .id }}
   {{- $id := .id -}}
   {{- with .adminApp }}
   adminAppTag_{{ $id }}:
@@ -262,6 +263,7 @@ sources:
       image: quay.io/alfresco/alfresco-audit-storage
       {{ template "quay_auth" }}
       {{ template "common_version_filter" . }}
+  {{- end }}
   {{- end }}
   {{- end }}
 
