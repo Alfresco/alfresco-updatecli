@@ -245,55 +245,6 @@ matrix:
     activiti: *activiti_2_4_version_spec
     activiti-admin: *activiti_2_4_version_spec
 
-  7.2.N:
-    id: 72n
-    acs:
-      version: "7.2"
-      pattern: *ga_hotfixes_pattern
-    activemq:
-      version: "5.16"
-      pattern: *ga_activemq_pattern
-    share:
-      version: "7.2"
-      pattern: *ga_hotfixes_pattern
-    insight-zeppelin: *search_ga_version_spec
-    search: *search_ga_version_spec
-    search-enterprise:
-      version: "3.1.1"
-      pattern: *ga_hotfixes_pattern
-    sync:
-      version: "3.11"
-      pattern: *ga_hotfixes_pattern
-    adw:
-      version: "4.4"
-      pattern: *ga_pattern
-    adminApp:
-      version: "7"
-      pattern: *ga_pattern
-    onedrive:
-      version: "2.0"
-      pattern: *ga_hotfixes_pattern
-    msteams:
-      version: "2.0"
-      pattern: *ga_hotfixes_pattern
-    intelligence:
-      version: "~1.5.0"
-      versionFilterKind: semver
-    trouter: *ats_4_1
-    sfs: *ats_4_1
-    tengine-aio: *tengines_5_1
-    tengine-misc: *tengines_5_1
-    tengine-im: *tengines_5_1
-    tengine-lo: *tengines_5_1
-    tengine-pdf: *tengines_5_1
-    tengine-tika: *tengines_5_1
-    activiti:
-      version: "2.4"
-      pattern: *ga_hotfixes_pattern
-    activiti-admin:
-      version: "2.4"
-      pattern: *ga_hotfixes_pattern
-
   community:
     id: com
     acs:
