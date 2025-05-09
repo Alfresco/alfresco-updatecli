@@ -194,7 +194,7 @@ sources:
     name: Alfresco All-In-One Transform Engine image tag
     kind: dockerimage
     spec:
-      image: alfresco/alfresco-transform-core-aio
+      image: quay.io/alfresco/alfresco-transform-core-aio
       {{ template "common_version_filter" . }}
   {{- end }}
   {{- with index . "tengine-misc" }}
@@ -673,7 +673,7 @@ targets:
     kind: yaml
     sourceid: tengine-aioTag_{{ $id }}
     transformers:
-      - addprefix: "alfresco/alfresco-transform-core-aio:"
+      - addprefix: "quay.io/alfresco/alfresco-transform-core-aio:"
     spec:
       file: {{ .compose_target }}
       key: >-
