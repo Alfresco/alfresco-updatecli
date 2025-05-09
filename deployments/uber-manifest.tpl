@@ -38,6 +38,7 @@ scms:
 {{- $default_search_image := "quay.io/alfresco/search-services" }}
 {{- $default_share_image := "quay.io/alfresco/alfresco-share" }}
 {{- $default_activemq_image := "quay.io/alfresco/alfresco-activemq" }}
+{{- $default_aio_image := "quay.io/alfresco/alfresco-transform-core-aio" }}
 
 sources:
   {{- range .matrix }}
@@ -190,11 +191,15 @@ sources:
       {{ template "common_version_filter" . }}
   {{- end }}
   {{- with index . "tengine-aio" }}
+  {{ $aio_image := .image | default $default_aio_image }}
   tengine-aioTag_{{ $id }}:
     name: Alfresco All-In-One Transform Engine image tag
     kind: dockerimage
     spec:
-      image: alfresco/alfresco-transform-core-aio
+      image: {{ $aio_image }}
+      {{ if eq (printf "%.8s" $aio_image) "quay.io/" }}
+      {{ template "quay_auth" }}
+      {{ end }}
       {{ template "common_version_filter" . }}
   {{- end }}
   {{- with index . "tengine-misc" }}
@@ -673,7 +678,7 @@ targets:
     kind: yaml
     sourceid: tengine-aioTag_{{ $id }}
     transformers:
-      - addprefix: "alfresco/alfresco-transform-core-aio:"
+      - addprefix: "{{ .image | default $default_aio_image }}:"
     spec:
       file: {{ .compose_target }}
       key: >-
