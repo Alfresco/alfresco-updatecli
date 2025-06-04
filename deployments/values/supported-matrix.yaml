@@ -123,7 +123,7 @@ matrix:
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
     search-enterprise:
-      version: "4.2"
+      version: "5.1"
       pattern: *ga_hotfixes_pattern
     sync:
       version: "5.1"
