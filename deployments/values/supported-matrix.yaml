@@ -28,10 +28,10 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "6"
+      version: "7"
       pattern: *development_almost_semver_pattern
     adminApp:
-      version: "9"
+      version: "10"
       pattern: *development_almost_semver_pattern
     onedrive:
       version: "2"
