@@ -5,7 +5,6 @@ patterns:
   ga: &ga_pattern (\.[0-9]+){1,2}
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
   development: &development_pattern (\.[0-9]+){0,3}(-A\.?[0-9]+)?
-  development_almost_semver_pattern: &development_almost_semver_pattern (\.[0-9]+){0,3}(-[0-9]+)?
   ga_activemq: &ga_activemq_pattern \.\d+-jre17-rockylinux8
 matrix:
   next:
@@ -28,11 +27,11 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "7"
-      pattern: *development_almost_semver_pattern
+      version: ">=7.0.0-0"
+      versionFilterKind: semver
     adminApp:
-      version: "10"
-      pattern: *development_almost_semver_pattern
+      version: ">=10.0.0-0"
+      versionFilterKind: semver
     onedrive:
       version: "2"
       pattern: *development_pattern
