@@ -228,18 +228,14 @@ matrix:
     intelligence:
       version: "~1.5.0"
       versionFilterKind: semver
-    trouter: &ats_4_1
-      version: "~4.1.1"
-      versionFilterKind: semver
-    sfs: *ats_4_1
-    tengine-aio: &tengines_5_1
-      version:  "~5.1.1"
-      versionFilterKind: semver
-    tengine-misc: *tengines_5_1
-    tengine-im: *tengines_5_1
-    tengine-lo: *tengines_5_1
-    tengine-pdf: *tengines_5_1
-    tengine-tika: *tengines_5_1
+    trouter: *ats_ga_version
+    sfs: *ats_ga_version
+    tengine-aio: *tengines_ga_version
+    tengine-misc: *tengines_ga_version
+    tengine-im: *tengines_ga_version
+    tengine-lo: *tengines_ga_version
+    tengine-pdf: *tengines_ga_version
+    tengine-tika: *tengines_ga_version
     activiti: *activiti_2_4_version_spec
     activiti-admin: *activiti_2_4_version_spec
 
