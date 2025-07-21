@@ -5,7 +5,6 @@ patterns:
   ga: &ga_pattern (\.[0-9]+){1,2}
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
   development: &development_pattern (\.[0-9]+){0,3}(-A\.?[0-9]+)?
-  development_almost_semver_pattern: &development_almost_semver_pattern (\.[0-9]+){0,3}(-[0-9]+)?
   ga_activemq: &ga_activemq_pattern \.\d+-jre17-rockylinux8
 matrix:
   next:
@@ -28,11 +27,11 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: "7"
-      pattern: *development_almost_semver_pattern
+      version: ">=7.0.0-0"
+      versionFilterKind: semver
     adminApp:
-      version: "10"
-      pattern: *development_almost_semver_pattern
+      version: ">=10.0.0-0"
+      versionFilterKind: semver
     onedrive:
       version: "2"
       pattern: *development_pattern
@@ -67,20 +66,20 @@ matrix:
     activemq: *activemq_ga_version_spec
     share: *acs_ga_version_spec
     search: &search_ga_version_spec
-      version: "2.0.15"
+      version: "2.0.16"
       pattern: *ga_hotfixes_pattern
     insight-zeppelin: *search_ga_version_spec
-    search-enterprise:
+    search-enterprise: &search_ent_ga_version_spec
       version: "5"
       pattern: *ga_hotfixes_pattern
     sync:
       version: "5.2"
       pattern: *ga_hotfixes_pattern
     adw:
-      version: &adw_ga_version "6.0"
+      version: &adw_ga_version "7.0"
       pattern: *ga_pattern
     adminApp:
-      version: &acc_ga_version "9.4"
+      version: &acc_ga_version "10.0"
       pattern: *ga_pattern
     onedrive:
       version: "2"
@@ -89,7 +88,7 @@ matrix:
       version: "2"
       pattern: *ga_hotfixes_pattern
     intelligence: &ais_ga_version
-      version: "~3.1.0"
+      version: "~3"
       versionFilterKind: semver
     trouter: &ats_ga_version
       version: "~4"
@@ -122,9 +121,7 @@ matrix:
     share: *acs_23_version_spec
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
-    search-enterprise:
-      version: "5.1"
-      pattern: *ga_hotfixes_pattern
+    search-enterprise: *search_ent_ga_version_spec
     sync:
       version: "5.1"
       pattern: *ga_hotfixes_pattern
