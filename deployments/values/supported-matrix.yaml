@@ -73,8 +73,8 @@ matrix:
       version: "5"
       pattern: *ga_hotfixes_pattern
     sync: &sync_ga_version_spec
-      version: "5.3"
-      pattern: *ga_pattern
+      version: "~5"
+      versionFilterKind: semver
     adw:
       version: &adw_ga_version "7.1"
       pattern: *ga_pattern
