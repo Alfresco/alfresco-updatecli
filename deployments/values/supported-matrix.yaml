@@ -72,9 +72,9 @@ matrix:
     search-enterprise: &search_ent_ga_version_spec
       version: "5"
       pattern: *ga_hotfixes_pattern
-    sync:
-      version: "5.2"
-      pattern: *ga_hotfixes_pattern
+    sync: &sync_ga_version_spec
+      version: "~5"
+      versionFilterKind: semver
     adw:
       version: &adw_ga_version "7.1"
       pattern: *ga_pattern
@@ -166,7 +166,9 @@ matrix:
     search-enterprise:
       version: "3.3"
       pattern: *ga_hotfixes_pattern
-    sync: *sync_ga_version_spec
+    sync:
+      version: "3.11"
+      pattern: *ga_hotfixes_pattern
     adw:
       version: "5.0"
       pattern: *ga_pattern
