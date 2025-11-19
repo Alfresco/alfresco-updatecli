@@ -124,10 +124,10 @@ matrix:
     search-enterprise: *search_ent_ga_version_spec
     sync: *sync_ga_version_spec
     adw:
-      version: "5.3"
+      version: *adw_ga_version
       pattern: *ga_pattern
     adminApp:
-      version: "9.3"
+      version: *acc_ga_version
       pattern: *ga_pattern
     onedrive:
       version: "2"
