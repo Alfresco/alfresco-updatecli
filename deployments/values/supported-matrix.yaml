@@ -76,10 +76,10 @@ matrix:
       version: "~5"
       versionFilterKind: semver
     adw:
-      version: &adw_ga_version "7.1"
+      version: &adw_ga_version "7.2"
       pattern: *ga_pattern
     adminApp:
-      version: &acc_ga_version "10.1"
+      version: &acc_ga_version "10.2"
       pattern: *ga_pattern
     onedrive:
       version: "2"
