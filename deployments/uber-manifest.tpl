@@ -271,7 +271,7 @@ sources:
   {{- end }}
   {{- end }}
   {{- end }}
-    {{- with .knowledge-retrieval }}
+    {{- with index . "knowledge-retrieval" }}
   knowledgeRetrievalTag_{{ $id }}:
     name: Alfresco knowledge-retrieval Service image tag
     kind: dockerimage
@@ -860,7 +860,7 @@ targets:
   {{- end }}
   {{- end }}
   {{- end }}
-  {{- with .knowledge-retrieval }}
+  {{- with index . "knowledge-retrieval" }}
   {{- if and .helm_key .helm_target }}
   knowledgeRetrievalValues_{{ $id }}:
     name: Alfresco knowledge-retrieval image tag
