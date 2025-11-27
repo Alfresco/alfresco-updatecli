@@ -111,6 +111,7 @@ matrix:
     audit-storage: &audit_storage_ga_version_spec
       version: "~1"
       versionFilterKind: semver
+    knowledge-retrieval: *acs_ga_version_spec
 
   23.N:
     id: 23n
@@ -151,6 +152,7 @@ matrix:
       version: *activiti_24_version
       pattern: *ga_pattern
     audit-storage: *audit_storage_ga_version_spec
+    knowledge-retrieval: *acs_23_version_spec
 
   7.4.N:
     id: 74n
