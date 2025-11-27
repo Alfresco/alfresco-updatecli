@@ -859,7 +859,6 @@ targets:
   {{- end }}
   {{- end }}
   {{- end }}
-  {{- end }}
   {{- with index . "knowledge-retrieval" }}
   {{- if and .helm_key .helm_target }}
   knowledgeRetrievalValues_{{ $id }}:
@@ -879,4 +878,5 @@ targets:
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
+  {{- end }}
   {{- end }}
