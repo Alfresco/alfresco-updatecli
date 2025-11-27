@@ -271,6 +271,15 @@ sources:
   {{- end }}
   {{- end }}
   {{- end }}
+    {{- with .knowledge-retrieval }}
+  knowledgeRetrievalTag_{{ $id }}:
+    name: Alfresco knowledge-retrieval Service image tag
+    kind: dockerimage
+    spec:
+      image: quay.io/alfresco/knowledge-retrieval
+      {{ template "quay_auth" }}
+      {{ template "common_version_filter" . }}
+  {{- end }}
 
 
 targets:
@@ -850,4 +859,24 @@ targets:
   {{- end }}
   {{- end }}
   {{- end }}
+  {{- end }}
+  {{- with .knowledge-retrieval }}
+  {{- if and .helm_key .helm_target }}
+  knowledgeRetrievalValues_{{ $id }}:
+    name: Alfresco knowledge-retrieval image tag
+    kind: yaml
+    sourceid: knowledgeRetrievalTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: >-
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
+  knowledgeRetrievalAppVersion_{{ $id }}:
+    name: Alfresco knowledge-retrieval appVersion in Chart.yaml
+    kind: yaml
+    sourceid: knowledgeRetrievalTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
   {{- end }}
