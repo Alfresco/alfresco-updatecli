@@ -10,7 +10,7 @@ matrix:
   next:
     id: next
     acs: &acs_next_version_spec
-      version: ">=25.0.0-0"
+      version: ">=26.0.0-0"
       versionFilterKind: regex/semver
       regex: '^(\d+\.\d+\.\d+(-A\.\d+)?)$' # mainly to ignore -Mx
     activemq: &activemq_ga_version_spec
