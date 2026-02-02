@@ -14,7 +14,7 @@ matrix:
       versionFilterKind: regex/semver
       regex: '^(\d+\.\d+\.\d+(-A\.\d+)?)$' # mainly to ignore -Mx
     activemq: &activemq_ga_version_spec
-      version: "5.18"
+      version: "6.2"
       pattern: *ga_activemq_pattern
     share: *acs_next_version_spec
     search:
