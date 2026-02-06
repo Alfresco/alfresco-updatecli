@@ -1,0 +1,29 @@
+---
+# Reflection of https://docs.alfresco.com/content-services/latest/support/
+# TO BE ENRICHED AS RELEASES ARE OUT
+patterns:
+  ga: &ga_pattern (\.[0-9]+){1,2}
+matrix:
+  next:
+    id: next
+
+  current:
+    id: current
+    activiti:
+      version: &activiti_ga_version "25"
+      pattern: *ga_pattern
+    activiti-admin:
+      version: *activiti_ga_version
+      pattern: *ga_pattern
+
+  23.N:
+    id: 23n
+    activiti:
+      version: &activiti_24_version "24"
+      pattern: *ga_pattern
+    activiti-admin:
+      version: *activiti_24_version
+      pattern: *ga_pattern
+
+  7.4.N:
+    id: 74n

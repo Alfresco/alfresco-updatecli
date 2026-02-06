@@ -104,12 +104,6 @@ matrix:
     tengine-lo: *tengines_ga_version
     tengine-pdf: *tengines_ga_version
     tengine-tika: *tengines_ga_version
-    activiti:
-      version: &activiti_ga_version "25"
-      pattern: *ga_pattern
-    activiti-admin:
-      version: *activiti_ga_version
-      pattern: *ga_pattern
     audit-storage: &audit_storage_ga_version_spec
       version: "~1"
       versionFilterKind: semver
@@ -146,12 +140,6 @@ matrix:
     tengine-lo: *tengines_ga_version
     tengine-pdf: *tengines_ga_version
     tengine-tika: *tengines_ga_version
-    activiti:
-      version: &activiti_24_version "24"
-      pattern: *ga_pattern
-    activiti-admin:
-      version: *activiti_24_version
-      pattern: *ga_pattern
     audit-storage: *audit_storage_ga_version_spec
 
   7.4.N:
@@ -192,10 +180,6 @@ matrix:
     tengine-lo: *tengines_ga_version
     tengine-pdf: *tengines_ga_version
     tengine-tika: *tengines_ga_version
-    activiti: &activiti_2_4_version_spec
-      version: "2.4"
-      pattern: *ga_hotfixes_pattern
-    activiti-admin: *activiti_2_4_version_spec
 
   community:
     id: com
