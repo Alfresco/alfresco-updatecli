@@ -46,7 +46,7 @@ matrix:
       versionFilterKind: semver
     sfs: *ats_next_version
     tengine-aio: &tengines_next_version
-      version:  ">=5.0.0-0"
+      version:  ">=5.3.0-0"
       versionFilterKind: semver
     tengine-misc: *tengines_next_version
     tengine-im: *tengines_next_version
@@ -91,14 +91,14 @@ matrix:
       version: "~4"
       versionFilterKind: semver
     sfs: *ats_ga_version
-    tengine-aio: &tengines_ga_version
+    tengine-aio: &tengines_ga_version_spec
       version: "~5"
       versionFilterKind: semver
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti:
       version: &activiti_ga_version "25"
       pattern: *ga_pattern
@@ -141,14 +141,12 @@ matrix:
       versionFilterKind: semver
     trouter: *ats_ga_version
     sfs: *ats_ga_version
-    tengine-aio: &tengines_ga_version
-      version: "~5"
-      versionFilterKind: semver
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti:
       version: &activiti_ga_version "25"
       pattern: *ga_pattern
@@ -181,12 +179,12 @@ matrix:
     intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
-    tengine-aio: *tengines_ga_version
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti:
       version: &activiti_24_version "24"
       pattern: *ga_pattern
@@ -223,12 +221,12 @@ matrix:
     intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
-    tengine-aio: *tengines_ga_version
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti: &activiti_2_4_version_spec
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -249,5 +247,5 @@ matrix:
       <<: *search_ga_version_spec
       image: docker.io/alfresco/alfresco-search-services
     adminApp: *acc_ga_version_spec
-    tengine-aio: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
     aca: *adw_ga_version_spec
