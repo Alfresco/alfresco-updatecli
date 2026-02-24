@@ -67,6 +67,58 @@ matrix:
       version: "5.18"
       pattern: *ga_activemq_pattern
     share: *acs_ga_version_spec
+    search-enterprise: &search_ent_ga_version_spec
+      version: "5"
+      pattern: *ga_hotfixes_pattern
+    sync: &sync_ga_version_spec
+      version: ">=5.3.0-0"
+      versionFilterKind: semver
+    adw:
+      version: &adw_ga_version "7.2"
+      pattern: *ga_pattern
+    adminApp:
+      version: &acc_ga_version "10.2"
+      pattern: *ga_pattern
+    onedrive:
+      version: "2"
+      pattern: *ga_hotfixes_pattern
+    msteams:
+      version: "2"
+      pattern: *ga_hotfixes_pattern
+    intelligence: &ais_ga_version
+      version: "~3"
+      versionFilterKind: semver
+    trouter: &ats_ga_version
+      version: "~4"
+      versionFilterKind: semver
+    sfs: *ats_ga_version
+    tengine-aio: &tengines_ga_version
+      version: "~5"
+      versionFilterKind: semver
+    tengine-misc: *tengines_ga_version
+    tengine-im: *tengines_ga_version
+    tengine-lo: *tengines_ga_version
+    tengine-pdf: *tengines_ga_version
+    tengine-tika: *tengines_ga_version
+    activiti:
+      version: &activiti_ga_version "25"
+      pattern: *ga_pattern
+    activiti-admin:
+      version: *activiti_ga_version
+      pattern: *ga_pattern
+    audit-storage: &audit_storage_ga_version_spec
+      version: "~1"
+      versionFilterKind: semver
+
+  25.N:
+    id: 25n
+    acs: &acs_25_ga_version_spec
+      version:  "~25"
+      versionFilterKind: semver
+    activemq: &activemq5_ga_version_spec
+      version: "5.19"
+      pattern: *ga_activemq_pattern
+    share: *acs_25_ga_version_spec
     search: &search_ga_version_spec
       version: "2.0.17"
       pattern: *ga_hotfixes_pattern
@@ -74,7 +126,7 @@ matrix:
     search-enterprise: &search_ent_ga_version_spec
       version: "5"
       pattern: *ga_hotfixes_pattern
-    sync: &sync_ga_version_spec
+    sync: &sync_25_ga_version_spec
       version: "~5"
       versionFilterKind: semver
     adw:
@@ -119,12 +171,12 @@ matrix:
     acs: &acs_23_version_spec
       version: "~23"
       versionFilterKind: semver
-    activemq: *activemq_ga_version_spec
+    activemq: *activemq5_ga_version_spec
     share: *acs_23_version_spec
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
-    sync: *sync_ga_version_spec
+    sync: *sync_25_ga_version_spec
     adw:
       version: *adw_ga_version
       pattern: *ga_pattern
@@ -203,7 +255,7 @@ matrix:
       <<: *acs_ga_version_spec
       image: docker.io/alfresco/alfresco-content-repository-community
     activemq:
-      <<: *activemq_ga_version_spec
+      <<: *activemq5_ga_version_spec
       image: docker.io/alfresco/alfresco-activemq
     share:
       <<: *acs_ga_version_spec
