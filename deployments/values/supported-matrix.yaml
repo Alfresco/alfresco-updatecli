@@ -42,7 +42,7 @@ matrix:
       version: ">=3.3.0-0"
       versionFilterKind: semver
     trouter: &ats_next_version
-      version: ">=4.0.0-0"
+      version: ">=4.3.0-0"
       versionFilterKind: semver
     sfs: *ats_next_version
     tengine-aio: &tengines_next_version
@@ -139,9 +139,7 @@ matrix:
     intelligence: &ais_ga_version_spec
       version: "~3"
       versionFilterKind: semver
-    trouter: &ats_ga_version
-      version: "~4"
-      versionFilterKind: semver
+    trouter: *ats_ga_version
     sfs: *ats_ga_version
     tengine-aio: &tengines_ga_version
       version: "~5"
