@@ -33,8 +33,8 @@ matrix:
       version: ">=10.3.0-0"
       versionFilterKind: semver
     onedrive:
-      version: "2"
-      pattern: *development_pattern
+      version: ">=2.1.0-0"
+      versionFilterKind: semver
     msteams:
       version: "2"
       pattern: *development_pattern
@@ -78,9 +78,9 @@ matrix:
     adminApp: &acc_ga_version_spec
       version: ">=10.3"
       versionFilterKind: semver
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    onedrive: &onedrive_ga_version_spec
+      version: "~2"
+      versionFilterKind: semver
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -134,9 +134,7 @@ matrix:
     adminApp:
       <<: *acc_ga_version_spec
       version: ">=10.2"
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    onedrive: *onedrive_ga_version_spec
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -182,9 +180,7 @@ matrix:
     adminApp:
       <<: *acc_ga_version_spec
       version: "~10.2"
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    onedrive: *onedrive_ga_version_spec
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -228,9 +224,7 @@ matrix:
     adminApp:
       version: "8.3"
       pattern: *ga_pattern
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    onedrive: *onedrive_ga_version_spec
     msteams:
       version: "2"
       pattern: *ga_hotfixes_pattern
