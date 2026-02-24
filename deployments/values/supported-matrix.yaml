@@ -36,8 +36,8 @@ matrix:
       version: ">=2.1.0-0"
       versionFilterKind: semver
     msteams:
-      version: "2"
-      pattern: *development_pattern
+      version: ">=2.1.0-0"
+      versionFilterKind: semver
     intelligence:
       version: ">=3.0.0-0"
       versionFilterKind: semver
@@ -81,9 +81,9 @@ matrix:
     onedrive: &onedrive_ga_version_spec
       version: "~2"
       versionFilterKind: semver
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    msteams: &msteams_ga_version_spec
+      version: "~2"
+      versionFilterKind: semver
     intelligence: &ais_ga_version
       version: "~3"
       versionFilterKind: semver
@@ -135,9 +135,7 @@ matrix:
       <<: *acc_ga_version_spec
       version: ">=10.2"
     onedrive: *onedrive_ga_version_spec
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    msteams: *msteams_ga_version_spec
     intelligence: &ais_ga_version
       version: "~3"
       versionFilterKind: semver
@@ -181,9 +179,7 @@ matrix:
       <<: *acc_ga_version_spec
       version: "~10.2"
     onedrive: *onedrive_ga_version_spec
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    msteams: *msteams_ga_version_spec
     intelligence: *ais_ga_version
     trouter: *ats_ga_version
     sfs: *ats_ga_version
@@ -225,9 +221,7 @@ matrix:
       version: "8.3"
       pattern: *ga_pattern
     onedrive: *onedrive_ga_version_spec
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
+    msteams: *msteams_ga_version_spec
     intelligence: *ais_ga_version
     trouter: *ats_ga_version
     sfs: *ats_ga_version
