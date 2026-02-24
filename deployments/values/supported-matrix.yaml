@@ -30,7 +30,7 @@ matrix:
       version: ">=7.3.0-0"
       versionFilterKind: semver
     adminApp:
-      version: ">=10.0.0-0"
+      version: ">=10.3.0-0"
       versionFilterKind: semver
     onedrive:
       version: "2"
@@ -75,9 +75,9 @@ matrix:
     adw: &adw_ga_version_spec
       version: ">=7.3"
       versionFilterKind: semver
-    adminApp:
-      version: &acc_ga_version "10.2"
-      pattern: *ga_pattern
+    adminApp: &acc_ga_version_spec
+      version: ">=10.3"
+      versionFilterKind: semver
     onedrive:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -132,8 +132,8 @@ matrix:
       <<: *adw_ga_version_spec
       version: ">=7.2"
     adminApp:
-      version: &acc_ga_version "10.2"
-      pattern: *ga_pattern
+      <<: *acc_ga_version_spec
+      version: ">=10.2"
     onedrive:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -180,8 +180,8 @@ matrix:
       <<: *adw_ga_version_spec
       version: "~7.2"
     adminApp:
-      version: *acc_ga_version
-      pattern: *ga_pattern
+      <<: *acc_ga_version_spec
+      version: "~10.2"
     onedrive:
       version: "2"
       pattern: *ga_hotfixes_pattern
@@ -262,8 +262,6 @@ matrix:
     search:
       <<: *search_ga_version_spec
       image: docker.io/alfresco/alfresco-search-services
-    adminApp:
-      version: *acc_ga_version
-      pattern: *ga_pattern
+    adminApp: *acc_ga_version_spec
     tengine-aio: *tengines_ga_version
     aca: *adw_ga_version_spec
