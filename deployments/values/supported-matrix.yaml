@@ -39,7 +39,7 @@ matrix:
       version: ">=2.1.0-0"
       versionFilterKind: semver
     intelligence:
-      version: ">=3.0.0-0"
+      version: ">=3.3.0-0"
       versionFilterKind: semver
     trouter: &ats_next_version
       version: ">=4.0.0-0"
@@ -84,7 +84,7 @@ matrix:
     msteams: &msteams_ga_version_spec
       version: "~2"
       versionFilterKind: semver
-    intelligence: &ais_ga_version
+    intelligence: &ais_ga_version_spec
       version: "~3"
       versionFilterKind: semver
     trouter: &ats_ga_version
@@ -136,7 +136,7 @@ matrix:
       version: ">=10.2"
     onedrive: *onedrive_ga_version_spec
     msteams: *msteams_ga_version_spec
-    intelligence: &ais_ga_version
+    intelligence: &ais_ga_version_spec
       version: "~3"
       versionFilterKind: semver
     trouter: &ats_ga_version
@@ -180,7 +180,7 @@ matrix:
       version: "~10.2"
     onedrive: *onedrive_ga_version_spec
     msteams: *msteams_ga_version_spec
-    intelligence: *ais_ga_version
+    intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
     tengine-aio: *tengines_ga_version
@@ -222,7 +222,7 @@ matrix:
       pattern: *ga_pattern
     onedrive: *onedrive_ga_version_spec
     msteams: *msteams_ga_version_spec
-    intelligence: *ais_ga_version
+    intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
     tengine-aio: *tengines_ga_version
