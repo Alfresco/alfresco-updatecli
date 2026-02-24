@@ -27,7 +27,7 @@ matrix:
       version: "5"
       pattern: *development_pattern
     adw:
-      version: ">=7.0.0-0"
+      version: ">=7.3.0-0"
       versionFilterKind: semver
     adminApp:
       version: ">=10.0.0-0"
@@ -45,7 +45,6 @@ matrix:
       version: ">=4.0.0-0"
       versionFilterKind: semver
     sfs: *ats_next_version
-
     tengine-aio: &tengines_next_version
       version:  ">=5.0.0-0"
       versionFilterKind: semver
@@ -73,9 +72,9 @@ matrix:
     sync: &sync_ga_version_spec
       version: ">=5.3.0-0"
       versionFilterKind: semver
-    adw:
-      version: &adw_ga_version "7.2"
-      pattern: *ga_pattern
+    adw: &adw_ga_version_spec
+      version: ">=7.3"
+      versionFilterKind: semver
     adminApp:
       version: &acc_ga_version "10.2"
       pattern: *ga_pattern
@@ -130,8 +129,8 @@ matrix:
       version: "~5"
       versionFilterKind: semver
     adw:
-      version: &adw_ga_version "7.2"
-      pattern: *ga_pattern
+      <<: *adw_ga_version_spec
+      version: ">=7.2"
     adminApp:
       version: &acc_ga_version "10.2"
       pattern: *ga_pattern
@@ -178,8 +177,8 @@ matrix:
     search-enterprise: *search_ent_ga_version_spec
     sync: *sync_25_ga_version_spec
     adw:
-      version: *adw_ga_version
-      pattern: *ga_pattern
+      <<: *adw_ga_version_spec
+      version: "~7.2"
     adminApp:
       version: *acc_ga_version
       pattern: *ga_pattern
@@ -267,6 +266,4 @@ matrix:
       version: *acc_ga_version
       pattern: *ga_pattern
     tengine-aio: *tengines_ga_version
-    aca:
-      version: *adw_ga_version
-      pattern: *ga_pattern
+    aca: *adw_ga_version_spec
