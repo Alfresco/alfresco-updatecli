@@ -66,12 +66,6 @@ matrix:
       version: "6.2"
       pattern: *ga_activemq_pattern
     share: *acs_ga_version_spec
-    search: &search_ga_version_spec
-      # while no GA
-      #version: "~2"
-      version: "^2.0.18-A.0"
-      versionFilterKind: semver
-    insight-zeppelin: *search_ga_version_spec
     search-enterprise: &search_ent_ga_version_spec
       version: "5"
       # while no GA
@@ -142,7 +136,11 @@ matrix:
       version: "5.19"
       pattern: *ga_activemq_pattern
     share: *acs_25_ga_version_spec
-    search: *search_ga_version_spec
+    search: &search_ga_version_spec
+      # while no GA
+      #version: "~2"
+      version: "^2.0.18-A.0"
+      versionFilterKind: semver
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: &search_ent_ga_version_spec
       version: "5"
