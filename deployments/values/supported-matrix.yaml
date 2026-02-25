@@ -269,5 +269,6 @@ matrix:
     aca:
       # while no GA
       #<<: *adw_ga_version_spec
-      version: "develop-"
+      version: "develop-2"
+      versionFilterKind: regex
       pattern: "[0-9]+"
