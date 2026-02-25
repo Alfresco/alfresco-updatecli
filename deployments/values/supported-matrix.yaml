@@ -266,4 +266,7 @@ matrix:
       image: docker.io/alfresco/alfresco-search-services
     adminApp: *acc_ga_version_spec
     tengine-aio: *tengines_ga_version_spec
-    aca: *adw_ga_version_spec
+    aca:
+      <<: *adw_ga_version_spec
+      # while no GA
+      version: "develop-x"
