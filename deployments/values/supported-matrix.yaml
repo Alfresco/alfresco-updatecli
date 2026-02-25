@@ -59,8 +59,9 @@ matrix:
     acs: &acs_ga_version_spec
       # while no GA
       #version:  "~26"
-      version: "^26.1.0-A.0"
-      versionFilterKind: semver
+      version: ">=26.0.0-0"
+      versionFilterKind: regex/semver
+      regex: '^(\d+\.\d+\.\d+(-A\.\d+)?)$' # mainly to ignore -Mx
     activemq:
       version: "6.2"
       pattern: *ga_activemq_pattern
