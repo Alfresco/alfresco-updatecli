@@ -21,8 +21,8 @@ matrix:
       version: "5"
       pattern: *development_pattern
     sync:
-      version: ">=5.3.0-0"
-      versionFilterKind: semver
+      version: "5"
+      pattern: *development_pattern
     adw:
       version: ">=7.3.0-0"
       versionFilterKind: semver
@@ -71,7 +71,7 @@ matrix:
       # while no GA
       #pattern: *ga_hotfixes_pattern
       pattern: *development_pattern
-    sync:
+    sync: &sync_ga_version_spec
       version: "~5.3"
       versionFilterKind: semver
     adw: &adw_ga_version_spec
@@ -115,12 +115,14 @@ matrix:
     tengine-lo: *tengines_ga_version_spec
     tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
-    activiti:
-      version: &activiti_ga_version "25"
-      pattern: *ga_pattern
-    activiti-admin:
-      version: *activiti_ga_version
-      pattern: *ga_pattern
+    activiti: &activiti_ga_version_spec
+      # while no GA
+      #version: "26"
+      #pattern: *ga_pattern
+      version: "develop-2"
+      versionFilterKind: regex
+      pattern: "[0-9]+"
+    activiti-admin: *activiti_ga_version_spec
     audit-storage: &audit_storage_ga_version_spec
       # while no GA
       #version: "~1"
@@ -143,8 +145,8 @@ matrix:
       versionFilterKind: semver
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
-    sync:
-      version: "~5.3"
+    sync: &sync_25_ga_version_spec
+      version: "~5"
       versionFilterKind: semver
     adw:
       <<: *adw_ga_version_spec
@@ -164,10 +166,10 @@ matrix:
     tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
     activiti:
-      version: &activiti_ga_version "25"
+      version: "25"
       pattern: *ga_pattern
     activiti-admin:
-      version: *activiti_ga_version
+      version: "25"
       pattern: *ga_pattern
     audit-storage: *audit_storage_ga_version_spec
 
@@ -181,9 +183,7 @@ matrix:
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
-    sync:
-      version: "~5.3"
-      versionFilterKind: semver
+    sync: *sync_25_ga_version_spec
     adw:
       <<: *adw_ga_version_spec
       version: "~7.2"
@@ -202,10 +202,10 @@ matrix:
     tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
     activiti:
-      version: &activiti_24_version "24"
+      version: "24"
       pattern: *ga_pattern
     activiti-admin:
-      version: *activiti_24_version
+      version: "24"
       pattern: *ga_pattern
     audit-storage: *audit_storage_ga_version_spec
 
