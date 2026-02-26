@@ -156,9 +156,7 @@ matrix:
       version: ">=10.2"
     onedrive: *onedrive_ga_version_spec
     msteams: *msteams_ga_version_spec
-    intelligence: &ais_ga_version_spec
-      version: "~3"
-      versionFilterKind: semver
+    intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
     tengine-aio: *tengines_ga_version_spec
