@@ -142,9 +142,7 @@ matrix:
       version: "^2.0.18-A.0"
       versionFilterKind: semver
     insight-zeppelin: *search_ga_version_spec
-    search-enterprise: &search_ent_ga_version_spec
-      version: "5"
-      pattern: *ga_hotfixes_pattern
+    search-enterprise: *search_ent_ga_version_spec
     sync: &sync_25_ga_version_spec
       version: "~5"
       versionFilterKind: semver
