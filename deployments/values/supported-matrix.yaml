@@ -21,8 +21,8 @@ matrix:
       version: "5"
       pattern: *development_pattern
     sync:
-      version: "5"
-      pattern: *development_pattern
+      version: ">=5.3.0-0"
+      versionFilterKind: semver
     adw:
       version: ">=7.3.0-0"
       versionFilterKind: semver
@@ -71,7 +71,7 @@ matrix:
       # while no GA
       #pattern: *ga_hotfixes_pattern
       pattern: *development_pattern
-    sync: &sync_ga_version_spec
+    sync:
       version: "~5.3"
       versionFilterKind: semver
     adw: &adw_ga_version_spec
@@ -143,8 +143,8 @@ matrix:
       versionFilterKind: semver
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
-    sync: &sync_25_ga_version_spec
-      version: "~5"
+    sync:
+      version: "~5.3"
       versionFilterKind: semver
     adw:
       <<: *adw_ga_version_spec
@@ -181,7 +181,9 @@ matrix:
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
-    sync: *sync_25_ga_version_spec
+    sync:
+      version: "~5.3"
+      versionFilterKind: semver
     adw:
       <<: *adw_ga_version_spec
       version: "~7.2"
