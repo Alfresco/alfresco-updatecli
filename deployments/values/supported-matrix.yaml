@@ -220,7 +220,7 @@ matrix:
       <<: *acs_ga_version_spec
       image: docker.io/alfresco/alfresco-content-repository-community
     activemq:
-      <<: *activemq5_ga_version_spec
+      <<: *activemq6_ga_version_spec
       image: docker.io/alfresco/alfresco-activemq
     share:
       <<: *acs_ga_version_spec
