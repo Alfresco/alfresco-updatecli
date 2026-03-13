@@ -1,6 +1,7 @@
 ---
 # Reflection of https://docs.alfresco.com/content-services/latest/support/
 # TO BE ENRICHED AS RELEASES ARE OUT
+# * Search Services (`search`) is no longer supported for Enterprise edition starting with ACS v26
 patterns:
   ga: &ga_pattern (\.[0-9]+){1,2}
   ga_with_hotfixes: &ga_hotfixes_pattern (\.[0-9]+){0,3}
@@ -17,37 +18,33 @@ matrix:
       version: "6.2"
       pattern: *ga_activemq_pattern
     share: *acs_next_version_spec
-    search:
-      version: "2"
-      pattern: *development_pattern
     search-enterprise:
       version: "5"
       pattern: *development_pattern
     sync:
-      version: "5"
-      pattern: *development_pattern
+      version: ">=5.3.0-0"
+      versionFilterKind: semver
     adw:
-      version: ">=7.0.0-0"
+      version: ">=7.3.0-0"
       versionFilterKind: semver
     adminApp:
-      version: ">=10.0.0-0"
+      version: ">=10.3.0-0"
       versionFilterKind: semver
     onedrive:
-      version: "2"
-      pattern: *development_pattern
+      version: ">=2.1.0-0"
+      versionFilterKind: semver
     msteams:
-      version: "2"
-      pattern: *development_pattern
+      version: ">=2.1.0-0"
+      versionFilterKind: semver
     intelligence:
-      version: ">=3.0.0-0"
+      version: ">=3.4.0-0"
       versionFilterKind: semver
     trouter: &ats_next_version
-      version: ">=4.0.0-0"
+      version: ">=4.4.0-0"
       versionFilterKind: semver
     sfs: *ats_next_version
-
     tengine-aio: &tengines_next_version
-      version:  ">=5.0.0-0"
+      version:  ">=5.4.0-0"
       versionFilterKind: semver
     tengine-misc: *tengines_next_version
     tengine-im: *tengines_next_version
@@ -55,97 +52,121 @@ matrix:
     tengine-pdf: *tengines_next_version
     tengine-tika: *tengines_next_version
     audit-storage:
-      version: ">=1.1.0-0"
+      version: ">=1.3.0-0"
       versionFilterKind: semver
 
   current:
     id: current
     acs: &acs_ga_version_spec
-      version:  "~25"
+      version: "~26"
       versionFilterKind: semver
-    activemq: &activemq_ga_version_spec
-      version: "5.18"
+    activemq: &activemq6_ga_version_spec
+      version: "6.2"
       pattern: *ga_activemq_pattern
     share: *acs_ga_version_spec
-    search: &search_ga_version_spec
-      version: "2.0.17"
-      pattern: *ga_hotfixes_pattern
-    insight-zeppelin: *search_ga_version_spec
     search-enterprise: &search_ent_ga_version_spec
       version: "5"
       pattern: *ga_hotfixes_pattern
     sync: &sync_ga_version_spec
-      version: "~5"
+      version: "~5.3"
       versionFilterKind: semver
-    adw:
-      version: &adw_ga_version "7.2"
-      pattern: *ga_pattern
-    adminApp:
-      version: &acc_ga_version "10.2"
-      pattern: *ga_pattern
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    intelligence: &ais_ga_version
-      version: "~3"
+    adw: &adw_ga_version_spec
+      version: ">=7.3"
+      versionFilterKind: semver
+    adminApp: &acc_ga_version_spec
+      version: ">=10.3"
+      versionFilterKind: semver
+    onedrive: &onedrive_ga_version_spec
+      version: ">=2.1"
+      versionFilterKind: semver
+    msteams: &msteams_ga_version_spec
+      version: ">=2.1"
+      versionFilterKind: semver
+    intelligence: &ais_ga_version_spec
+      version: ">=3.4.0"
       versionFilterKind: semver
     trouter: &ats_ga_version
-      version: "~4"
+      version: ">=4.4"
       versionFilterKind: semver
     sfs: *ats_ga_version
-    tengine-aio: &tengines_ga_version
-      version: "~5"
+    tengine-aio: &tengines_ga_version_spec
+      version: ">=5.4"
       versionFilterKind: semver
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti:
-      version: &activiti_ga_version "25"
+      version: &activiti_ga_version "26"
       pattern: *ga_pattern
     activiti-admin:
       version: *activiti_ga_version
       pattern: *ga_pattern
     audit-storage: &audit_storage_ga_version_spec
-      version: "~1"
+      version: ">=1.3"
       versionFilterKind: semver
+
+  25.N:
+    id: 25n
+    acs: &acs_25_ga_version_spec
+      version:  "~25"
+      versionFilterKind: semver
+    activemq: &activemq5_ga_version_spec
+      version: "5.19"
+      pattern: *ga_activemq_pattern
+    share: *acs_25_ga_version_spec
+    search: &search_ga_version_spec
+      version: "~2"
+      versionFilterKind: semver
+    insight-zeppelin: *search_ga_version_spec
+    search-enterprise: *search_ent_ga_version_spec
+    sync: *sync_ga_version_spec
+    adw: *adw_ga_version_spec
+    adminApp: *acc_ga_version_spec
+    onedrive: *onedrive_ga_version_spec
+    msteams: *msteams_ga_version_spec
+    intelligence: *ais_ga_version_spec
+    trouter: *ats_ga_version
+    sfs: *ats_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
+    activiti:
+      version: &activiti_25_version "25"
+      pattern: *ga_pattern
+    activiti-admin:
+      version: *activiti_25_version
+      pattern: *ga_pattern
+    audit-storage: *audit_storage_ga_version_spec
 
   23.N:
     id: 23n
     acs: &acs_23_version_spec
       version: "~23"
       versionFilterKind: semver
-    activemq: *activemq_ga_version_spec
+    activemq: *activemq5_ga_version_spec
     share: *acs_23_version_spec
     search: *search_ga_version_spec
     insight-zeppelin: *search_ga_version_spec
     search-enterprise: *search_ent_ga_version_spec
     sync: *sync_ga_version_spec
-    adw:
-      version: *adw_ga_version
-      pattern: *ga_pattern
-    adminApp:
-      version: *acc_ga_version
-      pattern: *ga_pattern
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    intelligence: *ais_ga_version
+    adw: *adw_ga_version_spec
+    adminApp: *acc_ga_version_spec
+    onedrive: *onedrive_ga_version_spec
+    msteams: *msteams_ga_version_spec
+    intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
-    tengine-aio: *tengines_ga_version
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti:
       version: &activiti_24_version "24"
       pattern: *ga_pattern
@@ -177,21 +198,17 @@ matrix:
     adminApp:
       version: "8.3"
       pattern: *ga_pattern
-    onedrive:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    msteams:
-      version: "2"
-      pattern: *ga_hotfixes_pattern
-    intelligence: *ais_ga_version
+    onedrive: *onedrive_ga_version_spec
+    msteams: *msteams_ga_version_spec
+    intelligence: *ais_ga_version_spec
     trouter: *ats_ga_version
     sfs: *ats_ga_version
-    tengine-aio: *tengines_ga_version
-    tengine-misc: *tengines_ga_version
-    tengine-im: *tengines_ga_version
-    tengine-lo: *tengines_ga_version
-    tengine-pdf: *tengines_ga_version
-    tengine-tika: *tengines_ga_version
+    tengine-aio: *tengines_ga_version_spec
+    tengine-misc: *tengines_ga_version_spec
+    tengine-im: *tengines_ga_version_spec
+    tengine-lo: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    tengine-tika: *tengines_ga_version_spec
     activiti: &activiti_2_4_version_spec
       version: "2.4"
       pattern: *ga_hotfixes_pattern
@@ -203,7 +220,7 @@ matrix:
       <<: *acs_ga_version_spec
       image: docker.io/alfresco/alfresco-content-repository-community
     activemq:
-      <<: *activemq_ga_version_spec
+      <<: *activemq6_ga_version_spec
       image: docker.io/alfresco/alfresco-activemq
     share:
       <<: *acs_ga_version_spec
@@ -211,10 +228,6 @@ matrix:
     search:
       <<: *search_ga_version_spec
       image: docker.io/alfresco/alfresco-search-services
-    adminApp:
-      version: *acc_ga_version
-      pattern: *ga_pattern
-    tengine-aio: *tengines_ga_version
-    aca:
-      version: *adw_ga_version
-      pattern: *ga_pattern
+    adminApp: *acc_ga_version_spec
+    tengine-aio: *tengines_ga_version_spec
+    aca: *adw_ga_version_spec
