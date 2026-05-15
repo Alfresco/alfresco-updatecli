@@ -213,8 +213,9 @@ matrix:
     tengine-misc: *tengines_ga_version_spec
     tengine-im: *tengines_ga_version_spec
     tengine-lo: *tengines_ga_version_spec
-    tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    pdf-renderer: *pdf_renderer_version
     activiti: &activiti_2_4_version_spec
       version: "2.4"
       pattern: *ga_hotfixes_pattern
