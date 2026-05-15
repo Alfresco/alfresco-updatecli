@@ -49,8 +49,11 @@ matrix:
     tengine-misc: *tengines_next_version
     tengine-im: *tengines_next_version
     tengine-lo: *tengines_next_version
-    tengine-pdf: *tengines_next_version
     tengine-tika: *tengines_next_version
+    tengine-pdf: *tengines_next_version
+    pdf-renderer: &pdf_renderer_version
+      version: ">=1.3.0-0"
+      versionFilterKind: semver
     audit-storage:
       version: ">=1.3.0-0"
       versionFilterKind: semver
@@ -95,8 +98,9 @@ matrix:
     tengine-misc: *tengines_ga_version_spec
     tengine-im: *tengines_ga_version_spec
     tengine-lo: *tengines_ga_version_spec
-    tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    pdf-renderer: *pdf_renderer_version
     activiti:
       version: &activiti_ga_version "26"
       pattern: *ga_pattern
@@ -133,8 +137,9 @@ matrix:
     tengine-misc: *tengines_ga_version_spec
     tengine-im: *tengines_ga_version_spec
     tengine-lo: *tengines_ga_version_spec
-    tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    pdf-renderer: *pdf_renderer_version
     activiti:
       version: &activiti_25_version "25"
       pattern: *ga_pattern
@@ -165,8 +170,9 @@ matrix:
     tengine-misc: *tengines_ga_version_spec
     tengine-im: *tengines_ga_version_spec
     tengine-lo: *tengines_ga_version_spec
-    tengine-pdf: *tengines_ga_version_spec
     tengine-tika: *tengines_ga_version_spec
+    tengine-pdf: *tengines_ga_version_spec
+    pdf-renderer: *pdf_renderer_version
     activiti:
       version: &activiti_24_version "24"
       pattern: *ga_pattern
@@ -230,4 +236,5 @@ matrix:
       image: docker.io/alfresco/alfresco-search-services
     adminApp: *acc_ga_version_spec
     tengine-aio: *tengines_ga_version_spec
+    pdf-renderer: *pdf_renderer_version
     aca: *adw_ga_version_spec
