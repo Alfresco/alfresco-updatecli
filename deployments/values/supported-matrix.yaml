@@ -19,8 +19,8 @@ matrix:
       pattern: *ga_activemq_pattern
     share: *acs_next_version_spec
     search-enterprise:
-      version: "5"
-      pattern: *development_pattern
+      version: ">=5"
+      versionFilterKind: semver
     sync:
       version: ">=5.3.0-0"
       versionFilterKind: semver
@@ -68,8 +68,8 @@ matrix:
       pattern: *ga_activemq_pattern
     share: *acs_ga_version_spec
     search-enterprise: &search_ent_ga_version_spec
-      version: "5"
-      pattern: *ga_hotfixes_pattern
+      version: "~5"
+      versionFilterKind: semver
     sync: &sync_ga_version_spec
       version: "~5.3"
       versionFilterKind: semver
