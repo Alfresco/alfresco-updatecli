@@ -19,7 +19,7 @@ matrix:
       pattern: *ga_activemq_pattern
     share: *acs_next_version_spec
     search-enterprise:
-      version: ">=5"
+      version: ">=5.0.0-0"
       versionFilterKind: semver
     sync:
       version: ">=5.3.0-0"
