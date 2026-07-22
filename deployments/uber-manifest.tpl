@@ -112,6 +112,17 @@ sources:
     spec:
       {{ template "common_version_filter" . }}
   {{ end }}
+  {{- with index . "batch-indexing" }}
+  batchIndexingTag_{{ $id }}:
+    name: Alfresco Elasticsearch Batch Indexing image tag
+    kind: dockerimage
+    spec:
+      image: {{ .image }}
+      {{ if eq (printf "%.8s" .image) "quay.io/" }}
+      {{ template "quay_auth" }}
+      {{ end }}
+      {{ template "common_version_filter" . }}
+  {{- end }}
   {{- with .search }}
   {{ $search_image := .image | default $default_search_image }}
   searchTag_{{ $id }}:
@@ -516,6 +527,39 @@ targets:
       file: {{ osDir $target_searchEnt }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- with index . "batch-indexing" }}
+  {{- if and .compose_key .compose_target }}
+  batchIndexingCompose_{{ $id }}:
+    name: Alfresco Elasticsearch Batch Indexing image tag
+    kind: yaml
+    sourceid: batchIndexingTag_{{ $id }}
+    transformers:
+      - addprefix: "{{ .image }}:"
+    spec:
+      file: {{ .compose_target }}
+      key: >-
+        {{ .compose_key }}
+  {{- end }}
+  {{- if and .helm_key .helm_target }}
+  batchIndexingValues_{{ $id }}:
+    name: Alfresco Elasticsearch Batch Indexing image tag
+    kind: yaml
+    sourceid: batchIndexingTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: >-
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
+  batchIndexingAppVersion_{{ $id }}:
+    name: Alfresco Elasticsearch Batch Indexing appVersion in Chart.yaml
+    kind: yaml
+    sourceid: batchIndexingTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- with .share }}
