@@ -548,26 +548,30 @@ targets:
   {{- end }}
   {{- end }}
   {{- with index . "cic-connector" }}
-  {{- if and .compose_key .compose_target }}
-  cicConnectorCompose_{{ $id }}:
+  {{- if and .compose_keys .compose_target }}
+  {{- $target_cicConnectorCompose := .compose_target }}
+  {{- range $index, $key := .compose_keys }}
+  cicConnector{{ $index }}Compose_{{ $id }}:
     name: CIC Connector image tag
     kind: yaml
     sourceid: cicConnectorTag_{{ $id }}
     transformers:
-      - addprefix: "quay.io/alfresco/alfresco-cic-connector:"
+      - addprefix: "quay.io/alfresco/alfresco-cic-connector-{{ $index }}:"
     spec:
-      file: {{ .compose_target }}
-      key: {{ .compose_key }}
+      file: {{ $target_cicConnectorCompose }}
+      key: {{ $key }}
   {{- end }}
-  {{- if and .helm_key .helm_target }}
-  cicConnectorValues_{{ $id }}:
+  {{- end }}
+  {{- if and .helm_keys .helm_target }}
+  {{- $target_cicConnector := .helm_target }}
+  {{- range $key, $value := .helm_keys }}
+  cicConnector{{ $key }}Values_{{ $id }}:
     name: CIC Connector Helm values tag
     kind: yaml
     sourceid: cicConnectorTag_{{ $id }}
     spec:
-      file: {{ .helm_target }}
-      key: >-
-        {{ .helm_key }}
+      file: {{ $target_cicConnector }}
+      key: {{ $value }}
   {{- end }}
   {{- if .helm_update_appVersion }}
   cicConnectorAppVersion_{{ $id }}:
@@ -577,6 +581,7 @@ targets:
     spec:
       file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- with index . "batch-indexing" }}
