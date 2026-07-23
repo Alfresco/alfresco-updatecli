@@ -195,6 +195,10 @@ matrix:
     search:
       <<: *search_ga_version_spec
       image: docker.io/alfresco/alfresco-search-services
+    batch-indexing:
+      version: ">=5.0.0"
+      versionFilterKind: semver
+      image: docker.io/alfresco/alfresco-elasticsearch-batch-indexing
     adminApp: *acc_ga_version_spec
     tengine-aio: *tengines_ga_version_spec
     pdf-renderer: *pdf_renderer_version
