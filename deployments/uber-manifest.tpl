@@ -33,6 +33,16 @@ scms:
       username: alfresco-build
       token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
       directory: /tmp/updatecli/searchEnterprise
+  cicConnector:
+    name: Alfresco CIC Connector
+    kind: github
+    spec:
+      owner: Alfresco
+      repository: alfresco-cic-connector
+      branch: master
+      username: alfresco-build
+      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
+      directory: /tmp/updatecli/cicConnector
 
 {{- $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
 {{- $default_search_image := "quay.io/alfresco/search-services" }}
@@ -109,6 +119,14 @@ sources:
     name: Search Enterprise tag
     kind: gittag
     scmid: searchEnterprise
+    spec:
+      {{ template "common_version_filter" . }}
+  {{ end }}
+  {{- with index . "cic-connector" }}
+  cicConnectorTag_{{ $id }}:
+    name: CIC Connector tag
+    kind: gittag
+    scmid: cicConnector
     spec:
       {{ template "common_version_filter" . }}
   {{ end }}
@@ -527,6 +545,38 @@ targets:
       file: {{ osDir $target_searchEnt }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- with index . "cic-connector" }}
+  {{- if and .compose_key .compose_target }}
+  cicConnectorCompose_{{ $id }}:
+    name: CIC Connector image tag
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    transformers:
+      - addprefix: "quay.io/alfresco/alfresco-cic-connector:"
+    spec:
+      file: {{ .compose_target }}
+      key: {{ .compose_key }}
+  {{- end }}
+  {{- if and .helm_key .helm_target }}
+  cicConnectorValues_{{ $id }}:
+    name: CIC Connector Helm values tag
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    spec:
+      file: {{ .helm_target }}
+      key: >-
+        {{ .helm_key }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
+  cicConnectorAppVersion_{{ $id }}:
+    name: CIC Connector appVersion in Chart.yaml
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
+      key: "$.appVersion"
   {{- end }}
   {{- end }}
   {{- with index . "batch-indexing" }}
