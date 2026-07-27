@@ -33,6 +33,16 @@ scms:
       username: alfresco-build
       token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
       directory: /tmp/updatecli/searchEnterprise
+  cicConnector:
+    name: Alfresco CIC Connector
+    kind: github
+    spec:
+      owner: Alfresco
+      repository: alfresco-cic-connector
+      branch: master
+      username: alfresco-build
+      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
+      directory: /tmp/updatecli/cicConnector
 
 {{- $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
 {{- $default_search_image := "quay.io/alfresco/search-services" }}
@@ -109,6 +119,14 @@ sources:
     name: Search Enterprise tag
     kind: gittag
     scmid: searchEnterprise
+    spec:
+      {{ template "common_version_filter" . }}
+  {{ end }}
+  {{- with index . "cic-connector" }}
+  cicConnectorTag_{{ $id }}:
+    name: CIC Connector tag
+    kind: gittag
+    scmid: cicConnector
     spec:
       {{ template "common_version_filter" . }}
   {{ end }}
@@ -525,6 +543,43 @@ targets:
     sourceid: searchEnterpriseTag_{{ $id }}
     spec:
       file: {{ osDir $target_searchEnt }}/Chart.yaml
+      key: "$.appVersion"
+  {{- end }}
+  {{- end }}
+  {{- end }}
+  {{- with index . "cic-connector" }}
+  {{- if and .compose_keys .compose_target }}
+  {{- $target_cicConnectorCompose := .compose_target }}
+  {{- range $index, $key := .compose_keys }}
+  cicConnector{{ $index }}Compose_{{ $id }}:
+    name: CIC Connector image tag
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    transformers:
+      - addprefix: "quay.io/alfresco/alfresco-cic-connector-{{ $index }}:"
+    spec:
+      file: {{ $target_cicConnectorCompose }}
+      key: {{ $key }}
+  {{- end }}
+  {{- end }}
+  {{- if and .helm_keys .helm_target }}
+  {{- $target_cicConnector := .helm_target }}
+  {{- range $key, $value := .helm_keys }}
+  cicConnector{{ $key }}Values_{{ $id }}:
+    name: CIC Connector Helm values tag
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    spec:
+      file: {{ $target_cicConnector }}
+      key: {{ $value }}
+  {{- end }}
+  {{- if .helm_update_appVersion }}
+  cicConnectorAppVersion_{{ $id }}:
+    name: CIC Connector appVersion in Chart.yaml
+    kind: yaml
+    sourceid: cicConnectorTag_{{ $id }}
+    spec:
+      file: {{ osDir .helm_target }}/Chart.yaml
       key: "$.appVersion"
   {{- end }}
   {{- end }}
