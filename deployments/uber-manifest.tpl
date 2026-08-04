@@ -23,16 +23,6 @@
 name: {{ template "manifest_name" . }}
 
 scms:
-  searchEnterprise:
-    name: Alfresco Elasticsearch connector
-    kind: github
-    spec:
-      owner: Alfresco
-      repository: alfresco-elasticsearch-connector
-      branch: master
-      username: alfresco-build
-      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
-      directory: /tmp/updatecli/searchEnterprise
   cicConnector:
     name: Alfresco CIC Connector
     kind: github
@@ -117,9 +107,10 @@ sources:
   {{- with index . "search-enterprise" }}
   searchEnterpriseTag_{{ $id }}:
     name: Search Enterprise tag
-    kind: gittag
-    scmid: searchEnterprise
+    kind: dockerimage
     spec:
+      image: quay.io/alfresco/alfresco-elasticsearch-reindexing
+      {{ template "quay_auth" }}
       {{ template "common_version_filter" . }}
   {{ end }}
   {{- with index . "cic-connector" }}

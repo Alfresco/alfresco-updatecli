@@ -22,7 +22,7 @@ The matrix leans heavily on YAML anchors/aliases (`&name` / `*name`) to share a 
 
 ## Registry auth and SCMs
 
-Most images live on `quay.io` and the template injects `QUAY_USERNAME`/`QUAY_PASSWORD` — it does this only when the image string starts with `quay.io/` (community images on `docker.io` need no auth, so a component overriding `image:` to a docker.io path skips auth automatically). Search Enterprise is the exception: it is resolved from **git tags** of `Alfresco/alfresco-elasticsearch-connector` via the `searchEnterprise` GitHub SCM, which needs `UPDATECLI_GITHUB_TOKEN`.
+Most images live on `quay.io` and the template injects `QUAY_USERNAME`/`QUAY_PASSWORD` — it does this only when the image string starts with `quay.io/` (community images on `docker.io` need no auth, so a component overriding `image:` to a docker.io path skips auth automatically). Search Enterprise's source (`searchEnterpriseTag_*`) polls the `quay.io/alfresco/alfresco-elasticsearch-reindexing` image tags the same way — that image and the `search-enterprise` compose/Helm target images (`quay.io/alfresco/alfresco-elasticsearch-{reindexing,live-indexing,...}`) are all built and pushed with the same tag in the same CI release job of `Alfresco/alfresco-elasticsearch-connector`, so any one of them is a valid stand-in for version discovery. CIC Connector is the remaining exception: it is resolved from **git tags** of `Alfresco/alfresco-cic-connector` via the `cicConnector` GitHub SCM, which needs `UPDATECLI_GITHUB_TOKEN`.
 
 ## Validating changes
 
