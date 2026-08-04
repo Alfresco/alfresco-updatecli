@@ -200,9 +200,6 @@ matrix:
     share:
       <<: *acs_ga_version_spec
       image: docker.io/alfresco/alfresco-share
-    search:
-      <<: *search_ga_version_spec
-      image: docker.io/alfresco/alfresco-search-services
     batch-indexing:
       version: ">=5.0.0"
       versionFilterKind: semver
