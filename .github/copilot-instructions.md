@@ -20,9 +20,9 @@ The matrix leans heavily on YAML anchors/aliases (`&name` / `*name`) to share a 
 
 **Important:** the template's `targets` reference keys that are deliberately *not* present in this repo's matrix — `compose_target`, `compose_key`, `helm_target`, `helm_key`, `helm_keys`, `compose_keys`, `helm_update_appVersion`. Those are supplied by the **consuming** repo's own values file, which is merged on top of `supported-matrix.yaml` at run time. In this repo the matrix only declares version discovery (`sources`); target blocks stay inert because those keys are absent. Do not add them here.
 
-## Registry auth and SCMs
+## Registry auth
 
-Most images live on `quay.io` and the template injects `QUAY_USERNAME`/`QUAY_PASSWORD` — it does this only when the image string starts with `quay.io/` (community images on `docker.io` need no auth, so a component overriding `image:` to a docker.io path skips auth automatically). Search Enterprise's source (`searchEnterpriseTag_*`) polls the `quay.io/alfresco/alfresco-elasticsearch-reindexing` image tags the same way — that image and the `search-enterprise` compose/Helm target images (`quay.io/alfresco/alfresco-elasticsearch-{reindexing,live-indexing,...}`) are all built and pushed with the same tag in the same CI release job of `Alfresco/alfresco-elasticsearch-connector`, so any one of them is a valid stand-in for version discovery. CIC Connector is the remaining exception: it is resolved from **git tags** of `Alfresco/alfresco-cic-connector` via the `cicConnector` GitHub SCM, which needs `UPDATECLI_GITHUB_TOKEN`.
+Most images live on `quay.io` and the template injects `QUAY_USERNAME`/`QUAY_PASSWORD` — it does this only when the image string starts with `quay.io/` (community images on `docker.io` need no auth, so a component overriding `image:` to a docker.io path skips auth automatically). For multi-image components (e.g. `search-enterprise`, `cic-connector`), the source polls just one sibling image's tags as a stand-in for the whole set — their release CI pushes all sibling images with the same tag in one job, so any one is a valid proxy. No component in this manifest currently needs a GitHub SCM or `UPDATECLI_GITHUB_TOKEN`.
 
 ## Validating changes
 
