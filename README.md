@@ -1,6 +1,6 @@
 # alfresco-updatecli
 
-Shared source of truth for which Alfresco component versions are supported per ACS release line, expressed as an [updatecli](https://www.updatecli.io/) manifest. Downstream deployment repos consume `deployments/uber-manifest.tpl` and `deployments/values/supported-matrix.yaml` to automatically open PRs that bump image tags in their own compose/Helm files.
+Shared source of truth for which Alfresco component versions are supported per ACS release line, expressed as an [updatecli](https://www.updatecli.io/) manifest. Downstream deployment repos consume [`deployments/uber-manifest.tpl`](deployments/uber-manifest.tpl) and [`deployments/values/supported-matrix.yaml`](deployments/values/supported-matrix.yaml) to automatically open PRs that bump image tags in their own compose/Helm files.
 
 See `.github/copilot-instructions.md` for how the manifest and matrix fit together and how to edit them.
 
