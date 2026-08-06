@@ -6,11 +6,9 @@ See `.github/copilot-instructions.md` for how the manifest and matrix fit togeth
 
 ## Consumers
 
-Repos in the `Alfresco` org known to consume this manifest:
+Public repos in the `Alfresco` org known to consume this manifest:
 
 - [acs-deployment](https://github.com/Alfresco/acs-deployment)
 - [alfresco-ansible-deployment](https://github.com/Alfresco/alfresco-ansible-deployment)
 - [alfresco-helm-charts](https://github.com/Alfresco/alfresco-helm-charts)
 - [alfresco-dockerfiles-bakery](https://github.com/Alfresco/alfresco-dockerfiles-bakery)
-- [alfresco-process-services-deployment](https://github.com/Alfresco/alfresco-process-services-deployment)
-- [flux-alfresco-pipeline](https://github.com/Alfresco/flux-alfresco-pipeline)
