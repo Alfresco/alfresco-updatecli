@@ -22,28 +22,6 @@
 ---
 name: {{ template "manifest_name" . }}
 
-scms:
-  searchEnterprise:
-    name: Alfresco Elasticsearch connector
-    kind: github
-    spec:
-      owner: Alfresco
-      repository: alfresco-elasticsearch-connector
-      branch: master
-      username: alfresco-build
-      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
-      directory: /tmp/updatecli/searchEnterprise
-  cicConnector:
-    name: Alfresco CIC Connector
-    kind: github
-    spec:
-      owner: Alfresco
-      repository: alfresco-cic-connector
-      branch: master
-      username: alfresco-build
-      token: {{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}
-      directory: /tmp/updatecli/cicConnector
-
 {{- $default_repo_image := "quay.io/alfresco/alfresco-content-repository" }}
 {{- $default_search_image := "quay.io/alfresco/search-services" }}
 {{- $default_share_image := "quay.io/alfresco/alfresco-share" }}
@@ -117,17 +95,19 @@ sources:
   {{- with index . "search-enterprise" }}
   searchEnterpriseTag_{{ $id }}:
     name: Search Enterprise tag
-    kind: gittag
-    scmid: searchEnterprise
+    kind: dockerimage
     spec:
+      image: quay.io/alfresco/alfresco-elasticsearch-reindexing
+      {{ template "quay_auth" }}
       {{ template "common_version_filter" . }}
   {{ end }}
   {{- with index . "cic-connector" }}
   cicConnectorTag_{{ $id }}:
     name: CIC Connector tag
-    kind: gittag
-    scmid: cicConnector
+    kind: dockerimage
     spec:
+      image: quay.io/alfresco/alfresco-cic-connector-live-ingester
+      {{ template "quay_auth" }}
       {{ template "common_version_filter" . }}
   {{ end }}
   {{- with index . "batch-indexing" }}
