@@ -208,3 +208,29 @@ matrix:
     tengine-aio: *tengines_ga_version_spec
     pdf-renderer: *pdf_renderer_version
     aca: *adw_ga_version_spec
+
+  community-next:
+    id: com-next
+    # Same as 'community', except batch-indexing also tracks its "-A.N" development
+    # tags, and postgres/elasticsearch (generic test infra, not Alfresco products)
+    # are pinned to whatever this repo's test environment currently supports.
+    activemq:
+      <<: *activemq6_ga_version_spec
+      image: docker.io/alfresco/alfresco-activemq
+    postgres:
+      version: "~17"
+      versionFilterKind: semver
+      image: postgres
+    elasticsearch:
+      version: "~8.17"
+      versionFilterKind: semver
+      image: elasticsearch
+    search:
+      version: "~2.0"
+      versionFilterKind: semver
+      image: docker.io/alfresco/alfresco-search-services
+    batch-indexing:
+      version: ">=5.0.0-0"
+      versionFilterKind: regex/semver
+      regex: '^(\d+\.\d+\.\d+(?:-A\.?\d+)?)$'
+      image: docker.io/alfresco/alfresco-elasticsearch-batch-indexing
