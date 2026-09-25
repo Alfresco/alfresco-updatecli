@@ -209,8 +209,8 @@ matrix:
     pdf-renderer: *pdf_renderer_version
     aca: *adw_ga_version_spec
 
-  community-prerelease:
-    id: community-pre
+  community-next:
+    id: com-next
     # Same as 'community', except batch-indexing also tracks its "-A.N" development
     # tags, and postgres/elasticsearch (generic test infra, not Alfresco products)
     # are pinned to whatever this repo's test environment currently supports.
