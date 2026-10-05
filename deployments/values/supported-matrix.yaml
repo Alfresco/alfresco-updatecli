@@ -16,7 +16,7 @@ matrix:
     acs: &acs_next_version_spec
       version: ">=26.0.0-0"
       versionFilterKind: regex/semver
-      regex: *development_regex # mainly to ignore -Mx
+      regex: *development_regex
     activemq:
       version: "6.2"
       pattern: *ga_activemq_pattern
