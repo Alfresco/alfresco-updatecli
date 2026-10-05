@@ -14,7 +14,7 @@ The matrix defines release lines (`next`, `current`, `25.N`, `23.N`, `community`
 `versionFilterKind` selects how a component's `version` is interpreted:
 - `semver` — the `version` is a semver constraint (`~26`, `>=5.0.0-0`, `~5.3`).
 - `regex` (the template default when unset) — `version` + the component's `pattern` are concatenated into `^<version><pattern>$`. The `patterns:` anchors at the top of the matrix (`ga`, `ga_with_hotfixes`, `ga_activemq`, …) are the reusable regex fragments.
-- `regex/semver` — a semver constraint plus a `regex` to pre-filter tags (used by `acs`/`share` in `next` to ignore milestone tags like `-Mx`).
+- `regex/semver` — a semver constraint plus a `regex` to pre-filter tags, needed wherever a prerelease constraint (`>=X.Y.0-0`) would otherwise match anything, such as feature-branch builds (used throughout `next` to only accept GA and `-A.N` tags, ignoring milestone and feature-branch builds). `regex` is usually one of the full-regex `patterns:` anchors (`development`, `build`), not a literal inline value.
 
 The matrix leans heavily on YAML anchors/aliases (`&name` / `*name`) to share a spec across release lines. When you change a shared spec, you change every line that aliases it — check the alias references before editing.
 
