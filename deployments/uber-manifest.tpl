@@ -15,8 +15,12 @@
           {{- else }}
           {{ .version }}
           {{- end }}
-        {{- if and (eq $vfk "regex/semver") .regex }}
+        {{- if eq $vfk "regex/semver" }}
+        {{- if .regex }}
         regex: {{ .regex }}
+        {{- else if .pattern }}
+        regex: '^(\d+{{ .pattern }})$'
+        {{- end }}
         {{- end }}
 {{- end }}
 ---
